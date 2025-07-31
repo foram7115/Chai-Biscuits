@@ -1,7 +1,9 @@
 import React from 'react';
-
+import Header from './Header';
 const TermsAndConditions = () => {
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-[#fceeea] px-4 py-8 flex justify-center">
       <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-6 sm:p-10 space-y-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-[#4b2c20] text-center">
@@ -49,6 +51,7 @@ const TermsAndConditions = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

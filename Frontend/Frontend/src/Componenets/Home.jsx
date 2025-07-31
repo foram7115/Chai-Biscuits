@@ -7,9 +7,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from 'swiper/modules'
 import "swiper/css";
 import "swiper/css/pagination";
+import Header from './Header'
 
 const Home = () => {
     return (
+        <>
+        <Header/>
         <div>
             <div className="min-h-screen bg-[#fdf3ef] p-6">
                 {/* Search Bar */}
@@ -93,6 +96,7 @@ const Home = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
