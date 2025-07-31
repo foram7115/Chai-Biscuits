@@ -1,7 +1,13 @@
 import React from 'react';
 import Logo from '../assets/logo.png';
+import { useNavigate } from 'react-router-dom';
+
 
 function Welcome() {
+    const navigate = useNavigate();
+    const next = () =>{
+        navigate('/Login')
+    }
   return (
     <div className="h-screen w-full bg-[#4B2E2B] text-white flex flex-col justify-between overflow-hidden relative ">
       {/* Top Bar */}
@@ -33,7 +39,7 @@ function Welcome() {
           <span className="w-3 h-3 rounded-full bg-white/40"></span>
           <span className="w-3 h-3 rounded-full bg-white/40"></span>
         </div>
-        <button className="bg-[#EADBC8] text-[#4B2E2B] px-6 py-3 rounded-xl font-semibold">
+        <button className="bg-[#EADBC8] text-[#4B2E2B] px-6 py-3 rounded-xl font-semibold" onClick={next}>
           Get Start
         </button>
       </div>

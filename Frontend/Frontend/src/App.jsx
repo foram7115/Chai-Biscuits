@@ -1,13 +1,14 @@
 import { Routes , Route} from 'react-router-dom'
 import Login from './Componenets/Login'
 import Verify from './Componenets/Verify'
+import Welcome from './Componenets/Welcome'
 
 function App() {
 
   return (
     <>
        <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Welcome />} />
       <Route path="/verify" element={<Verify />} />
     </Routes>
     </>
