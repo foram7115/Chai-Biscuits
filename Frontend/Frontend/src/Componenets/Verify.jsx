@@ -1,7 +1,13 @@
 import React from 'react'
 import back from '../assets/back1.jpg'
 import './Verify.css'
+import { useNavigate } from 'react-router-dom'
+
 const Verify = () => {
+    const navigate = useNavigate();
+    const next = ()=>{
+        navigate('/home')
+    }
   return (
      <div className=" flex items-center justify-center image  " style={{ backgroundImage: `url(${back})` }}>
       <div className=" p-6 w-80 rounded-lg text-center relative">
@@ -31,7 +37,7 @@ const Verify = () => {
         </p>
 
         {/* Next Button */}
-        <button className="w-full py-3 bg-[#4b2e2e] text-white font-semibold rounded-full">
+        <button className="w-full py-3 bg-[#4b2e2e] text-white font-semibold rounded-full" onClick={next}>
           Next
         </button>
 
