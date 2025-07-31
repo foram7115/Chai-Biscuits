@@ -1,7 +1,9 @@
 import React from 'react';
-
+import Header from './Header';
 const ContactUs = () => {
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-[#fceeea] flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 space-y-6">
         <h2 className="text-xl sm:text-2xl font-semibold text-[#4b2c20] text-center">
@@ -51,6 +53,7 @@ const ContactUs = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

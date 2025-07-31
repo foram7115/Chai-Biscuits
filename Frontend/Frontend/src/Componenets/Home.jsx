@@ -13,6 +13,11 @@ import CC from '../assets/CC.webp'
 import Affo from '../assets/Affo.jpg'
 import Espresso from '../assets/Espresso.webp'
 import Brew from '../assets/Brew.jpg'
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from 'swiper/modules'
+import "swiper/css";
+import "swiper/css/pagination";
+import Header from './Header'
 
 const Home = () => {
     const coffeeItems = [
@@ -77,6 +82,20 @@ const Home = () => {
                             </div>
                         </div>
                     ))}
+        <>
+        <Header/>
+        <div>
+            <div className="min-h-screen bg-[#fdf3ef] p-6">
+                {/* Search Bar */}
+                <div className="flex items-center justify-center bg-[#e5d5ca] px-4 py-3 rounded-full mb-6 ">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="bg-transparent outline-none w-full text-[#4b2e2e]"
+                    />
                 </div>
             </div>
 
@@ -114,5 +133,6 @@ const Home = () => {
         </div>
     );
 };
+
 
 export default Home;

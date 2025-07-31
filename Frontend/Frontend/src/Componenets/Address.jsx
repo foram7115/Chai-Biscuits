@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from './Header';
 import { FiArrowLeft, FiMapPin, FiPlus, FiMoreVertical } from 'react-icons/fi';
 
 function Address() {
     return (
+        <>
+        <Header/>
         <div className="min-h-screen bg-[#fceeea] text-[#4b2c20] flex justify-center items-center px-4 py-5">
             <div className="w-full max-w-lg">
                 {/* Header */}
@@ -83,6 +86,7 @@ function Address() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

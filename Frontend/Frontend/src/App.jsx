@@ -14,23 +14,17 @@ function App() {
 
   return (
     <>
-      <Header/>
-      <OrderHistory/>
-      <TrackOrder/>
-      <ContactUs/>
-      <TermsAndConditions/>
-      <Address/>
-       <Routes>
-
-      <Route path="/" element={<Welcome />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/verify" element={<Verify />} />
-      
+      <Routes>
       <Route exact path="/" element={<Welcome />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/verify" element={<Verify />} />
       <Route exact path="/home" element={<Home />} />
-    </Routes>
+      <Route exact path="/address" element={<Address/>} />
+      <Route exact path="/track-order" element={<TrackOrder/>} />
+      <Route exact path="/order-history" element={<OrderHistory/>} />
+      <Route exact path="/term-conditions" element={<TermsAndConditions/>} />
+      <Route exact path="/contact-us" element={<ContactUs/>} />
+      </Routes>
     </>
   )
 }

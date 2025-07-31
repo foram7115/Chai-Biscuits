@@ -5,21 +5,47 @@ import Profile from '../assets/Profile.avif';
 import Cart from '../assets/Cart.png';
 import Menu from '../assets/Menu.png';
 import Home from '../assets/Home.avif';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+
   const [showProfile, setShowProfile] = useState(false);
+  const navigate = useNavigate();
+  const handleClick = (label) => {
+  console.log("Clicked:", label)
+
+  // Example navigation:
+  if (label === 'My Addresses') {
+    navigate('/address')
+  }
+   if (label === 'Track Order') {
+    navigate('/track-order')
+  }
+   if (label === 'Order History') {
+    navigate('/order-history')
+  }
+   if (label === 'Terms & Conditions') {
+    navigate('/term-conditions')
+  }
+   if (label === 'Contact Us') {
+    navigate('/contact-us')
+  }
+
+  // Add more conditions as needed
+}
 
   return (
-    <div className="relative w-full bg-[#b08968]" >
+    
+    <div className="sticky top-0 z-50 bg-[#b08968] h-20" >
       {/* Header */}
-      <div className="relative flex justify-between items-center flex-wrap px-4 sm:px-6 py-3 w-full">
+      <div className="flex items-center px-4 sm:px-6 py-3 h-20 ">
         {/* Left: Profile */}
-        <div className="flex items-center z-10">
+        <div className="flex items-center z-10 top-0 mt-0 ">
           <img
             src={Profile}
             alt="profile"
             onClick={() => setShowProfile(true)}
-            className="w-8 sm:w-9 md:w-10 lg:w-11 h-8 sm:h-9 md:h-10 lg:h-11 object-cover rounded-full cursor-pointer"
+            className="sm:w-9 md:w-10 lg:w-11 h-8 sm:h-9 md:h-10 lg:h-11 object-cover rounded-full cursor-pointer"
           />
         </div>
 
@@ -94,6 +120,7 @@ function Header() {
               'Contact Us',
             ].map((label, i) => (
               <button
+                onClick={() => handleClick(label)}
                 key={i}
                 className="w-full flex justify-between items-center px-4 py-2 rounded-full bg-[#f3e7e3] text-[#4b2c20] text-sm hover:bg-[#e9d6cf] transition"
               >

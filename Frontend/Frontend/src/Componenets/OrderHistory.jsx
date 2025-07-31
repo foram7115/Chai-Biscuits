@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Header from './Header';
 const orders = [
   {
     id: 'CB10234',
@@ -30,7 +30,10 @@ const statusColor = {
 };
 
 const OrderHistory = () => {
+
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-[#fef6f3] p-4 sm:p-6 md:p-10">
       <div className="max-w-3xl mx-auto bg-white shadow-md rounded-xl p-6 sm:p-8">
         <h1 className="text-xl sm:text-2xl font-bold text-[#4b2c20] mb-6">Order History</h1>
@@ -68,6 +71,7 @@ const OrderHistory = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
