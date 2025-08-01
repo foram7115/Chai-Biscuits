@@ -1,8 +1,41 @@
 import random
 from django.http import JsonResponse
+import requests
 from .models import OTP, CustomUser
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.utils import timezone
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import CustomUser
+import json
+
+@csrf_exempt
+def get_user_profile(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            phone = data.get('phone_number')
+
+            if not phone:
+                return JsonResponse({'error': 'Phone number is required'}, status=400)
+
+            user = CustomUser.objects.get(phone_number=phone)
+
+            return JsonResponse({
+                'name': user.name,
+                'phone_number': user.phone_number,
+                'address': user.address
+            })
+
+        except CustomUser.DoesNotExist:
+            return JsonResponse({'error': 'User not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
 @csrf_exempt
@@ -27,10 +60,6 @@ def register_user(request):
 
         return JsonResponse({'message': 'User registered successfully'})
 
-
-def generate_otp():
-    return str(random.randint(1000, 9999))
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -40,27 +69,32 @@ from .models import OTP  # adjust import based on your model
 def generate_otp():
     return str(random.randint(1000, 9999))
 
-@api_view(['GET','POST'])
+@csrf_exempt
 def send_otp(request):
-    try:
-        phone = request.data.get('phone_number')
-        if not phone:
-            return Response({'error': 'Phone number is required'}, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            phone = data.get('phone_number')
 
-        otp = generate_otp()
+            if not phone:
+                return JsonResponse({'error': 'Phone number is required'}, status=400)
 
-        # Clean up old OTPs
-        OTP.objects.filter(phone_number=phone).delete()
+            otp = generate_otp()
 
-        # Save new OTP
-        OTP.objects.create(phone_number=phone, otp=otp)
+            # Save OTP in DB
+            OTP.objects.update_or_create(phone_number=phone, defaults={'otp': otp, 'created_at': timezone.now()})
 
-        print(f"Sending OTP {otp} to phone {phone} (Simulated)")
+            # Send OTP using 2Factor API
+            api_key = 'cfc26a50-6ebb-11f0-a562-0200cd936042'  # Replace with your actual key
+            url = f'https://2factor.in/API/V1/{api_key}/SMS/{phone}/{otp}'
 
-        return Response({'message': 'OTP sent successfully'}, status=status.HTTP_200_OK)
-    except Exception as e:
-        print("Error sending OTP:", e)
-        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            response = requests.get(url)
+            print(f'Sending OTP {otp} to phone {phone}, API response:', response.text)
+
+            return JsonResponse({'message': 'OTP sent successfully'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
 from django.http import JsonResponse
@@ -71,41 +105,24 @@ import json
 @csrf_exempt
 def verify_otp(request):
     if request.method == 'POST':
-        print('Row body', request.body)
-        
-        data = json.loads(request.body)
-        print("Parsed data", data)
-        
-        phone_number = data.get('phone_number')
-        entered_otp = data.get('otp')
-        print("Phone", phone_number, "OPT", entered_otp)
-
         try:
-            otp_record = OTP.objects.filter(phone_number=phone_number).latest('created_at')
+            data = json.loads(request.body)
+            phone = data.get('phone_number')
+            entered_otp = data.get('otp')
+
+            if not all([phone, entered_otp]):
+                return JsonResponse({'error': 'Phone number and OTP required'}, status=400)
+
+            otp_record = OTP.objects.filter(phone_number=phone).latest('created_at')
 
             if otp_record.otp == entered_otp:
-                # Optionally delete OTP after successful login
-                otp_record.delete()
+                otp_record.delete()  # Delete after successful verification
                 return JsonResponse({'message': 'OTP verified, login successful'})
             else:
                 return JsonResponse({'error': 'Invalid OTP'}, status=400)
-
         except OTP.DoesNotExist:
             return JsonResponse({'error': 'OTP not found'}, status=400)
-
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-
-from twilio.rest import Client
-
-def send_sms(phone_number, otp_code):
-    account_sid = 'your_twilio_sid'
-    auth_token = 'your_twilio_token'
-    from_number = 'your_twilio_phone_number'
-    
-    client = Client(account_sid, auth_token)
-    client.messages.create(
-        body=f'Your OTP is {otp_code}',
-        from_=from_number,
-        to=f'+91{phone_number}'  # Assuming India
-    )

@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import Footer from './Footer'
 const steps = [
   { label: 'Order Placed', time: '10:00 AM', completed: true },
   { label: 'Packed', time: '10:15 AM', completed: true },
@@ -62,6 +63,7 @@ const TrackOrder = () => {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };

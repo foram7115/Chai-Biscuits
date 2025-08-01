@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-
+import Footer from './Footer'
 // Import 5 images
 import o1 from "../assets/o1.webp";
 import o2 from "../assets/o2.jpg";
@@ -67,6 +67,7 @@ const Offer2 = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

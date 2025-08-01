@@ -1,6 +1,7 @@
 import React from "react";
 import { FaMinus, FaPlus, FaTimes } from "react-icons/fa";
 import Header from "./Header";
+import Footer from './Footer'
 import IcedAmericano from "../assets/IcedAmericano.jpg";
 
 const Cart = () => {
@@ -73,6 +74,7 @@ const Cart = () => {
 
                 </div>
             </div>
+            <Footer/>
         </>
     );
 };

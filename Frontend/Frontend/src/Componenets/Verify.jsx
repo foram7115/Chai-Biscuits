@@ -7,16 +7,20 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const Verify = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [phone, setPhone] = useState('');
+  const [timer, setTimer] = useState(30);
+  const [resendDisabled, setResendDisabled] = useState(true);
+
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Phone number management
   useEffect(() => {
     const phoneFromState = location.state?.phone;
     const phoneFromStorage = localStorage.getItem('userPhone');
 
     if (phoneFromState) {
       setPhone(phoneFromState);
-      localStorage.setItem('userPhone', phoneFromState); // Save it for next page too
+      localStorage.setItem('userPhone', phoneFromState);
     } else if (phoneFromStorage) {
       setPhone(phoneFromStorage);
     } else {
@@ -25,6 +29,17 @@ const Verify = () => {
     }
   }, [location, navigate]);
 
+  // Countdown timer
+  useEffect(() => {
+    if (timer > 0) {
+      const countdown = setTimeout(() => setTimer(timer - 1), 1000);
+      return () => clearTimeout(countdown);
+    } else {
+      setResendDisabled(false);
+    }
+  }, [timer]);
+
+  // Handle OTP input change
   const handleOtpChange = (index, value) => {
     if (/^\d$/.test(value) || value === '') {
       const updated = [...otp];
@@ -38,6 +53,7 @@ const Verify = () => {
     }
   };
 
+  // Verify OTP
   const handleVerify = async () => {
     try {
       const otpCode = otp.join('');
@@ -46,9 +62,6 @@ const Verify = () => {
         phone_number: phone,
         otp: otpCode,
       });
-
-      console.log('Phone:', phone);
-      console.log('OTP Code:', otpCode);
 
       if (res.data.message) {
         alert("OTP Verified!");
@@ -59,6 +72,26 @@ const Verify = () => {
       alert('OTP verification failed');
     }
   };
+
+  // Resend OTP
+  const handleResend = async () => {
+    try {
+      await axios.post('http://localhost:8000/api/send-otp/', {
+        phone_number: phone,
+      });
+
+      alert('OTP resent successfully');
+      setOtp(['', '', '', '']);
+      setTimer(30);
+      setResendDisabled(true);
+    } catch (err) {
+      console.error('Error resending OTP:', err);
+      alert('Failed to resend OTP');
+    }
+  };
+
+  // Format timer display (e.g., 00:29)
+  const formatTime = (t) => `00:${t.toString().padStart(2, '0')}`;
 
   return (
     <div className="flex items-center justify-center image" style={{ backgroundImage: `url(${back})` }}>
@@ -81,11 +114,19 @@ const Verify = () => {
           ))}
         </div>
 
-        <div className="text-[#4b2e2e] mb-4 text-sm font-semibold">00:29</div>
+        <div className="text-[#4b2e2e] mb-4 text-sm font-semibold">
+          {timer > 0 ? formatTime(timer) : 'You can resend OTP'}
+        </div>
 
         <p className="text-sm text-[#4b2e2e] mb-6">
-          Don’t receive code?{" "}
-          <button className="underline font-medium">Resend</button>
+          Didn’t receive code?{" "}
+          <button
+            className={`underline font-medium ${resendDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={handleResend}
+            disabled={resendDisabled}
+          >
+            Resend
+          </button>
         </p>
 
         <button
