@@ -17,8 +17,8 @@ function Header() {
    const home = () =>{
     navigate('/home')
   }
-  const Cart1 = () =>{
-    navigate('/cart')
+  const next = () =>{
+    navigate('/Cart')
   }
   const handleClick = (label) => {
   console.log("Clicked:", label)
@@ -75,7 +75,7 @@ function Header() {
           <img
             src={Cart}
             alt="cart"
-            onClick={Cart1()}
+            onClick={() => next()}
             className="w-6 sm:w-7 md:w-9 lg:w-10 h-auto mt-1 object-cover rounded-full cursor-pointer"
           />
         </div>
