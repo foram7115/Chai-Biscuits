@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from '../assets/logo.png';
 import Notification from '../assets/N1.png';
 import Profile from '../assets/p1.png';
@@ -6,6 +6,7 @@ import Cart from '../assets/cart2.png';
 import Menu from '../assets/menu3.png';
 import Home from '../assets/home2.png';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 function Header() {
 

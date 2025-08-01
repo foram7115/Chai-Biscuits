@@ -15,6 +15,8 @@ import Espresso from '../assets/Espresso.webp'
 import Brew from '../assets/Brew.jpg'
 import Header from './Header'
 
+
+
 const Home = () => {
     const coffeeItems = [
         { title: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: "₹300.00", image: Capuccino },
