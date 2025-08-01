@@ -1,33 +1,45 @@
 import React, { useState } from "react";
-import back from '../assets/back1.jpg'
+import back from '../assets/back1.jpg';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
-  const navigate = useNavigate()
-  const next = ()=>{
-    navigate('/Login')
-  }
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
+    phone_number: "",
     address: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Registered Data:", formData);
-    // Add API call or validation here
-    alert("Registration successful!");
+    setLoading(true);
+    
+    try {
+      const response = await axios.post("http://localhost:8000/api/register/", formData);
+      alert("Registration successful!");
+      navigate("/login");
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
- 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#fef5f1] px-4 image" style={{ backgroundImage: `url(${back})` }}>
+    <div
+      className="min-h-screen flex items-center justify-center bg-[#fef5f1] px-4 image"
+      style={{ backgroundImage: `url(${back})` }}
+    >
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white p-8 rounded-xl shadow-md"
@@ -53,8 +65,8 @@ const Register = () => {
           <label className="block mb-1 text-brown-700 font-medium">Phone Number</label>
           <input
             type="tel"
-            name="phone"
-            value={formData.phone}
+            name="phone_number"
+            value={formData.phone_number}
             onChange={handleChange}
             required
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-brown-300"
@@ -77,9 +89,10 @@ const Register = () => {
 
         <button
           type="submit"
-          className="w-full bg-brown-800 text-black py-2 rounded-md hover:bg-brown-700 transition " onClick={next}
+          disabled={loading}
+          className="w-full bg-brown-800 text-black py-2 rounded-md hover:bg-brown-700 transition"
         >
-          Register
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>
