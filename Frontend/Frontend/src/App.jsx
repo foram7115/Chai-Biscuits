@@ -9,12 +9,14 @@ import TermsAndConditions from './Componenets/TermAndConditions'
 import TrackOrder from './Componenets/TrackOrder'
 import OrderHistory from './Componenets/OrderHistory'
 import Home from './Componenets/Home'
+import Menu from './Componenets/Menu'
 
 function App() {
 
   return (
     <>
       <Routes>
+        <Menu/>
       <Route exact path="/" element={<Welcome />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/verify" element={<Verify />} />
