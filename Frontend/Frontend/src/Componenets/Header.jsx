@@ -3,7 +3,7 @@ import Logo from '../assets/logo.png';
 import Notification from '../assets/notification.png';
 import Profile from '../assets/Profile.avif';
 import Cart from '../assets/Cart.png';
-import Menu from '../assets/Menu.png';
+import Menu from '../assets/Menu2.png';
 import Home from '../assets/Home.avif';
 import { useNavigate } from 'react-router-dom';
 
