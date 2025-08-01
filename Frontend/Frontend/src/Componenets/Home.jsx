@@ -14,8 +14,21 @@ import Donut from "../assets/Donut.jpg";
 import Espresso from '../assets/Espresso.webp'
 import Brew from '../assets/Brew.jpg'
 import Header from './Header'
-
+import Footer from './Footer'
+import backg1 from '../assets/backg1.png'
+import backg2 from '../assets/backg2.png'
+import { useNavigate } from 'react-router-dom'
 const Home = () => {
+    const navigate = useNavigate();
+    const offer2 = ()=>{
+        navigate('/offer2')
+    }
+    const offer = ()=>{
+        navigate('/offer')
+    }
+    const menu = ()=>{
+        navigate('/Menu')
+    }
     const coffeeItems = [
         { title: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: "₹300.00", image: Capuccino },
         { title: "Americano", description: "Espresso, hot water", price: "₹250.00", image: Americo },
@@ -32,7 +45,7 @@ const Home = () => {
     return (
          <>
             <Header />
-            <div className="min-h-screen bg-[#fdf3ef] p-6">
+            <div className="min-h-screen bg-[#fdf3ef] p-1">
 
                 {/* Search Bar */}
                 <div className="flex items-center justify-center bg-[#e5d5ca] px-4 py-3 rounded-full mb-6">
@@ -49,12 +62,12 @@ const Home = () => {
 
                 {/* Menu Icons */}
                 <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6">
-                    {[{ icon: hotco, label: "Hot Coffee" }, { icon: coldco, label: "Cold Coffee" },
-                    { icon: coldd, label: "Drinks" }, { icon: food, label: "Snacks" }]
+                    {[{ icon: hotco, label: "Hot Coffee", action: menu }, { icon: coldco, label: "Cold Coffee", action: menu},
+                    { icon: coldd, label: "Drinks", action: menu }, { icon: food, label: "Snacks", action: menu }]
                         .map((item, index) => (
                             <div key={index} className="flex flex-col items-center text-[#4b2e2e]">
                                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#e5d5ca] rounded-full flex items-center justify-center mb-2">
-                                    <img src={item.icon} alt={item.label} className="w-10 h-10 sm:w-12 sm:h-12 object-contain" />
+                                    <img onClick={item.action} src={item.icon} alt={item.label} className="w-10 h-10 sm:w-12 sm:h-12 object-contain" />
                                 </div>
                                 <span className="text-sm text-center">{item.label}</span>
                             </div>
@@ -65,19 +78,21 @@ const Home = () => {
                 <div className="w-full mt-10 px-4">
                     <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:justify-center sm:overflow-visible scrollbar-hide">
                         {[{
-                            bg: "https://source.unsplash.com/600x300/?coffee",
-                            title: "Today's", subtitle: "Special Offer", button: "Buy Now →"
+                            bg: backg1,
+                            title: "Today's", subtitle: "Special Offer", button: "Buy Now →", action: offer,
                         },
                         {
-                            bg: "https://source.unsplash.com/600x300/?latte",
-                            title: "Flat 30% Off", button: "Buy Now →"
+                            bg: backg2,
+                            title: "Flat 30% Off", button:"Buy Now →", action: offer2,
                         }].map((item, i) => (
                             <div key={i} className="snap-start shrink-0 w-[280px] sm:w-[360px] h-48 bg-cover bg-center rounded-2xl overflow-hidden relative"
                                 style={{ backgroundImage: `url(${item.bg})` }}>
                                 <div className="absolute inset-0 bg-black/40 flex flex-col justify-center px-5 text-white">
                                     <h2 className="text-2xl font-bold">{item.title}</h2>
-                                    {item.subtitle && <h2 className="text-2xl font-bold">{item.subtitle}</h2>}
-                                    <p className="mt-2 font-medium underline underline-offset-4">{item.button}</p>
+                                    {item.subtitle && <h2 className="text-2xl font-bold ">{item.subtitle}</h2>}
+                                    <button onClick={item.action} className="mt-2 font-medium underline underline-offset-4 text-left cursor-pointer ">
+                                        {item.button}
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -120,6 +135,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 };

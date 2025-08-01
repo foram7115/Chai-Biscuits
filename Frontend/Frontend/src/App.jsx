@@ -14,15 +14,14 @@ import Register from './Componenets/Register'
 import Cart from './Componenets/Cart'
 import Offer from './Componenets/Offer'
 import Offer2 from './Componenets/Offer2'
-import Footer from './Componenets/Footer'
+
 
 function App() {
 
   return (
     <>
-       <Footer/>
-       <Offer2/>
-       <Offer/>
+       
+      
       <Routes>
       <Route exact path="/" element={<Welcome />} />
       <Route exact path="/Register" element={<Register />} />
@@ -36,6 +35,8 @@ function App() {
       <Route exact path="/order-history" element={<OrderHistory/>} />
       <Route exact path="/term-conditions" element={<TermsAndConditions/>} />
       <Route exact path="/contact-us" element={<ContactUs/>} />
+      <Route exact path="/offer2" element={<Offer2/>} />
+      <Route exact path="/offer" element={<Offer/>} />
       </Routes>
     </>
   )

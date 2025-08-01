@@ -1,6 +1,7 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa6";
 import Header from "./Header";
+import Footer from './Footer'
 
 // Hot coffee images
 import Capuccino from "../assets/Capuccino.jpg";
@@ -146,6 +147,7 @@ const Menu = () => {
         <MenuSection title="Drinks" items={drinkItems} />
         <MenuSection title="Snacks" items={snackItems} />
       </div>
+      <Footer/>
     </>
   );
 };

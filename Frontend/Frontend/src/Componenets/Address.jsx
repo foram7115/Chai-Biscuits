@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import Footer from './Footer'
 import { FiArrowLeft, FiMapPin, FiPlus, FiMoreVertical } from 'react-icons/fi';
 
 function Address() {
@@ -86,6 +87,7 @@ function Address() {
                 </div>
             </div>
         </div>
+        <Footer/>
         </>
     );
 }
