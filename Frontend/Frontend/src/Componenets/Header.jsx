@@ -11,6 +11,9 @@ function Header() {
 
   const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
+  const menu = () =>{
+    navigate('/Menu')
+  }
   const handleClick = (label) => {
   console.log("Clicked:", label)
 
@@ -60,7 +63,7 @@ function Header() {
           <img
             src={Menu}
             alt="menu"
-            onClick={() => setShowProfile(true)}
+            onClick={() => menu()}
             className="w-6 sm:w-7 md:w-9 lg:w-10 h-6 sm:h-7 md:h-9 lg:h-10 object-cover rounded-full cursor-pointer"
           />
           <img

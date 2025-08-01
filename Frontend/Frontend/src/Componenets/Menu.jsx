@@ -3,67 +3,67 @@ import { FaPlus } from "react-icons/fa6";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Capuccino from '../assets/Capuccino.jpg'
 
 const coffeeItems = [
   {
     name: "Cappuccino",
     description: "Espresso, steamed milk, milk foam",
     price: 300,
-    image: require("../assets/Capuccino.jpg")
+    image: Capuccino
   },
   {
     name: "Americano",
     description: "Espresso, hot water",
     price: 250,
-    image: require("../assets/Americo.jpg")
+   
   },
   {
     name: "Latte",
     description: "Espresso, milk, foam art",
     price: 280,
-    image: require("../assets/Latte.jpg")
+  
   },
   {
     name: "Mocha",
     description: "Espresso, chocolate, steamed milk",
     price: 320,
-    image: require("../assets/Mocha.jpg")
+    
   },
   {
     name: "Macchiato",
     description: "Espresso, milk foam",
     price: 270,
-    image: require("../assets/Macchiato.jpg")
+    
   },
   {
     name: "Flat White",
     description: "Espresso, steamed milk",
     price: 260,
-    image: require("../assets/FlatWhite.jpg")
+
   },
   {
     name: "Iced Coffee",
     description: "Chilled espresso, ice, milk",
     price: 290,
-    image: require("../assets/IcedCoffee.jpg")
+    
   },
   {
     name: "Affogato",
     description: "Espresso over ice cream",
     price: 350,
-    image: require("../assets/Affogato.jpg")
   },
   {
     name: "Espresso Shot",
     description: "Strong and bold",
     price: 200,
-    image: require("../assets/Espresso.jpg")
+    
   },
   {
     name: "Cold Brew",
     description: "Slow-brewed coffee",
     price: 310,
-    image: require("../assets/Coldbrew.jpg")
+    
   },
 ];
 
