@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Logo from '../assets/logo.png';
-import Notification from '../assets/notification.png';
-import Profile from '../assets/Profile.avif';
-import Cart from '../assets/Cart.png';
-import Menu from '../assets/Menu2.png';
-import Home from '../assets/Home.jpg';
+import Notification from '../assets/N1.png';
+import Profile from '../assets/p1.png';
+import Cart from '../assets/cart2.png';
+import Menu from '../assets/menu3.png';
+import Home from '../assets/home2.png';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
@@ -59,24 +59,24 @@ function Header() {
         </div>
 
         {/* Center: Home, Menu, Cart */}
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-3 sm:gap-4 z-0">
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center  sm:gap-3 z-0">
           <img
             src={Home}
             alt="home"
             onClick={() => home()}
-            className="w-6 sm:w-7 md:w-9 lg:w-10 h-6 sm:h-7 md:h-9 lg:h-10 object-cover rounded-full cursor-pointer"
+            className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 sm:h-7 md:h-10 lg:h-15 object-cover rounded-full cursor-pointer"
           />
           <img
             src={Menu}
             alt="menu"
             onClick={() => menu()}
-            className="w-6 sm:w-7 md:w-9 lg:w-10 h-6 sm:h-7 md:h-9 lg:h-10 object-cover rounded-full cursor-pointer"
+            className="w-6 sm:w-7 md:w-9 lg:w-10 h-6 sm:h-7 md:h-9 lg:h-12 object-cover rounded-full cursor-pointer"
           />
           <img
             src={Cart}
             alt="cart"
             onClick={() => next()}
-            className="w-6 sm:w-7 md:w-9 lg:w-10 h-auto mt-1 object-cover rounded-full cursor-pointer"
+            className="w-5 sm:w-7 md:w-9 lg:w-10 h-auto  object-cover rounded-full cursor-pointer"
           />
         </div>
 
