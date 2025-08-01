@@ -36,40 +36,40 @@ const Cart = () => {
                     </div>
 
                     {/* Promo Code */}
-<div className="mb-6">
-  <p className="text-brown-800 font-medium mb-2">Promo Code</p>
-  <input
-    type="text"
-    placeholder="Enter Promo Code"
-    className="w-full p-3 rounded-md bg-[#f3e4db] text-brown-800 focus:outline-none"
-    defaultValue="20HJ256KJNP12"
-  />
-</div>
+                    <div className="mb-6">
+                        <p className="text-brown-800 font-medium mb-2">Promo Code</p>
+                        <input
+                            type="text"
+                            placeholder="Enter Promo Code"
+                            className="w-full p-3 rounded-md bg-[#f3e4db] text-brown-800 focus:outline-none"
+                            defaultValue="20HJ256KJNP12"
+                        />
+                    </div>
 
-{/* Summary */}
-<div className="bg-[#f3e4db] rounded-xl p-4 text-brown-900 space-y-2">
-  <div className="flex justify-between">
-    <span>Subtotal</span>
-    <span>$30.00</span>
-  </div>
-  <div className="flex justify-between">
-    <span>Shipping Fees</span>
-    <span>$3.23</span>
-  </div>
-  <div className="flex justify-between">
-    <span>Taxes</span>
-    <span>$5.51</span>
-  </div>
-  <div className="flex justify-between">
-    <span>Discount</span>
-    <span>$0.00</span>
-  </div>
-  <hr className="border-t border-black my-2" />
-  <div className="flex justify-between font-bold text-lg">
-    <span>Total</span>
-    <span>$38.74</span>
-  </div>
-</div>
+                    {/* Summary */}
+                    <div className="bg-[#f3e4db] rounded-xl p-4 text-brown-900 space-y-2">
+                        <div className="flex justify-between">
+                            <span>Subtotal</span>
+                            <span>$30.00</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span>Shipping Fees</span>
+                            <span>$3.23</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span>Taxes</span>
+                            <span>$5.51</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span>Discount</span>
+                            <span>$0.00</span>
+                        </div>
+                        <hr className="border-t border-black my-2" />
+                        <div className="flex justify-between font-bold text-lg">
+                            <span>Total</span>
+                            <span>$38.74</span>
+                        </div>
+                    </div>
 
                 </div>
             </div>

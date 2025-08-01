@@ -12,13 +12,18 @@ import Home from './Componenets/Home'
 import Menu from './Componenets/Menu'
 import Register from './Componenets/Register'
 import Cart from './Componenets/Cart'
+import Offer from './Componenets/Offer'
+import Offer2 from './Componenets/Offer2'
+import Footer from './Componenets/Footer'
 
 function App() {
 
   return (
     <>
+       <Footer/>
+       <Offer2/>
+       <Offer/>
       <Routes>
-       
       <Route exact path="/" element={<Welcome />} />
       <Route exact path="/Register" element={<Register />} />
       <Route exact path="/Menu" element={<Menu />} />
