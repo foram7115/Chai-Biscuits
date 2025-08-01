@@ -4,25 +4,63 @@ from .models import OTP, CustomUser
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+
+@csrf_exempt
+def register_user(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data.get('name')
+        phone_number = data.get('phone_number')
+        address = data.get('address')
+
+        if not all([name, phone_number, address]):
+            return JsonResponse({'error': 'All fields are required'}, status=400)
+
+        # Save user if not already exists
+        user, created = CustomUser.objects.get_or_create(phone_number=phone_number, defaults={
+            'name': name,
+            'address': address
+        })
+
+        if not created:
+            return JsonResponse({'error': 'User already exists'}, status=400)
+
+        return JsonResponse({'message': 'User registered successfully'})
+
+
 def generate_otp():
     return str(random.randint(1000, 9999))
 
-@csrf_exempt
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+import random
+from .models import OTP  # adjust import based on your model
+
+def generate_otp():
+    return str(random.randint(1000, 9999))
+
+@api_view(['POST'])
 def send_otp(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        phone_number = data.get('phone_number')
+    try:
+        phone = request.data.get('phone_number')
+        if not phone:
+            return Response({'error': 'Phone number is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if not phone_number:
-            return JsonResponse({'error': 'Phone number is required'}, status=400)
+        otp = generate_otp()
 
-        otp_code = generate_otp()
-        OTP.objects.create(phone_number=phone_number, otp=otp_code)
+        # Clean up old OTPs
+        OTP.objects.filter(phone_number=phone).delete()
 
-        # ✅ Call the helper function to send the SMS
-        send_sms(phone_number, otp_code)
+        # Save new OTP
+        OTP.objects.create(phone_number=phone, otp=otp)
 
-        return JsonResponse({'message': 'OTP sent successfully'})
+        print(f"Sending OTP {otp} to phone {phone} (Simulated)")
+
+        return Response({'message': 'OTP sent successfully'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print("Error sending OTP:", e)
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @csrf_exempt
