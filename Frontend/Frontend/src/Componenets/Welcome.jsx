@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 function Welcome() {
     const navigate = useNavigate();
     const next = () =>{
-        navigate('/Login')
+        navigate('/Register')
     }
   return (
     <div className="h-screen w-full bg-[#4B2E2B] text-white flex flex-col justify-between overflow-hidden relative ">
       {/* Top Bar */}
       <div className="w-full flex justify-end px-6 pt-4">
         <button className=" text-[#d4a373] px-4 py-2 rounded-lg font-medium" onClick={next}>
-          Skip
+          Login
         </button>
       </div>
 

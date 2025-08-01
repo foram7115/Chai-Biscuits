@@ -14,6 +14,12 @@ function Header() {
   const menu = () =>{
     navigate('/Menu')
   }
+   const home = () =>{
+    navigate('/home')
+  }
+  const Cart1 = () =>{
+    navigate('/cart')
+  }
   const handleClick = (label) => {
   console.log("Clicked:", label)
 
@@ -57,7 +63,7 @@ function Header() {
           <img
             src={Home}
             alt="home"
-            onClick={() => setShowProfile(true)}
+            onClick={() => home()}
             className="w-6 sm:w-7 md:w-9 lg:w-10 h-6 sm:h-7 md:h-9 lg:h-10 object-cover rounded-full cursor-pointer"
           />
           <img
@@ -69,7 +75,7 @@ function Header() {
           <img
             src={Cart}
             alt="cart"
-            onClick={() => setShowProfile(true)}
+            onClick={Cart1()}
             className="w-6 sm:w-7 md:w-9 lg:w-10 h-auto mt-1 object-cover rounded-full cursor-pointer"
           />
         </div>
@@ -84,6 +90,7 @@ function Header() {
           <img
             src={Logo}
             alt="logo"
+            onClick={home}
             className="w-20 sm:w-24 md:w-28 lg:w-32 h-auto object-contain"
           />
         </div>
