@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import Footer from './Footer'
 
 // Import 12 images
 import offer1 from "../assets/offer1.jpg";
@@ -68,6 +69,7 @@ const Offer = () => {
           ))}
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

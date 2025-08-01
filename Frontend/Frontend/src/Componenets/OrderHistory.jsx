@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import Footer from './Footer'
 const orders = [
   {
     id: 'CB10234',
@@ -71,6 +72,7 @@ const OrderHistory = () => {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };
