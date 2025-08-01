@@ -13,10 +13,6 @@ import CC from '../assets/CC.webp'
 import Affo from '../assets/Affo.jpg'
 import Espresso from '../assets/Espresso.webp'
 import Brew from '../assets/Brew.jpg'
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from 'swiper/modules'
-import "swiper/css";
-import "swiper/css/pagination";
 import Header from './Header'
 
 const Home = () => {
@@ -34,9 +30,10 @@ const Home = () => {
     ];
 
     return (
-        <>
+         <>
             <Header />
             <div className="min-h-screen bg-[#fdf3ef] p-6">
+
                 {/* Search Bar */}
                 <div className="flex items-center justify-center bg-[#e5d5ca] px-4 py-3 rounded-full mb-6">
                     <span className="material-symbols-outlined mr-2">search</span>
@@ -120,12 +117,45 @@ const Home = () => {
                                 </div>
                             ))}
                         </div>
+
+                        {/* Best Items Section */}
+                        <div className="mt-12">
+                            <h2 className="text-2xl font-semibold text-[#4b2e2e] mb-6">Best Items</h2>
+
+                            {/* Responsive horizontal slider on mobile */}
+                            <div className="flex sm:grid sm:grid-cols-3 lg:grid-cols-5 gap-4 overflow-x-auto sm:overflow-visible pb-4">
+                                {coffeeItems.map((item, i) => (
+                                    <div key={i} className="min-w-[200px] bg-[#f9eae2] rounded-xl shadow p-3 flex flex-col items-center text-[#4b2e2e]">
+                                        {/* Image */}
+                                        <div className="w-full h-36 sm:h-40 bg-[#d9c2b4] rounded-t-xl overflow-hidden">
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+
+                                        {/* Title & Description */}
+                                        <div className="mt-2 w-full">
+                                            <h3 className="font-bold text-lg">{item.title}</h3>
+                                            <p className="text-sm text-gray-700">{item.description}</p>
+                                        </div>
+
+                                        {/* Price and Add Button */}
+                                        <div className="mt-2 flex justify-between items-center w-full">
+                                            <span className="text-lg font-bold">{item.price}</span>
+                                            <button className="w-8 h-8 rounded-full bg-[#4b2e2e] text-white flex items-center justify-center text-xl">+</button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </>
-    );
+    )
 };
 
 
-            export default Home;
+export default Home
