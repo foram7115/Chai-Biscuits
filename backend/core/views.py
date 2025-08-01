@@ -40,7 +40,7 @@ from .models import OTP  # adjust import based on your model
 def generate_otp():
     return str(random.randint(1000, 9999))
 
-@api_view(['POST'])
+@api_view(['GET','POST'])
 def send_otp(request):
     try:
         phone = request.data.get('phone_number')
@@ -63,12 +63,22 @@ def send_otp(request):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import OTP
+import json
+
 @csrf_exempt
 def verify_otp(request):
     if request.method == 'POST':
+        print('Row body', request.body)
+        
         data = json.loads(request.body)
+        print("Parsed data", data)
+        
         phone_number = data.get('phone_number')
         entered_otp = data.get('otp')
+        print("Phone", phone_number, "OPT", entered_otp)
 
         try:
             otp_record = OTP.objects.filter(phone_number=phone_number).latest('created_at')
@@ -82,6 +92,8 @@ def verify_otp(request):
 
         except OTP.DoesNotExist:
             return JsonResponse({'error': 'OTP not found'}, status=400)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
 from twilio.rest import Client

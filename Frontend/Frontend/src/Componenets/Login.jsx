@@ -5,29 +5,33 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
   const navigate = useNavigate();
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [fullName, setFullName] = useState('');
 
   const handleNext = async () => {
-    if (!phoneNumber || phoneNumber.length !== 10) {
-      alert('Please enter a valid 10-digit phone number.');
+    if (!name || !phone) {
+      alert('Please enter your full name and phone number');
+      return;
+    }
+
+    if (!/^\d{10}$/.test(phone)) {
+      alert('Phone number must be 10 digits');
       return;
     }
 
     try {
       const response = await axios.post('http://localhost:8000/api/send-otp/', {
-        phone_number: phoneNumber
+        phone_number: phone,
       });
 
       if (response.status === 200) {
-        // Store phone for later OTP verification
-        localStorage.setItem('phone_number', phoneNumber);
-        navigate('/Verify');
+        localStorage.setItem('userPhone', phone);
+        navigate('/Verify', { state: { phone } });
       }
     } catch (error) {
       console.error('Error sending OTP:', error);
-      alert('Failed to send OTP. Try again.');
+      alert('Failed to send OTP. Please try again.');
     }
   };
 
@@ -46,16 +50,17 @@ const Login = () => {
             <input
               type="text"
               placeholder="Full Name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
               className="w-full mb-4 px-4 py-3 rounded-full bg-[#e5d5ca] text-[#4b2e2e] placeholder-[#4b2e2e] focus:outline-none"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
+
             <input
               type="text"
               placeholder="Phone No."
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
               className="w-full mb-4 px-4 py-3 rounded-full bg-[#e5d5ca] text-[#4b2e2e] placeholder-[#4b2e2e] focus:outline-none"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
 
             <p className="text-sm text-[#4b2e2e] mb-6">
