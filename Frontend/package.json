@@ -9,10 +9,5 @@
     "swiper": "^11.2.10",
     "react-router-dom": "^7.7.1",
     "tailwindcss": "^4.1.11"
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
   }
 }

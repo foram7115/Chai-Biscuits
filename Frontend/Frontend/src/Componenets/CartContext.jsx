@@ -18,7 +18,6 @@ export const CartProvider = ({ children }) => {
         return [...prev, { ...item, quantity: 1 }];
       }
     });
-<<<<<<< HEAD
   };
 
   // Decrease quantity
@@ -31,26 +30,6 @@ export const CartProvider = ({ children }) => {
         .filter((i) => i.quantity > 0)
     );
   };
-=======
-};
-       const decreaseQuantity = (item) => {
-        setCartItems((prevItems) =>
-            prevItems
-                .map((i) =>
-                    i.name === item.name ? { ...i, quantity: i.quantity - 1 } : i
-                )
-                .filter((i) => i.quantity > 0)
-        );
-    };
-
-    // Remove item
-    const removeFromCart = (item) => {
-        setCartItems((prevItems) =>
-            prevItems.filter((i) => i.name !== item.name)
-        );
-    };
-    
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
 
   // Remove item
   const removeFromCart = (item) => {

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Welcome() {
-<<<<<<< HEAD
+
     const navigate = useNavigate();
     const next = () =>{
         navigate('/Register')
@@ -12,16 +12,7 @@ function Welcome() {
     const login = () =>{
       navigate('./login')
     }
-=======
-  const navigate = useNavigate();
-  const next = () => {
-    navigate('/Register')
-  }
-  const login = () => {
-    navigate('./login')
-  }
 
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
   return (
     <div className="h-screen w-full bg-[#4B2E2B] text-white flex flex-col justify-between overflow-hidden relative ">
 
@@ -45,19 +36,13 @@ function Welcome() {
         </p>
       </div>
 
-<<<<<<< HEAD
       {/* Pagination & Button */}
       <div className="flex flex-col items-center gap-2 mb-2"> {/* Reduced spacing */}
         <button className="bg-[#EADBC8] text-[#4B2E2B] px-6 py-3 rounded-xl font-semibold" onClick={next}>
           Get Start
         </button>
       </div>
-=======
 
-      <button className="bg-[#EADBC8] text-[#4B2E2B] px-6 py-3 rounded-xl font-semibold" onClick={next}>
-        Get Start
-      </button>
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
     </div>
   );
 }

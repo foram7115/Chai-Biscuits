@@ -7,17 +7,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaPlus } from "react-icons/fa6";
 import Header from "./Header";
 import Footer from './Footer'
-<<<<<<< HEAD
-import { useCart } from "./CartContext"; // Adjust the path if needed
-
-// Hot coffee images
-=======
 
 import { useCart } from "./CartContext"; // Adjust the path if needed
 
 // Hot coffee images
 
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
 import Capuccino from "../assets/Capuccino.jpg";
 import Americo from "../assets/Americo.jpg";
 import Latte from "../assets/Latte.jpg";
@@ -160,14 +154,11 @@ const MenuSection = ({ title, items, addToCart }) => (
             <p className="text-gray-600 text-sm">{item.description}</p>
             <div className="flex justify-between items-center mt-2">
               <span className="text-lg font-bold">₹{item.price}.00</span>
-<<<<<<< HEAD
-              <button onClick={() => addToCart(item)} className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700">
-=======
+
               <button
                 onClick={() => addToCart(item)}
                 className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
               >
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
                 <FaPlus />
               </button>
             </div>
@@ -180,7 +171,7 @@ const MenuSection = ({ title, items, addToCart }) => (
 
 
 const Menu = () => {
-<<<<<<< HEAD
+
   const { cartItems, addToCart } = useCart();
 
   const handleAddToCart = (item) => {
@@ -212,20 +203,4 @@ const Menu = () => {
 
 
 export default Menu;
-=======
-  const {cartItems, addToCart} = useCart();
-    return (
-    <>
-      <Header />
-      <div className="p-6 bg-[#fef5f1]">
-        <MenuSection title="Hot Coffee" items={hotCoffeeItems} addToCart={addToCart} />
-        <MenuSection title="Cold Coffee" addToCart={addToCart} items={coldCoffeeItems} />
-        <MenuSection title="Drinks" addToCart={addToCart} items={drinkItems} />
-        <MenuSection title="Snacks" addToCart={addToCart} items={snackItems} />
-      </div>
-      <Footer />
-    </>
-    );
-};
-    export default Menu;
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
+
