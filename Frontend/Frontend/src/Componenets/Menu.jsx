@@ -2,6 +2,7 @@ import React from "react";
 import { FaPlus } from "react-icons/fa6";
 import Header from "./Header";
 import Footer from './Footer'
+import { useCart } from "./CartContext"; // Adjust the path if needed
 
 // Hot coffee images
 import Capuccino from "../assets/Capuccino.jpg";
@@ -50,6 +51,7 @@ import Snack3 from "../assets/Snack3.jpg";
 import Snack4 from "../assets/Snack4.jpg";
 import Snack5 from "../assets/Snack5.jpg";
 import Snack6 from "../assets/Snack6.jpg";
+
 
 // Hot Coffee
 const hotCoffeeItems = [
@@ -107,7 +109,8 @@ const snackItems = [
   { name: "Masala Weafer", description: "Toasted with herbs", price: 120, image: Snack6 },
 ];
 
-const MenuSection = ({ title, items }) => (
+
+const MenuSection = ({ title, items, addToCart }) => (
   <div className="mb-10">
     <h2 className="text-3xl font-bold mb-6 text-brown-800">{title}</h2>
     <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-brown-700">
@@ -126,8 +129,8 @@ const MenuSection = ({ title, items }) => (
             <p className="text-gray-600 text-sm">{item.description}</p>
             <div className="flex justify-between items-center mt-2">
               <span className="text-lg font-bold">₹{item.price}.00</span>
-              <button className="bg-brown-800 text-white p-2 rounded-full hover:bg-brown-700">
-                <FaPlus />
+              <button  onClick={() => addToCart(item)}   className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700">
+                <FaPlus />  
               </button>
             </div>
           </div>
@@ -138,14 +141,16 @@ const MenuSection = ({ title, items }) => (
 );
 
 const Menu = () => {
+  const { cartItems, addToCart } = useCart();
   return (
     <>
       <Header />
       <div className="p-6 bg-[#fef5f1]">
-        <MenuSection title="Hot Coffee" items={hotCoffeeItems} />
-        <MenuSection title="Cold Coffee" items={coldCoffeeItems} />
-        <MenuSection title="Drinks" items={drinkItems} />
-        <MenuSection title="Snacks" items={snackItems} />
+          Cart Count: {cartItems.length}
+        <MenuSection title="Hot Coffee" items={hotCoffeeItems} addToCart={addToCart}/>
+        <MenuSection title="Cold Coffee" addToCart={addToCart} items={coldCoffeeItems} />
+        <MenuSection title="Drinks" addToCart={addToCart} items={drinkItems} />
+        <MenuSection title="Snacks"addToCart={addToCart} items={snackItems} />
       </div>
       <Footer/>
     </>
