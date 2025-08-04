@@ -15,6 +15,7 @@ import Smoothie from "../assets/Smoothie.jpg";
 import Mojito from "../assets/Mojito.jpg";
 import Muffin from "../assets/Muffin.jpg";
 import Donut from "../assets/Donut.jpg";
+<<<<<<< HEAD
 import Espresso from '../assets/Espresso.webp';
 import Brew from '../assets/Brew.jpg';
 import Header from './Header';
@@ -22,6 +23,19 @@ import Footer from './Footer';
 import backg1 from '../assets/backg1.png';
 import backg2 from '../assets/backg2.png';
 import { useNavigate } from 'react-router-dom';
+=======
+import Espresso from '../assets/Espresso.webp'
+import Brew from '../assets/Brew.jpg'
+import Header from './Header'
+import { FaPlus } from "react-icons/fa6";
+import Footer from './Footer'
+import backg1 from '../assets/backg1.png'
+import backg2 from '../assets/backg2.png'
+import { useNavigate } from 'react-router-dom'
+
+
+import { useCart } from "./CartContext";
+>>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
 
 const Home = () => {
     const navigate = useNavigate();
@@ -39,6 +53,7 @@ const Home = () => {
     });
 
     const coffeeItems = [
+<<<<<<< HEAD
         { id: 1, title: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: 300, image: Capuccino },
         { id: 2, title: "Americano", description: "Espresso, hot water", price: 250, image: Americo },
         { id: 3, title: "ColdMocha", description: "Espresso, milk, foam art", price: 280, image: ColdMocha },
@@ -55,6 +70,20 @@ const Home = () => {
     const offer2 = () => navigate('/offer2');
     const menu = () => navigate('/Menu');
 
+=======
+        { name: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: "300.00", image: Capuccino },
+        { name: "Americano", description: "Espresso, hot water", price: "250.00", image: Americo },
+        { name: "ColdMocha", description: "Espresso, milk, foam art", price: "280.00", image: ColdMocha },
+        { name: "IcedAmericano", description: "Espresso, chocolate, steamed milk", price: "320.00", image: IcedAmericano },
+        { name: "Smoothie", description: "Espresso, milk foam", price: "270.00", image: Smoothie },
+        { name: "Mojito", description: "Espresso, steamed milk", price: "260.00", image: Mojito },
+        { name: "Muffin", description: "Chilled espresso, ice, milk", price: "120.00", image: Muffin },
+        { name: "Donut", description: "Espresso over ice cream", price: "130.00", image: Donut },
+        { name: "Espresso Shot", description: "Strong and bold", price: "200.00", image: Espresso },
+        { name: "Cold Brew", description: "Slow-brewed coffee", price: "310.00", image: Brew },
+    ];
+    const { cartItems, addToCart } = useCart();
+>>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
     return (
         <>
             <Header />
@@ -71,9 +100,16 @@ const Home = () => {
                     />
                 </div>
 
+<<<<<<< HEAD
                 <h2 className="flex justify-center text-3xl font-semibold text-[#4b2e2e] mb-4">Our Menu</h2>
 
                 {/* Category Buttons */}
+=======
+
+                <h2 className="flex justify-center text-3xl font-semibold text-[#4b2e2e] mb-4">Our Menu</h2>
+
+
+>>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
                 <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6">
                     {[{ icon: hotco, label: "Hot Coffee", action: menu }, { icon: coldco, label: "Cold Coffee", action: menu },
                     { icon: coldd, label: "Drinks", action: menu }, { icon: food, label: "Snacks", action: menu }]
@@ -87,7 +123,11 @@ const Home = () => {
                         ))}
                 </div>
 
+<<<<<<< HEAD
                 {/* Offers Section */}
+=======
+
+>>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
                 <div className="w-full mt-10 px-4">
                     <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:justify-center sm:overflow-visible scrollbar-hide">
                         {[{
@@ -116,6 +156,7 @@ const Home = () => {
                 <div className="mt-12 px-4">
                     <h2 className="text-2xl font-semibold text-[#4b2e2e] mb-6">Best Items</h2>
 
+<<<<<<< HEAD
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                         {coffeeItems.map((item) => (
                             <div key={item.id} className="bg-[#f9eae2] rounded-xl shadow p-3 flex flex-col items-center text-[#4b2e2e]">
@@ -125,6 +166,39 @@ const Home = () => {
                                         alt={item.title}
                                         className="w-full h-full object-cover"
                                     />
+=======
+                    <div className="mt-12">
+                        <h2 className="text-2xl font-semibold text-[#4b2e2e] mb-6">Best Items</h2>
+                        {/* Cart Count: {cartItems.length} */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                            {coffeeItems.map((item, i) => (
+                                <div key={i} className="bg-[#f9eae2] rounded-xl shadow p-3 flex flex-col items-center text-[#4b2e2e]">
+
+                                    <div className="w-full h-36 sm:h-40 bg-[#d9c2b4] rounded-t-xl overflow-hidden">
+                                        <img
+                                            src={item.image}
+                                            alt={item.name}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+
+
+                                    <div className="mt-2 w-full">
+                                        <h3 className="font-bold text-lg">{item.name}</h3>
+                                        <p className="text-sm text-gray-700">{item.description}</p>
+                                    </div>
+
+                                    <div className="mt-2 flex justify-between items-center w-full">
+                                        <span className="text-lg font-bold">₹{item.price}</span>
+                                        {/* <button className="w-8 h-8 rounded-full bg-[#4b2e2e] text-white flex items-center justify-center text-xl" onClick={addToCart}>+</button> */}
+                                        <button
+                                            onClick={() => addToCart(item)}
+                                            className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
+                                        >
+                                            <FaPlus />
+                                        </button>
+                                    </div>
+>>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
                                 </div>
 
                                 <div className="mt-2 w-full">
