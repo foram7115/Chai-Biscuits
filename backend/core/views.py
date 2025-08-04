@@ -82,7 +82,11 @@ def send_otp(request):
             otp = generate_otp()
 
             # Save OTP in DB
-            OTP.objects.update_or_create(phone_number=phone, defaults={'otp': otp, 'created_at': timezone.now()})
+            otp_instance, created = OTP.objects.update_or_create(
+                phone_number=phone,
+                defaults={'otp': otp, 'created_at': timezone.now()}
+            )
+            print(f"[DEBUG] Saved OTP {otp} for {phone}")
 
             # Send OTP using 2Factor API
             api_key = 'cfc26a50-6ebb-11f0-a562-0200cd936042'  # Replace with your actual key
@@ -135,3 +139,49 @@ def verify_otp(request):
             return JsonResponse({'error': str(e)}, status=500)
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from .models import CustomUser, Order, OrderItem
+import json
+from decimal import Decimal
+
+@csrf_exempt
+def create_order(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+
+            phone = data.get('phone_number')
+            total = data.get('total')
+            delivery_status = data.get('delivery_status')
+            items = data.get('items', [])
+
+            if not all([phone, total, delivery_status, items]):
+                return JsonResponse({'error': 'Missing required fields'}, status=400)
+
+            user = CustomUser.objects.get(phone_number=phone)
+
+            order = Order.objects.create(
+                user=user,
+                total_amount=Decimal(str(total)),
+                delivery_status=delivery_status
+            )
+
+            for item in items:
+                OrderItem.objects.create(
+                    order=order,
+                    item_name=item['name'],
+                    quantity=item['quantity'],
+                    price_per_item=Decimal(str(item['price']))
+                )
+
+            return JsonResponse({'message': 'Order created successfully'}, status=201)
+
+        except CustomUser.DoesNotExist:
+            return JsonResponse({'error': 'User not found'}, status=404)
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid method'}, status=405)
