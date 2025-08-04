@@ -5,26 +5,42 @@ import Footer from './Footer';
 const TrackOrder = () => {
   const [order, setOrder] = useState(null);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [orderCleared, setOrderCleared] = useState(false);
 
+  // Load order from localStorage on mount
   useEffect(() => {
-    const orderData = localStorage.getItem('latestOrder');
-    if (orderData) {
-      const parsedOrder = JSON.parse(orderData);
-      setOrder(parsedOrder);
+    const storedOrder = localStorage.getItem('latestOrder');
+    if (storedOrder) {
+      setOrder(JSON.parse(storedOrder));
     }
-
-    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
-    return () => clearInterval(timer);
   }, []);
 
+  // Clock tick updater every 60 seconds
+  useEffect(() => {
+    const interval = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-clear order after delivery time
+  useEffect(() => {
+    if (order && currentTime >= parseTime(order.deliveryTime)) {
+      setTimeout(() => {
+        localStorage.removeItem('latestOrder');
+        setOrder(null);
+        setOrderCleared(true);
+      }, 5000); // 5 sec delay
+    }
+  }, [order, currentTime]);
+
   const parseTime = (timeStr) => {
+    if (!timeStr) return new Date(0);
     const [hourMin, period] = timeStr.split(' ');
     let [hours, minutes] = hourMin.split(':').map(Number);
     if (period === 'PM' && hours < 12) hours += 12;
     if (period === 'AM' && hours === 12) hours = 0;
-    const now = new Date();
-    now.setHours(hours, minutes, 0, 0);
-    return now;
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
   };
 
   const getSteps = () => {
@@ -50,16 +66,6 @@ const TrackOrder = () => {
   };
 
   const steps = getSteps();
-
-  // Clear the order if delivered
-  useEffect(() => {
-    if (steps.length > 0 && steps[2].completed) {
-      localStorage.removeItem('latestOrder');
-      setTimeout(() => {
-        setOrder(null); // clear UI after short delay
-      }, 2000); // optional: wait 2 seconds before hiding UI
-    }
-  }, [steps]);
 
   return (
     <>
@@ -130,7 +136,11 @@ const TrackOrder = () => {
               </div>
             </>
           ) : (
-            <p className="text-center text-gray-600">No order found. Please place an order first.</p>
+            <p className="text-center text-gray-600">
+              {orderCleared
+                ? 'Your order was delivered. Ready to track a new one!'
+                : 'No order found. Please place an order first.'}
+            </p>
           )}
         </div>
       </div>

@@ -89,7 +89,7 @@ def send_otp(request):
             print(f"[DEBUG] Saved OTP {otp} for {phone}")
 
             # Send OTP using 2Factor API
-            api_key = 'cfc26a50-6ebb-11f0-a562-0200cd936042'  # Replace with your actual key
+            api_key = 'cfc26a50-6ebb-11f0-a562-0200cd936042'  # Replace with your actual key 
             url = f'https://2factor.in/API/V1/{api_key}/SMS/{phone}/{otp}'
 
             response = requests.get(url)

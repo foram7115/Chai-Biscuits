@@ -22,12 +22,6 @@ function Header() {
   });
 
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const menu = () => navigate('/Menu');
-  const home = () => navigate('/home');
-  const next = () => navigate('/Cart');
-=======
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
 
   const handleClick = (label) => {
     const routes = {
@@ -43,38 +37,9 @@ function Header() {
     }
   };
 
-<<<<<<< HEAD
-  // ✅ Fetch user profile on component mount
-  useEffect(() => {
-  const phone = localStorage.getItem('phone_number');
-
-  if (!phone) {
-    console.warn('No phone number found in localStorage');
-    return;
-  }
-
-  axios.get(`http://localhost:8000/api/get-user-profile/?phone=${phone}`, {
-    withCredentials: true,
-  })
-  .then(res => {
-    console.log("Profile fetched:", res.data);
-    const { name, phone_number } = res.data;
-
-    setUserData(prev => ({
-      ...prev,
-      name: name || 'User',
-      phone: phone_number || '',
-    }));
-  })
-  .catch(err => {
-    console.error('Failed to fetch profile:', err);
-  });
-}, []); // run only once on mount
-=======
   useEffect(() => {
     if (showProfile) {
       const phone = localStorage.getItem('phone_number');
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
 
       axios
         .get(`/api/get-user-profile/?phone=${phone}`, {
@@ -98,16 +63,9 @@ function Header() {
 
   return (
     <div className="sticky top-0 z-50 bg-[#b08968] h-20">
-<<<<<<< HEAD
-      {/* Header Bar */}
-      <div className="flex items-center px-4 sm:px-6 py-3 h-20">
-        {/* Left: Profile */}
-        <div className="flex items-center z-10">
-=======
       <div className="flex items-center px-4 sm:px-6 py-3 h-20 relative">
         {/* Profile icon (left) */}
         <div className="flex items-center">
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
           <img
             src={userData.profileImage}
             alt="profile"
@@ -116,33 +74,19 @@ function Header() {
           />
         </div>
 
-<<<<<<< HEAD
-        {/* Center: Home, Menu, Cart */}
-=======
         {/* Center nav icons */}
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center sm:gap-3 z-0">
           <img
             src={HomeIcon}
             alt="home"
-<<<<<<< HEAD
-            onClick={home}
-            className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 object-cover rounded-full cursor-pointer"
-=======
             onClick={() => navigate('/home')}
             className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 sm:h-7 md:h-10 lg:h-15 object-cover rounded-full cursor-pointer"
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
           />
           <img
             src={MenuIcon}
             alt="menu"
-<<<<<<< HEAD
-            onClick={menu}
-            className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 object-cover rounded-full cursor-pointer"
-=======
             onClick={() => navigate('/Menu')}
             className="w-6 sm:w-7 md:w-9 lg:w-10 h-6 sm:h-7 md:h-9 lg:h-12 object-cover rounded-full cursor-pointer"
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
           />
           <img
             src={Cart}
@@ -152,11 +96,7 @@ function Header() {
           />
         </div>
 
-<<<<<<< HEAD
-        {/* Right: Notification + Logo */}
-=======
         {/* Notification & Logo (right) */}
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
         <div className="flex items-center gap-2 sm:gap-4 md:gap-5 ml-auto z-10">
           <img
             src={Notification}
@@ -172,11 +112,7 @@ function Header() {
         </div>
       </div>
 
-<<<<<<< HEAD
-      {/* Slide-in Profile Panel */}
-=======
       {/* Profile Sidebar */}
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
       <div
         className={`fixed top-0 left-0 h-full w-72 sm:w-80 bg-[#fceeea] shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
           showProfile ? 'translate-x-0' : '-translate-x-full'
@@ -220,7 +156,6 @@ function Header() {
             ))}
           </div>
 
-<<<<<<< HEAD
           <button
             onClick={() => {
               localStorage.removeItem('phone_number');
@@ -230,9 +165,6 @@ function Header() {
             }}
             className="mt-6 w-full py-2 bg-[#4b2c20] text-white rounded-full hover:bg-[#3a241b] transition"
           >
-=======
-          <button className="mt-6 w-full py-2 bg-[#4b2c20] text-white rounded-full" onClick={next}>
->>>>>>> 0dd846c64af03e5fb9e8e6618591d18c07b49405
             Logout
           </button>
 
