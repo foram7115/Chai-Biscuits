@@ -17,12 +17,9 @@ import Offer2 from './Componenets/Offer2'
 
 
 function App() {
-
   return (
     <>
-
-
-      <Routes>
+    <Routes>
         <Route exact path="/" element={<Welcome />} />
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/Menu" element={<Menu />} />

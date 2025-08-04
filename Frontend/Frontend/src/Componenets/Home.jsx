@@ -14,25 +14,15 @@ import Donut from "../assets/Donut.jpg";
 import Espresso from '../assets/Espresso.webp'
 import Brew from '../assets/Brew.jpg'
 import Header from './Header'
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> a66c2430a927922b5632b7bfc9a4ae0671840094
->>>>>>> 5d359b9ca267655bd5d7d02ceaa5b4ea4ea570d8
+import { FaPlus } from "react-icons/fa6";
 import Footer from './Footer'
 import backg1 from '../assets/backg1.png'
 import backg2 from '../assets/backg2.png'
 import { useNavigate } from 'react-router-dom'
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> a66c2430a927922b5632b7bfc9a4ae0671840094
->>>>>>> 5d359b9ca267655bd5d7d02ceaa5b4ea4ea570d8
+import { useCart } from "./CartContext";
+
 const Home = () => {
     const navigate = useNavigate();
     const offer2 = () => {
@@ -45,18 +35,18 @@ const Home = () => {
         navigate('/Menu')
     }
     const coffeeItems = [
-        { title: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: "₹300.00", image: Capuccino },
-        { title: "Americano", description: "Espresso, hot water", price: "₹250.00", image: Americo },
-        { title: "ColdMocha", description: "Espresso, milk, foam art", price: "₹280.00", image: ColdMocha },
-        { title: "IcedAmericano", description: "Espresso, chocolate, steamed milk", price: "₹320.00", image: IcedAmericano },
-        { title: "Smoothie", description: "Espresso, milk foam", price: "₹270.00", image: Smoothie },
-        { title: "Mojito", description: "Espresso, steamed milk", price: "₹260.00", image: Mojito },
-        { title: "Muffin", description: "Chilled espresso, ice, milk", price: "₹120.00", image: Muffin },
-        { title: "Donut", description: "Espresso over ice cream", price: "₹130.00", image: Donut },
-        { title: "Espresso Shot", description: "Strong and bold", price: "₹200.00", image: Espresso },
-        { title: "Cold Brew", description: "Slow-brewed coffee", price: "₹310.00", image: Brew },
+        { name: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: "300.00", image: Capuccino },
+        { name: "Americano", description: "Espresso, hot water", price: "250.00", image: Americo },
+        { name: "ColdMocha", description: "Espresso, milk, foam art", price: "280.00", image: ColdMocha },
+        { name: "IcedAmericano", description: "Espresso, chocolate, steamed milk", price: "320.00", image: IcedAmericano },
+        { name: "Smoothie", description: "Espresso, milk foam", price: "270.00", image: Smoothie },
+        { name: "Mojito", description: "Espresso, steamed milk", price: "260.00", image: Mojito },
+        { name: "Muffin", description: "Chilled espresso, ice, milk", price: "120.00", image: Muffin },
+        { name: "Donut", description: "Espresso over ice cream", price: "130.00", image: Donut },
+        { name: "Espresso Shot", description: "Strong and bold", price: "200.00", image: Espresso },
+        { name: "Cold Brew", description: "Slow-brewed coffee", price: "310.00", image: Brew },
     ];
-
+    const { cartItems, addToCart } = useCart();
     return (
         <>
             <Header />
@@ -71,10 +61,10 @@ const Home = () => {
                     />
                 </div>
 
-              
+
                 <h2 className="flex justify-center text-3xl font-semibold text-[#4b2e2e] mb-4">Our Menu</h2>
 
-               
+
                 <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6">
                     {[{ icon: hotco, label: "Hot Coffee", action: menu }, { icon: coldco, label: "Cold Coffee", action: menu },
                     { icon: coldd, label: "Drinks", action: menu }, { icon: food, label: "Snacks", action: menu }]
@@ -88,7 +78,7 @@ const Home = () => {
                         ))}
                 </div>
 
-         
+
                 <div className="w-full mt-10 px-4">
                     <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:justify-center sm:overflow-visible scrollbar-hide">
                         {[{
@@ -117,28 +107,34 @@ const Home = () => {
 
                     <div className="mt-12">
                         <h2 className="text-2xl font-semibold text-[#4b2e2e] mb-6">Best Items</h2>
-
+                        {/* Cart Count: {cartItems.length} */}
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                             {coffeeItems.map((item, i) => (
                                 <div key={i} className="bg-[#f9eae2] rounded-xl shadow p-3 flex flex-col items-center text-[#4b2e2e]">
-                                   
+
                                     <div className="w-full h-36 sm:h-40 bg-[#d9c2b4] rounded-t-xl overflow-hidden">
                                         <img
                                             src={item.image}
-                                            alt={item.title}
+                                            alt={item.name}
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
 
-                                   
+
                                     <div className="mt-2 w-full">
-                                        <h3 className="font-bold text-lg">{item.title}</h3>
+                                        <h3 className="font-bold text-lg">{item.name}</h3>
                                         <p className="text-sm text-gray-700">{item.description}</p>
                                     </div>
 
                                     <div className="mt-2 flex justify-between items-center w-full">
-                                        <span className="text-lg font-bold">{item.price}</span>
-                                        <button className="w-8 h-8 rounded-full bg-[#4b2e2e] text-white flex items-center justify-center text-xl">+</button>
+                                        <span className="text-lg font-bold">₹{item.price}</span>
+                                        {/* <button className="w-8 h-8 rounded-full bg-[#4b2e2e] text-white flex items-center justify-center text-xl" onClick={addToCart}>+</button> */}
+                                        <button
+                                            onClick={() => addToCart(item)}
+                                            className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
+                                        >
+                                            <FaPlus />
+                                        </button>
                                     </div>
                                 </div>
                             ))}

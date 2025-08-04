@@ -13,15 +13,10 @@ const Verify = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-<<<<<<< HEAD
   useEffect(() => {
     const phoneFromState = location.state?.phone;
     const phoneFromStorage = localStorage.getItem('userPhone');
-=======
-  // Phone number management
- useEffect(() => {
-  const phoneFromState = location.state?.phone;
->>>>>>> 5d359b9ca267655bd5d7d02ceaa5b4ea4ea570d8
+
 
   if (phoneFromState) {
     setPhone(phoneFromState);

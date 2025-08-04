@@ -22,7 +22,7 @@ export const CartProvider = ({ children }) => {
         setCartItems((prevItems) =>
             prevItems
                 .map((i) =>
-                    i.id === item.id ? { ...i, quantity: i.quantity - 1 } : i
+                    i.name === item.name ? { ...i, quantity: i.quantity - 1 } : i
                 )
                 .filter((i) => i.quantity > 0)
         );
@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
     // Remove item
     const removeFromCart = (item) => {
         setCartItems((prevItems) =>
-            prevItems.filter((i) => i.id !== item.id)
+            prevItems.filter((i) => i.name !== item.name)
         );
     };
     

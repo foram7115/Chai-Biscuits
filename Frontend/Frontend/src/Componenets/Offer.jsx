@@ -13,22 +13,24 @@ import offer9 from "../assets/offer9.jpg";
 import offer10 from "../assets/offer10.jpg";
 import offer11 from "../assets/offer11.jpg";
 import offer12 from "../assets/offer12.jpg";
+import { useCart } from "./CartContext";
 const offerImages = [
-    { src: offer1, title: "50% Off Latte", price: 220 },
-    { src: offer2, title: "Buy 1 Get 1 Free", price: 280 },
-    { src: offer3, title: "Iced Coffee Combo", price: 250 },
-    { src: offer4, title: "Summer Special", price: 240 },
-    { src: offer5, title: "Espresso Deal", price: 200 },
-    { src: offer6, title: "Choco Mocha Treat", price: 260 },
-    { src: offer7, title: "Holiday Offer", price: 200 },
-    { src: offer8, title: "Cold Brew Boost", price: 230 },
-    { src: offer9, title: "Free Add-ons", price: 290 },
-    { src: offer10, title: "Macchiato Magic", price: 270 },
-    { src: offer11, title: "Daily Brew Discount", price: 210 },
-    { src: offer12, title: "Weekend Only Offer", price: 250 },
+    { image: offer1, name: "50% Off Latte", price: 220 },
+    { image: offer2, name: "Buy 1 Get 1 Free", price: 280 },
+    { image: offer3, name: "Iced Coffee Combo", price: 250 },
+    { image: offer4, name: "Summer Special", price: 240 },
+    { image: offer5, name: "Espresso Deal", price: 200 },
+    { image: offer6, name: "Choco Mocha Treat", price: 260 },
+    { image: offer7, name: "Holiday Offer", price: 200 },
+    { image: offer8, name: "Cold Brew Boost", price: 230 },
+    { image: offer9, name: "Free Add-ons", price: 290 },
+    { image: offer10, name: "Macchiato Magic", price: 270 },
+    { image: offer11, name: "Daily Brew Discount", price: 210 },
+    { image: offer12, name: "Weekend Only Offer", price: 250 },
 ];
 
 const Offer = () => {
+    const { cartItems, addToCart } = useCart();
     return (
         <>
             <Header />
@@ -38,28 +40,32 @@ const Offer = () => {
                 </h2>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                    {offerImages.map((offer, index) => (
+                    {offerImages.map((item, index) => (
                         <div
                             key={index}
                             className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 bg-white flex flex-col"
                         >
                             <div className="w-full h-48 flex items-center justify-center bg-white">
                                 <img
-                                    src={offer.src}
-                                    alt={offer.title}
+                                    src={item.image}
+                                    alt={item.name}
                                     className="max-h-full max-w-full object-contain"
                                 />
                             </div>
                             <div className="p-4 flex flex-col flex-grow justify-between">
                                 <p className="text-center text-brown-800 font-semibold mb-2">
-                                    {offer.title}
+                                    {item.name}
                                 </p>
                                 <p className="text-center text-gray-700 font-medium mb-4">
-                                    ₹{offer.price}
+                                    ₹{item.price}
                                 </p>
-                                <button className="bg-white border border-brown-800 text-black py-2 rounded-lg hover:bg-brown-100 transition">
+                                <button
+                                    onClick={() => addToCart(item)}
+                                    className="bg-white border border-brown-800 text-black py-2 rounded-lg hover:bg-brown-100 transitionbg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
+                                >
                                     Add to Cart
                                 </button>
+
                             </div>
                         </div>
                     ))}
