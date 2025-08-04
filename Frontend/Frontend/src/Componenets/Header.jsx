@@ -1,58 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '../assets/logo.png';
 import Notification from '../assets/N1.png';
-import Profile from '../assets/p1.png';
+import ProfilePlaceholder from '../assets/p1.png';
 import Cart from '../assets/cart2.png';
 import Menu from '../assets/menu3.png';
 import Home from '../assets/home2.png';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 
 function Header() {
-
   const [showProfile, setShowProfile] = useState(false);
+  const [userData, setUserData] = useState({
+    name: '',
+    phone: '',
+    profileImage: ProfilePlaceholder,
+  });
+
   const navigate = useNavigate();
-  const menu = () =>{
-    navigate('/Menu')
-  }
-   const home = () =>{
-    navigate('/home')
-  }
-  const next = () =>{
-    navigate('/Cart')
-  }
+
+  const menu = () => navigate('/Menu');
+  const home = () => navigate('/home');
+  const next = () => navigate('/Cart');
+
   const handleClick = (label) => {
-  console.log("Clicked:", label)
+    if (label === 'My Addresses') navigate('/address');
+    if (label === 'Track Order') navigate('/track-order');
+    if (label === 'Order History') navigate('/order-history');
+    if (label === 'Terms & Conditions') navigate('/term-conditions');
+    if (label === 'Contact Us') navigate('/contact-us');
+  };
 
-  // Example navigation:
-  if (label === 'My Addresses') {
-    navigate('/address')
-  }
-   if (label === 'Track Order') {
-    navigate('/track-order')
-  }
-   if (label === 'Order History') {
-    navigate('/order-history')
-  }
-   if (label === 'Terms & Conditions') {
-    navigate('/term-conditions')
-  }
-   if (label === 'Contact Us') {
-    navigate('/contact-us')
-  }
+  // Fetch user profile
+  useEffect(() => {
+  if (showProfile) {
+    const phone = localStorage.getItem('phone_number');  // ✅ USE THIS
 
-  // Add more conditions as needed
-}
+    axios.get(`/api/get-user-profile/?phone=${phone}`, {
+      withCredentials: true,
+    })
+    .then(res => {
+      console.log("Profile fetched:", res.data);
+      const { name, phone_number, profile_image } = res.data;
+
+      setUserData({
+        name: name || 'User',
+        phone: phone_number || '',
+        profileImage: profile_image 
+          ? (profile_image.startsWith('http') ? profile_image : `http://localhost:8000${profile_image}`)
+          : ProfilePlaceholder,
+      });
+    })
+    .catch(err => {
+      console.error('Failed to fetch profile:', err);
+    });
+  }
+}, [showProfile]);
+
+
 
   return (
-    
-    <div className="sticky top-0 z-50 bg-[#b08968] h-20" >
+    <div className="sticky top-0 z-50 bg-[#b08968] h-20">
       {/* Header */}
-      <div className="flex items-center px-4 sm:px-6 py-3 h-20 ">
+      <div className="flex items-center px-4 sm:px-6 py-3 h-20">
         {/* Left: Profile */}
         <div className="flex items-center z-10 top-0 mt-0 ">
           <img
-            src={Profile}
+            src={userData.profileImage}
             alt="profile"
             onClick={() => setShowProfile(true)}
             className="sm:w-9 md:w-10 lg:w-11 h-8 sm:h-9 md:h-10 lg:h-11 object-cover rounded-full cursor-pointer"
@@ -60,24 +73,24 @@ function Header() {
         </div>
 
         {/* Center: Home, Menu, Cart */}
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center  sm:gap-3 z-0">
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center sm:gap-3 z-0">
           <img
             src={Home}
             alt="home"
-            onClick={() => home()}
+            onClick={home}
             className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 sm:h-7 md:h-10 lg:h-15 object-cover rounded-full cursor-pointer"
           />
           <img
             src={Menu}
             alt="menu"
-            onClick={() => menu()}
+            onClick={menu}
             className="w-6 sm:w-7 md:w-9 lg:w-10 h-6 sm:h-7 md:h-9 lg:h-12 object-cover rounded-full cursor-pointer"
           />
           <img
             src={Cart}
             alt="cart"
-            onClick={() => next()}
-            className="w-5 sm:w-7 md:w-9 lg:w-10 h-auto  object-cover rounded-full cursor-pointer"
+            onClick={next}
+            className="w-5 sm:w-7 md:w-9 lg:w-10 h-auto object-cover rounded-full cursor-pointer"
           />
         </div>
 
@@ -99,8 +112,9 @@ function Header() {
 
       {/* Slide-In Profile Panel */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 sm:w-80 bg-[#fceeea] shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${showProfile ? 'translate-x-0' : '-translate-x-full'
-          }`}
+        className={`fixed top-0 left-0 h-full w-72 sm:w-80 bg-[#fceeea] shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
+          showProfile ? 'translate-x-0' : '-translate-x-full'
+        }`}
       >
         <div className="p-4 flex justify-between items-center">
           <h2 className="text-lg font-semibold text-[#4b2c20]">My Profile</h2>
@@ -114,12 +128,12 @@ function Header() {
 
         <div className="flex flex-col items-center text-center px-4">
           <img
-            src={Profile}
+            src={userData.profileImage}
             alt="user"
             className="w-20 h-20 rounded-full border border-gray-300 mb-2 object-cover"
           />
-          <h3 className="text-lg font-semibold text-[#4b2c20]">James Anderson</h3>
-          <p className="text-sm text-gray-600 mb-4">+91 7359382025</p>
+          <h3 className="text-lg font-semibold text-[#4b2c20]">{userData.name}</h3>
+          <p className="text-sm text-gray-600 mb-4">{userData.phone}</p>
 
           {/* Menu Options */}
           <div className="w-full space-y-3">

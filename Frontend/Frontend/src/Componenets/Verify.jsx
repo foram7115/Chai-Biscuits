@@ -14,20 +14,27 @@ const Verify = () => {
   const location = useLocation();
 
   // Phone number management
-  useEffect(() => {
-    const phoneFromState = location.state?.phone;
-    const phoneFromStorage = localStorage.getItem('userPhone');
+ useEffect(() => {
+  const phoneFromState = location.state?.phone;
 
-    if (phoneFromState) {
-      setPhone(phoneFromState);
-      localStorage.setItem('userPhone', phoneFromState);
-    } else if (phoneFromStorage) {
+  if (phoneFromState) {
+    setPhone(phoneFromState);
+    localStorage.setItem('userPhone', phoneFromState);
+
+    // ⚠️ Clear previously stored user data on new login
+    localStorage.removeItem('full_name');
+    localStorage.removeItem('phone_number');
+  } else {
+    const phoneFromStorage = localStorage.getItem('userPhone');
+    if (phoneFromStorage) {
       setPhone(phoneFromStorage);
     } else {
       alert('Phone number not found! Redirecting to login.');
       navigate('/');
     }
-  }, [location, navigate]);
+  }
+}, [location, navigate]);
+
 
   // Countdown timer
   useEffect(() => {
@@ -65,6 +72,10 @@ const Verify = () => {
 
       if (res.data.message) {
         alert("OTP Verified!");
+
+      localStorage.setItem('name', res.data.name);
+      localStorage.setItem('phone_number', res.data.phone_number);
+
         navigate('/home');
       }
     } catch (err) {
