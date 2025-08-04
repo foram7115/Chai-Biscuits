@@ -176,5 +176,9 @@ const Cart = () => {
     </>
   );
 };
+<<<<<<< HEAD
 
 export default Cart;
+=======
+            export default Cart;
+>>>>>>> f1e8c40018332e2057d87ac7c76e18d34d871c83
