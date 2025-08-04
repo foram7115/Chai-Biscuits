@@ -10,10 +10,9 @@ const Cart = () => {
             <Header />
             <div className="bg-[#fef5f1] min-h-screen flex items-center justify-center p-4">
                 <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-6">
-                    {/* Cart Title */}
+                    
                     <h1 className="text-3xl font-bold text-brown-800 mb-4">Cart</h1>
 
-                    {/* Cart Item */}
                     <div className="bg-[#fef5f1] shadow rounded-xl p-4 flex items-center justify-between mb-6">
                         <div className="flex items-center gap-4">
                             <img
@@ -36,7 +35,7 @@ const Cart = () => {
                         <button className="text-brown-800 text-xl ml-2"><FaTimes /></button>
                     </div>
 
-                    {/* Promo Code */}
+                 
                     <div className="mb-6">
                         <p className="text-brown-800 font-medium mb-2">Promo Code</p>
                         <input
@@ -47,7 +46,6 @@ const Cart = () => {
                         />
                     </div>
 
-                    {/* Summary */}
                     <div className="bg-[#f3e4db] rounded-xl p-4 text-brown-900 space-y-2">
                         <div className="flex justify-between">
                             <span>Subtotal</span>
@@ -74,7 +72,7 @@ const Cart = () => {
 
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 };

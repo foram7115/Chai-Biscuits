@@ -13,7 +13,6 @@ const Verify = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Phone number management
   useEffect(() => {
     const phoneFromState = location.state?.phone;
     const phoneFromStorage = localStorage.getItem('userPhone');
@@ -29,7 +28,6 @@ const Verify = () => {
     }
   }, [location, navigate]);
 
-  // Countdown timer
   useEffect(() => {
     if (timer > 0) {
       const countdown = setTimeout(() => setTimer(timer - 1), 1000);
@@ -39,7 +37,6 @@ const Verify = () => {
     }
   }, [timer]);
 
-  // Handle OTP input change
   const handleOtpChange = (index, value) => {
     if (/^\d$/.test(value) || value === '') {
       const updated = [...otp];
@@ -53,7 +50,6 @@ const Verify = () => {
     }
   };
 
-  // Verify OTP
   const handleVerify = async () => {
     try {
       const otpCode = otp.join('');
@@ -73,7 +69,6 @@ const Verify = () => {
     }
   };
 
-  // Resend OTP
   const handleResend = async () => {
     try {
       await axios.post('http://localhost:8000/api/send-otp/', {
@@ -90,7 +85,6 @@ const Verify = () => {
     }
   };
 
-  // Format timer display (e.g., 00:29)
   const formatTime = (t) => `00:${t.toString().padStart(2, '0')}`;
 
   return (

@@ -14,25 +14,20 @@ import Donut from "../assets/Donut.jpg";
 import Espresso from '../assets/Espresso.webp'
 import Brew from '../assets/Brew.jpg'
 import Header from './Header'
-<<<<<<< HEAD
-
-
-
-=======
 import Footer from './Footer'
 import backg1 from '../assets/backg1.png'
 import backg2 from '../assets/backg2.png'
 import { useNavigate } from 'react-router-dom'
->>>>>>> 5c63f37e167bb27c051a1e0b6b6fd93f3cda0746
+
 const Home = () => {
     const navigate = useNavigate();
-    const offer2 = ()=>{
+    const offer2 = () => {
         navigate('/offer2')
     }
-    const offer = ()=>{
+    const offer = () => {
         navigate('/offer')
     }
-    const menu = ()=>{
+    const menu = () => {
         navigate('/Menu')
     }
     const coffeeItems = [
@@ -42,18 +37,17 @@ const Home = () => {
         { title: "IcedAmericano", description: "Espresso, chocolate, steamed milk", price: "₹320.00", image: IcedAmericano },
         { title: "Smoothie", description: "Espresso, milk foam", price: "₹270.00", image: Smoothie },
         { title: "Mojito", description: "Espresso, steamed milk", price: "₹260.00", image: Mojito },
-        { title: "Muffin", description: "Chilled espresso, ice, milk", price: "₹290.00", image: Muffin },
-        { title: "Donut", description: "Espresso over ice cream", price: "₹350.00", image: Donut },
+        { title: "Muffin", description: "Chilled espresso, ice, milk", price: "₹120.00", image: Muffin },
+        { title: "Donut", description: "Espresso over ice cream", price: "₹130.00", image: Donut },
         { title: "Espresso Shot", description: "Strong and bold", price: "₹200.00", image: Espresso },
         { title: "Cold Brew", description: "Slow-brewed coffee", price: "₹310.00", image: Brew },
     ];
 
     return (
-         <>
+        <>
             <Header />
             <div className="min-h-screen bg-[#fdf3ef] p-1">
 
-                {/* Search Bar */}
                 <div className="flex items-center justify-center bg-[#e5d5ca] px-4 py-3 rounded-full mb-6">
                     <span className="material-symbols-outlined mr-2">search</span>
                     <input
@@ -63,12 +57,12 @@ const Home = () => {
                     />
                 </div>
 
-                {/* Heading */}
+              
                 <h2 className="flex justify-center text-3xl font-semibold text-[#4b2e2e] mb-4">Our Menu</h2>
 
-                {/* Menu Icons */}
+               
                 <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6">
-                    {[{ icon: hotco, label: "Hot Coffee", action: menu }, { icon: coldco, label: "Cold Coffee", action: menu},
+                    {[{ icon: hotco, label: "Hot Coffee", action: menu }, { icon: coldco, label: "Cold Coffee", action: menu },
                     { icon: coldd, label: "Drinks", action: menu }, { icon: food, label: "Snacks", action: menu }]
                         .map((item, index) => (
                             <div key={index} className="flex flex-col items-center text-[#4b2e2e]">
@@ -80,7 +74,7 @@ const Home = () => {
                         ))}
                 </div>
 
-                {/* Offer Cards */}
+         
                 <div className="w-full mt-10 px-4">
                     <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:justify-center sm:overflow-visible scrollbar-hide">
                         {[{
@@ -89,7 +83,7 @@ const Home = () => {
                         },
                         {
                             bg: backg2,
-                            title: "Flat 30% Off", button:"Buy Now →", action: offer2,
+                            title: "Flat 30% Off", button: "Buy Now →", action: offer2,
                         }].map((item, i) => (
                             <div key={i} className="snap-start shrink-0 w-[280px] sm:w-[360px] h-48 bg-cover bg-center rounded-2xl overflow-hidden relative"
                                 style={{ backgroundImage: `url(${item.bg})` }}>
@@ -107,15 +101,13 @@ const Home = () => {
 
                 <div>
 
-
-                    {/* Best Items Section */}
                     <div className="mt-12">
                         <h2 className="text-2xl font-semibold text-[#4b2e2e] mb-6">Best Items</h2>
 
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                             {coffeeItems.map((item, i) => (
                                 <div key={i} className="bg-[#f9eae2] rounded-xl shadow p-3 flex flex-col items-center text-[#4b2e2e]">
-                                    {/* Image Container with fixed height */}
+                                   
                                     <div className="w-full h-36 sm:h-40 bg-[#d9c2b4] rounded-t-xl overflow-hidden">
                                         <img
                                             src={item.image}
@@ -124,24 +116,23 @@ const Home = () => {
                                         />
                                     </div>
 
-                                    {/* Text Info */}
+                                   
                                     <div className="mt-2 w-full">
                                         <h3 className="font-bold text-lg">{item.title}</h3>
                                         <p className="text-sm text-gray-700">{item.description}</p>
                                     </div>
 
-                                    {/* Price and Add Button */}
                                     <div className="mt-2 flex justify-between items-center w-full">
                                         <span className="text-lg font-bold">{item.price}</span>
                                         <button className="w-8 h-8 rounded-full bg-[#4b2e2e] text-white flex items-center justify-center text-xl">+</button>
                                     </div>
                                 </div>
                             ))}
-                        </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                        </div>
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     )
 };

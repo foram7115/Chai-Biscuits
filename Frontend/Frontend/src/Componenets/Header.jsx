@@ -12,44 +12,42 @@ function Header() {
 
   const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
-  const menu = () =>{
+  const menu = () => {
     navigate('/Menu')
   }
-   const home = () =>{
+  const home = () => {
     navigate('/home')
   }
-  const next = () =>{
+  const next = () => {
     navigate('/Cart')
   }
   const handleClick = (label) => {
-  console.log("Clicked:", label)
+    console.log("Clicked:", label)
 
-  // Example navigation:
-  if (label === 'My Addresses') {
-    navigate('/address')
-  }
-   if (label === 'Track Order') {
-    navigate('/track-order')
-  }
-   if (label === 'Order History') {
-    navigate('/order-history')
-  }
-   if (label === 'Terms & Conditions') {
-    navigate('/term-conditions')
-  }
-   if (label === 'Contact Us') {
-    navigate('/contact-us')
-  }
+    if (label === 'My Addresses') {
+      navigate('/address')
+    }
+    if (label === 'Track Order') {
+      navigate('/track-order')
+    }
+    if (label === 'Order History') {
+      navigate('/order-history')
+    }
+    if (label === 'Terms & Conditions') {
+      navigate('/term-conditions')
+    }
+    if (label === 'Contact Us') {
+      navigate('/contact-us')
+    }
 
-  // Add more conditions as needed
-}
+  }
 
   return (
-    
+
     <div className="sticky top-0 z-50 bg-[#b08968] h-20" >
-      {/* Header */}
+    
       <div className="flex items-center px-4 sm:px-6 py-3 h-20 ">
-        {/* Left: Profile */}
+       
         <div className="flex items-center z-10 top-0 mt-0 ">
           <img
             src={Profile}
@@ -59,7 +57,6 @@ function Header() {
           />
         </div>
 
-        {/* Center: Home, Menu, Cart */}
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center  sm:gap-3 z-0">
           <img
             src={Home}
@@ -80,8 +77,6 @@ function Header() {
             className="w-5 sm:w-7 md:w-9 lg:w-10 h-auto  object-cover rounded-full cursor-pointer"
           />
         </div>
-
-        {/* Right: Notification and Logo */}
         <div className="flex items-center gap-2 sm:gap-4 md:gap-5 ml-auto z-10">
           <img
             src={Notification}
@@ -96,8 +91,6 @@ function Header() {
           />
         </div>
       </div>
-
-      {/* Slide-In Profile Panel */}
       <div
         className={`fixed top-0 left-0 h-full w-72 sm:w-80 bg-[#fceeea] shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${showProfile ? 'translate-x-0' : '-translate-x-full'
           }`}
@@ -121,7 +114,6 @@ function Header() {
           <h3 className="text-lg font-semibold text-[#4b2c20]">James Anderson</h3>
           <p className="text-sm text-gray-600 mb-4">+91 7359382025</p>
 
-          {/* Menu Options */}
           <div className="w-full space-y-3">
             {[
               'My Addresses',
@@ -141,7 +133,6 @@ function Header() {
             ))}
           </div>
 
-          {/* Logout Button */}
           <button className="mt-6 w-full py-2 bg-[#4b2c20] text-white rounded-full">
             Logout
           </button>
