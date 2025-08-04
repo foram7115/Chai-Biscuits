@@ -14,11 +14,18 @@ import Donut from "../assets/Donut.jpg";
 import Espresso from '../assets/Espresso.webp'
 import Brew from '../assets/Brew.jpg'
 import Header from './Header'
+<<<<<<< HEAD
 
+=======
+>>>>>>> a66c2430a927922b5632b7bfc9a4ae0671840094
 import Footer from './Footer'
 import backg1 from '../assets/backg1.png'
 import backg2 from '../assets/backg2.png'
 import { useNavigate } from 'react-router-dom'
+<<<<<<< HEAD
+=======
+
+>>>>>>> a66c2430a927922b5632b7bfc9a4ae0671840094
 const Home = () => {
     const navigate = useNavigate();
     const offer2 = ()=>{

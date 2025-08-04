@@ -8,11 +8,14 @@ function Welcome() {
     const next = () =>{
         navigate('/Register')
     }
+    const login = () =>{
+      navigate('./login')
+    }
   return (
     <div className="h-screen w-full bg-[#4B2E2B] text-white flex flex-col justify-between overflow-hidden relative ">
       {/* Top Bar */}
       <div className="w-full flex justify-end px-6 pt-4">
-        <button className=" text-[#d4a373] px-4 py-2 rounded-lg font-medium" onClick={next}>
+        <button className=" text-[#d4a373] px-4 py-2 rounded-lg font-medium" onClick={login}>
           Login
         </button>
       </div>
@@ -34,11 +37,6 @@ function Welcome() {
 
       {/* Pagination & Button */}
       <div className="flex flex-col items-center gap-2 mb-2"> {/* Reduced spacing */}
-        {/* <div className="flex gap-2 mt-[-10px]">
-          <span className="w-3 h-3 rounded-full bg-white/70 border border-white"></span>
-          <span className="w-3 h-3 rounded-full bg-white/40"></span>
-          <span className="w-3 h-3 rounded-full bg-white/40"></span>
-        </div> */}
         <button className="bg-[#EADBC8] text-[#4B2E2B] px-6 py-3 rounded-xl font-semibold" onClick={next}>
           Get Start
         </button>
