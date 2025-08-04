@@ -6,7 +6,6 @@ import o2 from "../assets/o2.jpg";
 import o3 from "../assets/o3.webp";
 import o4 from "../assets/o4.jpg";
 import o5 from "../assets/o5.jpg";
-
 const offerImages = [
     { src: o1, title: "Flat 30% Off", price: 220 },
     { src: o2, title: "Summer Sale", price: 180 },
@@ -14,7 +13,6 @@ const offerImages = [
     { src: o4, title: "Limited Time Offer", price: 200 },
     { src: o5, title: "Exclusive Deal", price: 170 },
 ];
-
 const Offer2 = () => {
     return (
         <>
@@ -23,14 +21,11 @@ const Offer2 = () => {
                 <h2 className="text-3xl font-bold text-black mb-8 text-center">
                     Flat 30% Off Deals
                 </h2>
-
                 <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        
                     {offerImages.slice(0, 3).map((offer, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-black"
-                        >
+                            className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-black" >
                             <img
                                 src={offer.src}
                                 alt={offer.title}
@@ -47,8 +42,7 @@ const Offer2 = () => {
                         {offerImages.slice(3).map((offer, index) => (
                             <div
                                 key={index}
-                                className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-black w-full sm:w-[45%] lg:w-[30%]"
-                            >
+                                className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-black w-full sm:w-[45%] lg:w-[30%]" >
                                 <img
                                     src={offer.src}
                                     alt={offer.title}
@@ -68,5 +62,4 @@ const Offer2 = () => {
         </>
     );
 };
-
 export default Offer2;

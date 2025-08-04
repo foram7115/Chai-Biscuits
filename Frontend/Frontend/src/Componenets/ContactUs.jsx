@@ -10,7 +10,6 @@ const ContactUs = () => {
           <h2 className="text-xl sm:text-2xl font-semibold text-[#4b2c20] text-center">
             Contact Us
           </h2>
-
           <form className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-[#4b2c20] mb-1">
@@ -22,7 +21,6 @@ const ContactUs = () => {
                 placeholder="Enter your name"
               />
             </div>
-
             <div>
               <label className="block text-sm font-medium text-[#4b2c20] mb-1">
                 Email Address
@@ -33,7 +31,6 @@ const ContactUs = () => {
                 placeholder="Enter your email"
               />
             </div>
-
             <div>
               <label className="block text-sm font-medium text-[#4b2c20] mb-1">
                 Message
@@ -44,7 +41,6 @@ const ContactUs = () => {
                 placeholder="Write your message here..."
               ></textarea>
             </div>
-
             <button
               type="submit"
               className="w-full py-2 bg-[#4b2c20] text-white rounded-full hover:bg-[#3a231a] transition"
@@ -58,5 +54,4 @@ const ContactUs = () => {
     </>
   );
 };
-
 export default ContactUs;

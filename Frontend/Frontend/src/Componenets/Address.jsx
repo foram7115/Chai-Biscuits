@@ -9,21 +9,16 @@ function Address() {
             <Header />
             <div className="min-h-screen bg-[#fceeea] text-[#4b2c20] flex justify-center items-center px-4 py-5">
                 <div className="w-full max-w-lg">
-                    
                     <div className="flex items-center gap-3 mb-6">
                         <FiArrowLeft size={24} className="cursor-pointer" />
                         <h1 className="text-xl font-semibold">Select Location</h1>
                     </div>
-
-                   
                     <input
                         type="text"
                         placeholder="Search Address"
                         className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white placeholder-gray-500 mb-6"
                     />
-
                     <div className="space-y-4">
-                    
                         <div className="flex items-center justify-between bg-white rounded-lg px-4 py-3 shadow-sm">
                             <div className="flex items-center gap-3 text-[#d12c6a] font-semibold">
                                 <FiPlus size={20} />
@@ -32,11 +27,8 @@ function Address() {
                             <span className="text-[#d12c6a] text-xl">{'>'}</span>
                         </div>
                     </div>
-
-                    
                     <h2 className="mt-8 mb-4 font-semibold text-lg">Saved Addresses</h2>
                     <div className="space-y-4">
-                       
                         <div className="bg-white rounded-lg p-4 shadow-sm">
                             <div className="flex justify-between items-center">
                                 <div>
@@ -51,7 +43,6 @@ function Address() {
                                 <FiMoreVertical className="text-gray-500" />
                             </div>
                         </div>
-
                         <div className="bg-white rounded-lg p-4 shadow-sm">
                             <div className="flex justify-between items-center">
                                 <div>
@@ -63,7 +54,6 @@ function Address() {
                                 <FiMoreVertical className="text-gray-500" />
                             </div>
                         </div>
-
                         <div className="bg-white rounded-lg p-4 shadow-sm">
                             <div className="flex justify-between items-center">
                                 <div>
@@ -82,5 +72,4 @@ function Address() {
         </>
     );
 }
-
 export default Address;

@@ -2,36 +2,10 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "react-icons": "^5.5.0",
-
-
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.2.10",
     "react-router-dom": "^7.7.1",
     "tailwindcss": "^4.1.11"
-<<<<<<< HEAD
-
-  
-
-    
-
-=======
-=======
-    "react-slick": "^0.30.3",
-    "slick-carousel": "^1.8.1",
-    "swiper": "^11.2.10",
-    "react-router-dom": "^7.7.1",
-    "tailwindcss": "^4.1.11"
-<<<<<<< HEAD
-    
-=======
-=======
-    "react-router-dom": "^7.7.1",
-    "tailwindcss": "^4.1.11"
-
->>>>>>> 5c63f37e167bb27c051a1e0b6b6fd93f3cda0746
->>>>>>> 12b27b6c6161cc30e6143b6708b44c30cc1406de
->>>>>>> a66c2430a927922b5632b7bfc9a4ae0671840094
->>>>>>> 5d359b9ca267655bd5d7d02ceaa5b4ea4ea570d8
   }
 }

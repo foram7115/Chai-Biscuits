@@ -2,27 +2,21 @@ import React, { useState } from "react";
 import back from '../assets/back1.jpg';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 const Register = () => {
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({
         name: "",
         phone_number: "",
         address: "",
     });
-
     const [loading, setLoading] = useState(false);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
         try {
             const response = await axios.post("http://localhost:8000/api/register/", formData);
             alert("Registration successful!");
@@ -34,20 +28,16 @@ const Register = () => {
             setLoading(false);
         }
     };
-
     return (
         <div
             className="min-h-screen flex items-center justify-center bg-[#fef5f1] px-4 image"
-            style={{ backgroundImage: `url(${back})` }}
-        >
+            style={{ backgroundImage: `url(${back})` }}>
             <form
                 onSubmit={handleSubmit}
-                className="w-full max-w-md bg-white p-8 rounded-xl shadow-md"
-            >
+                className="w-full max-w-md bg-white p-8 rounded-xl shadow-md" >
                 <h2 className="text-2xl font-bold mb-6 text-center text-brown-800">
                     Register
                 </h2>
-
                 <div className="mb-4">
                     <label className="block mb-1 text-brown-700 font-medium">Name</label>
                     <input
@@ -60,7 +50,6 @@ const Register = () => {
                         placeholder="Enter your name"
                     />
                 </div>
-
                 <div className="mb-4">
                     <label className="block mb-1 text-brown-700 font-medium">Phone Number</label>
                     <input
@@ -73,7 +62,6 @@ const Register = () => {
                         placeholder="Enter your phone number"
                     />
                 </div>
-
                 <div className="mb-6">
                     <label className="block mb-1 text-brown-700 font-medium">Address</label>
                     <textarea
@@ -86,7 +74,6 @@ const Register = () => {
                         placeholder="Enter your address"
                     ></textarea>
                 </div>
-
                 <button
                     type="submit"
                     disabled={loading}
@@ -98,5 +85,4 @@ const Register = () => {
         </div>
     );
 };
-
 export default Register;

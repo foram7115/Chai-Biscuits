@@ -14,25 +14,10 @@ import Donut from "../assets/Donut.jpg";
 import Espresso from '../assets/Espresso.webp'
 import Brew from '../assets/Brew.jpg'
 import Header from './Header'
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> a66c2430a927922b5632b7bfc9a4ae0671840094
->>>>>>> 5d359b9ca267655bd5d7d02ceaa5b4ea4ea570d8
 import Footer from './Footer'
 import backg1 from '../assets/backg1.png'
 import backg2 from '../assets/backg2.png'
 import { useNavigate } from 'react-router-dom'
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> a66c2430a927922b5632b7bfc9a4ae0671840094
->>>>>>> 5d359b9ca267655bd5d7d02ceaa5b4ea4ea570d8
 const Home = () => {
     const navigate = useNavigate();
     const offer2 = () => {
@@ -56,12 +41,10 @@ const Home = () => {
         { title: "Espresso Shot", description: "Strong and bold", price: "₹200.00", image: Espresso },
         { title: "Cold Brew", description: "Slow-brewed coffee", price: "₹310.00", image: Brew },
     ];
-
     return (
         <>
             <Header />
             <div className="min-h-screen bg-[#fdf3ef] p-1">
-
                 <div className="flex items-center justify-center bg-[#e5d5ca] px-4 py-3 rounded-full mb-6">
                     <span className="material-symbols-outlined mr-2">search</span>
                     <input
@@ -70,11 +53,7 @@ const Home = () => {
                         className="bg-transparent outline-none w-full text-[#4b2e2e]"
                     />
                 </div>
-
-              
                 <h2 className="flex justify-center text-3xl font-semibold text-[#4b2e2e] mb-4">Our Menu</h2>
-
-               
                 <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6">
                     {[{ icon: hotco, label: "Hot Coffee", action: menu }, { icon: coldco, label: "Cold Coffee", action: menu },
                     { icon: coldd, label: "Drinks", action: menu }, { icon: food, label: "Snacks", action: menu }]
@@ -87,8 +66,6 @@ const Home = () => {
                             </div>
                         ))}
                 </div>
-
-         
                 <div className="w-full mt-10 px-4">
                     <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:justify-center sm:overflow-visible scrollbar-hide">
                         {[{
@@ -112,16 +89,12 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
-
                 <div>
-
                     <div className="mt-12">
                         <h2 className="text-2xl font-semibold text-[#4b2e2e] mb-6">Best Items</h2>
-
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                             {coffeeItems.map((item, i) => (
                                 <div key={i} className="bg-[#f9eae2] rounded-xl shadow p-3 flex flex-col items-center text-[#4b2e2e]">
-                                   
                                     <div className="w-full h-36 sm:h-40 bg-[#d9c2b4] rounded-t-xl overflow-hidden">
                                         <img
                                             src={item.image}
@@ -129,13 +102,10 @@ const Home = () => {
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
-
-                                   
                                     <div className="mt-2 w-full">
                                         <h3 className="font-bold text-lg">{item.title}</h3>
                                         <p className="text-sm text-gray-700">{item.description}</p>
                                     </div>
-
                                     <div className="mt-2 flex justify-between items-center w-full">
                                         <span className="text-lg font-bold">{item.price}</span>
                                         <button className="w-8 h-8 rounded-full bg-[#4b2e2e] text-white flex items-center justify-center text-xl">+</button>
@@ -150,6 +120,4 @@ const Home = () => {
         </>
     )
 };
-
-
 export default Home

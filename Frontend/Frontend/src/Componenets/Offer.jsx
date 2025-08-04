@@ -27,7 +27,6 @@ const offerImages = [
     { src: offer11, title: "Daily Brew Discount", price: 210 },
     { src: offer12, title: "Weekend Only Offer", price: 250 },
 ];
-
 const Offer = () => {
     return (
         <>
@@ -69,5 +68,4 @@ const Offer = () => {
         </>
     );
 };
-
 export default Offer;

@@ -7,16 +7,13 @@ const steps = [
   { label: 'Out for Delivery', time: '11:00 AM', completed: true },
   { label: 'Delivered', time: '12:00 PM', completed: false },
 ];
-
 const TrackOrder = () => {
   return (
     <>
       <Header />
       <div className="min-h-screen bg-[#fef6f3] p-4 sm:p-6 md:p-10">
-        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-md p-6 sm:p-8">
-          
+        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-md p-6 sm:p-8">      
           <h1 className="text-xl sm:text-2xl font-bold text-[#4b2c20] mb-6">Track Your Order</h1>
-
           <div className="bg-[#fff3eb] p-4 rounded-lg mb-6 flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">Estimated Delivery</p>
@@ -24,7 +21,6 @@ const TrackOrder = () => {
             </div>
             <div className="text-sm text-green-600 font-medium">On Time</div>
           </div>
-
           <div className="relative border-l-4 border-[#d3b9af] ml-3 pl-6 space-y-6">
             {steps.map((step, i) => (
               <div key={i} className="relative">
@@ -36,7 +32,6 @@ const TrackOrder = () => {
               </div>
             ))}
           </div>
-
           <div className="mt-8 border-t pt-6">
             <h2 className="text-lg font-semibold text-[#4b2c20] mb-2">Delivery Partner</h2>
             <div className="flex items-center justify-between">
@@ -61,5 +56,4 @@ const TrackOrder = () => {
     </>
   );
 };
-
 export default TrackOrder;
