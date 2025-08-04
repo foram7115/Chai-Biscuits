@@ -14,10 +14,10 @@ import json
 
 @csrf_exempt
 def get_user_profile(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         try:
-            data = json.loads(request.body)
-            phone = data.get('phone_number')
+            print("Query params:", request.GET)
+            phone = request.GET.get('phone') 
 
             if not phone:
                 return JsonResponse({'error': 'Phone number is required'}, status=400)
@@ -117,7 +117,16 @@ def verify_otp(request):
 
             if otp_record.otp == entered_otp:
                 otp_record.delete()  # Delete after successful verification
-                return JsonResponse({'message': 'OTP verified, login successful'})
+                
+                try:
+                    user = CustomUser.objects.get(phone_number=phone)
+                    return JsonResponse({
+                        'message': 'OTP verified, login successful',
+                        'phone_number': user.phone_number,
+                        'name': user.name  # ✅ send 'name', not 'full_name'
+                    })
+                except CustomUser.DoesNotExist:
+                    return JsonResponse({'error': 'User not found'}, status=404)
             else:
                 return JsonResponse({'error': 'Invalid OTP'}, status=400)
         except OTP.DoesNotExist:
