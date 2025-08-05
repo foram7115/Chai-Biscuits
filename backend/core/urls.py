@@ -1,11 +1,12 @@
 from django.urls import path
 from . import views
-from .views import send_otp, verify_otp, register_user, get_user_profile, create_order
+from .views import send_otp, verify_otp, user_order_history, register_user, get_user_profile, create_order
 
 urlpatterns = [
     path('register/', register_user),
     path('send-otp/', send_otp),
     path('verify-otp/', verify_otp),
     path('get-user-profile/', views.get_user_profile),
-    path('create-order/', views.create_order)
+    path('create-order/', views.create_order),
+    path('order-history/', user_order_history),
 ]

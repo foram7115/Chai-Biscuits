@@ -6,13 +6,13 @@ import { useCart } from "./CartContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const Cart = () => {
   const {
     cartItems,
     addToCart,
     decreaseQuantity,
     removeFromCart,
+    clearCart
   } = useCart();
 
   const [promoCode, setPromoCode] = useState('');
@@ -33,60 +33,60 @@ const Cart = () => {
     return code;
   };
 
-  useEffect(() => {
-    if (!promoCode) {
-      const newCode = generatePromoCode();
-      setPromoCode(newCode);
-    }
-  }, []);
-
- const handlePlaceOrder = () => {
-  const phone_number = localStorage.getItem("phone_number");
-  const deliveryTime = new Date(Date.now() + 60 * 60 * 1000).toLocaleTimeString([], {
-    hour: '2-digit', minute: '2-digit', hour12: true
-  });
-  const placedAt = new Date().toLocaleTimeString([], {
-    hour: '2-digit', minute: '2-digit', hour12: true
-  });
-
-  const orderDetails = {
-    items: cartItems,
-    subtotal,
-    shipping,
-    taxes,
-    discount,
-    total,
-    promoCode,
-    deliveryTime,
-    placedAt
-  };
-
-  // ✅ Save to localStorage BEFORE doing anything else
-  localStorage.setItem('latestOrder', JSON.stringify(orderDetails));
-  console.log("✅ Order saved to localStorage:", orderDetails);
-
-  // ✅ Save to backend (optional)
-  axios.post('http://127.0.0.1:8000/api/create-order/', {
-    phone_number: phone_number,
-    total: total,
-    delivery_status: "delivered",
-    items: cartItems.map(item => ({
-      name: item.name,
-      price: item.price,
-      quantity: item.quantity
-    }))
-  }, { withCredentials: true })
-    .then(res => {
-      console.log("✅ Order saved to backend:", res.data);
-      navigate("/track-order");
-    })
-    .catch(err => {
-      console.error("❌ Backend failed:", err);
-      alert("Order placed locally but failed to save in backend.");
-      navigate("/track-order");
+  const handlePlaceOrder = () => {
+    const phone_number = localStorage.getItem("phone_number");
+    const deliveryTime = new Date(Date.now() + 60 * 60 * 1000).toLocaleTimeString([], {
+      hour: '2-digit', minute: '2-digit', hour12: true
     });
-};
+    const placedAt = new Date().toLocaleTimeString([], {
+      hour: '2-digit', minute: '2-digit', hour12: true
+    });
 
+    const itemsWithId = cartItems.map(item => ({
+      ...item,
+      id: item.id || `${item.name}-${item.price}`,
+    }));
+
+    const orderDetails = {
+      items: itemsWithId,
+      subtotal,
+      shipping,
+      taxes,
+      discount,
+      total,
+      promoCode,
+      deliveryTime,
+      placedAt
+    };
+
+    const existingOrders = JSON.parse(localStorage.getItem("allOrders")) || [];
+      existingOrders.push(orderDetails);
+      localStorage.setItem("allOrders", JSON.stringify(existingOrders));
+
+    console.log("✅ Order saved to localStorage:", orderDetails);
+
+    axios.post('http://127.0.0.1:8000/api/create-order/', {
+      phone_number: phone_number,
+      total: total,
+      delivery_status: "delivered",
+      items: itemsWithId.map(item => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity
+      }))
+    }, { withCredentials: true })
+      .then(res => {
+        console.log("✅ Order saved to backend:", res.data);
+        clearCart();
+        navigate("/track-order");
+      })
+      .catch(err => {
+        console.error("❌ Backend failed:", err);
+        alert("Order placed locally but failed to save in backend.");
+        clearCart();
+        navigate("/track-order");
+      });
+  };
 
   return (
     <>
@@ -115,7 +115,7 @@ const Cart = () => {
                 <div className="flex items-center gap-2">
                   <button onClick={() => decreaseQuantity(item)} className="p-2 bg-[#efe2da] rounded-full"><FaMinus /></button>
                   <span className="font-medium">{item.quantity}</span>
-                  <button onClick={() => addToCart(item)} className="p-2 bg-[#efe2da] rounded-full"><FaPlus /></button>
+                  <button onClick={() => addToCart({ ...item, id: item.id || `${item.name}-${item.price}` })} className="p-2 bg-[#efe2da] rounded-full"><FaPlus /></button>
                 </div>
                 <button onClick={() => removeFromCart(item)} className="text-brown-800 text-xl ml-2"><FaTimes /></button>
               </div>
@@ -128,8 +128,9 @@ const Cart = () => {
                 <p className="text-brown-800 font-medium mb-2">Promo Code</p>
                 <input
                   type="text"
+                  placeholder="Enter your promo code"
                   value={promoCode}
-                  readOnly
+                  onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
                   className="w-full p-3 rounded-md bg-[#f3e4db] text-brown-800 font-semibold focus:outline-none"
                 />
               </div>
@@ -172,4 +173,5 @@ const Cart = () => {
     </>
   );
 };
-            export default Cart;
+
+export default Cart;

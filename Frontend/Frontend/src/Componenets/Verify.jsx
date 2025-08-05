@@ -13,12 +13,9 @@ const Verify = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-
-  useEffect(() => {
-    const phoneFromState = location.state?.phone;
-    const phoneFromStorage = localStorage.getItem('userPhone');
-
-
+  // Phone number management
+ useEffect(() => {
+  const phoneFromState = location.state?.phone;
 
   if (phoneFromState) {
     setPhone(phoneFromState);
