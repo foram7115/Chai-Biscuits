@@ -3,38 +3,51 @@ import axios from 'axios';
 import back from '../assets/back1.jpg';
 import './Verify.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 const Verify = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [phone, setPhone] = useState('');
   const [timer, setTimer] = useState(30);
   const [resendDisabled, setResendDisabled] = useState(true);
+
   const navigate = useNavigate();
   const location = useLocation();
+
+
   useEffect(() => {
     const phoneFromState = location.state?.phone;
-    if (phoneFromState) {
-      setPhone(phoneFromState);
-      localStorage.setItem('userPhone', phoneFromState);
-      localStorage.removeItem('full_name');
-      localStorage.removeItem('phone_number');
+    const phoneFromStorage = localStorage.getItem('userPhone');
+
+
+
+  if (phoneFromState) {
+    setPhone(phoneFromState);
+    localStorage.setItem('userPhone', phoneFromState);
+
+    // ⚠️ Clear previously stored user data on new login
+    localStorage.removeItem('full_name');
+    localStorage.removeItem('phone_number');
+  } else {
+    const phoneFromStorage = localStorage.getItem('userPhone');
+    if (phoneFromStorage) {
+      setPhone(phoneFromStorage);
     } else {
-      const phoneFromStorage = localStorage.getItem('userPhone');
-      if (phoneFromStorage) {
-        setPhone(phoneFromStorage);
-      } else {
-        alert('Phone number not found! Redirecting to login.');
-        navigate('/');
-      }
+      alert('Phone number not found! Redirecting to login.');
+      navigate('/');
     }
-  }, [location, navigate]);
+  }
+}, [location, navigate]);
+
+
   useEffect(() => {
     if (timer > 0) {
-      const countdown = setTimeout(() => setTimer((prev) => prev - 1), 1000);
+      const countdown = setTimeout(() => setTimer(timer - 1), 1000);
       return () => clearTimeout(countdown);
     } else {
       setResendDisabled(false);
     }
   }, [timer]);
+
   const handleOtpChange = (index, value) => {
     if (/^\d$/.test(value) || value === '') {
       const updated = [...otp];
@@ -47,17 +60,22 @@ const Verify = () => {
       }
     }
   };
+
   const handleVerify = async () => {
     try {
       const otpCode = otp.join('');
+
       const res = await axios.post('http://localhost:8000/api/verify-otp/', {
         phone_number: phone,
         otp: otpCode,
       });
+
       if (res.data.message) {
         alert("OTP Verified!");
-        localStorage.setItem('name', res.data.name);
-        localStorage.setItem('phone_number', res.data.phone_number);
+
+      localStorage.setItem('name', res.data.name);
+      localStorage.setItem('phone_number', res.data.phone_number);
+
         navigate('/home');
       }
     } catch (err) {
@@ -65,11 +83,13 @@ const Verify = () => {
       alert('OTP verification failed');
     }
   };
+
   const handleResend = async () => {
     try {
       await axios.post('http://localhost:8000/api/send-otp/', {
         phone_number: phone,
       });
+
       alert('OTP resent successfully');
       setOtp(['', '', '', '']);
       setTimer(30);
@@ -79,17 +99,17 @@ const Verify = () => {
       alert('Failed to resend OTP');
     }
   };
+
   const formatTime = (t) => `00:${t.toString().padStart(2, '0')}`;
+
   return (
-    <div
-      className="flex items-center justify-center image"
-      style={{ backgroundImage: `url(${back})` }}
-    >
-      <div className="p-6 w-80 rounded-lg text-center relative bg-white/80 backdrop-blur-md">
+    <div className="flex items-center justify-center image" style={{ backgroundImage: `url(${back})` }}>
+      <div className="p-6 w-80 rounded-lg text-center relative">
         <p className="text-[#4b2e2e] font-medium mb-6">
           Enter the OTP sent via SMS to <br />
           <span className="font-semibold">+{phone}</span>
         </p>
+
         <div className="flex justify-center gap-4 mb-2">
           {otp.map((digit, index) => (
             <input
@@ -102,11 +122,13 @@ const Verify = () => {
             />
           ))}
         </div>
+
         <div className="text-[#4b2e2e] mb-4 text-sm font-semibold">
           {timer > 0 ? formatTime(timer) : 'You can resend OTP'}
         </div>
+
         <p className="text-sm text-[#4b2e2e] mb-6">
-          Didn’t receive code?{' '}
+          Didn’t receive code?{" "}
           <button
             className={`underline font-medium ${resendDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handleResend}
@@ -115,6 +137,7 @@ const Verify = () => {
             Resend
           </button>
         </p>
+
         <button
           className="w-full py-3 bg-[#4b2e2e] text-white font-semibold rounded-full"
           onClick={handleVerify}
@@ -125,4 +148,5 @@ const Verify = () => {
     </div>
   );
 };
+
 export default Verify;

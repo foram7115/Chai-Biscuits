@@ -1,8 +1,15 @@
 import React from "react";
+
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import { FaPlus } from "react-icons/fa6";
 import Header from "./Header";
 import Footer from './Footer'
-import { useCart } from "./CartContext";
+import { useCart } from "./CartContext"; // Adjust the path if needed
+
+// Hot coffee images
 import Capuccino from "../assets/Capuccino.jpg";
 import Americo from "../assets/Americo.jpg";
 import Latte from "../assets/Latte.jpg";
@@ -43,6 +50,9 @@ import Snack3 from "../assets/Snack3.jpg";
 import Snack4 from "../assets/Snack4.jpg";
 import Snack5 from "../assets/Snack5.jpg";
 import Snack6 from "../assets/Snack6.jpg";
+
+
+// Hot Coffee
 const hotCoffeeItems = [
   { name: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: 300, image: Capuccino },
   { name: "Americano", description: "Espresso, hot water", price: 250, image: Americo },
@@ -91,6 +101,38 @@ const snackItems = [
   { name: "Naachos", description: "Paneer and veggies", price: 40, image: Snack5 },
   { name: "Masala Weafer", description: "Toasted with herbs", price: 20, image: Snack6 },
 ];
+
+
+
+// const MenuSection = ({ title, items, addToCart }) => (
+
+//   <div className="mb-10">
+//     <h2 className="text-3xl font-bold mb-6 text-brown-800">{title}</h2>
+//     <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-brown-700">
+//       <div className="flex space-x-4 min-w-[1500px] sm:min-w-[1000px]">
+//         {items.map((item, index) => (
+//           <div
+//             key={index}
+//             className="w-[250px] flex-shrink-0 bg-[#fbe7dd] rounded-2xl p-3 shadow"
+//           >
+//             <img
+//               src={item.image}
+//               alt={item.name}
+//               className="rounded-xl w-full h-40 object-cover mb-2"
+//             />
+//             <h3 className="text-xl font-semibold">{item.name}</h3>
+//             <p className="text-gray-600 text-sm">{item.description}</p>
+//             <div className="flex justify-between items-center mt-2">
+//               <span className="text-lg font-bold">₹{item.price}.00</span>
+//               <button onClick={() => addToCart(item)} className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700">
+//                 <FaPlus />
+//               </button>
+//             </div>
+//         ))}
+//       </div>
+//     </div>
+//   </div>
+// );
 const MenuSection = ({ title, items, addToCart }) => (
   <div className="mb-10">
     <h2 className="text-3xl font-bold mb-6 text-brown-800">{title}</h2>
@@ -110,10 +152,7 @@ const MenuSection = ({ title, items, addToCart }) => (
             <p className="text-gray-600 text-sm">{item.description}</p>
             <div className="flex justify-between items-center mt-2">
               <span className="text-lg font-bold">₹{item.price}.00</span>
-              <button
-                onClick={() => addToCart(item)}
-                className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
-              >
+              <button onClick={() => addToCart(item)} className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700">
                 <FaPlus />
               </button>
             </div>
@@ -123,20 +162,36 @@ const MenuSection = ({ title, items, addToCart }) => (
     </div>
   </div>
 );
+
+
 const Menu = () => {
   const { cartItems, addToCart } = useCart();
+
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    toast.success(`${item.name} added to cart! 🛒`, {
+      position: "top-right",
+      autoClose: 2000,
+      theme: "light",
+    });
+  };
+
   return (
     <>
       <Header />
       <div className="p-6 bg-[#fef5f1]">
-        Cart Count: {cartItems.length}
-        <MenuSection title="Hot Coffee" items={hotCoffeeItems} addToCart={addToCart} />
-        <MenuSection title="Cold Coffee" addToCart={addToCart} items={coldCoffeeItems} />
-        <MenuSection title="Drinks" addToCart={addToCart} items={drinkItems} />
-        <MenuSection title="Snacks" addToCart={addToCart} items={snackItems} />
+        <div className="font-semibold mb-4 text-[#4b2c20]">
+        </div>
+
+        <MenuSection title="Hot Coffee" items={hotCoffeeItems} addToCart={handleAddToCart}/>
+        <MenuSection title="Cold Coffee" items={coldCoffeeItems} addToCart={handleAddToCart} />
+        <MenuSection title="Drinks" items={drinkItems} addToCart={handleAddToCart} />
+        <MenuSection title="Snacks" items={snackItems} addToCart={handleAddToCart} />
       </div>
       <Footer />
     </>
   );
 };
+
+
 export default Menu;
