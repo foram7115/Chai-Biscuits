@@ -185,3 +185,24 @@ def create_order(request):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Invalid method'}, status=405)
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import CustomUser, Order
+from .serializers import OrderSerializer
+
+@api_view(['GET'])
+def user_order_history(request):
+    phone = request.GET.get('phone')
+    if not phone:
+        return Response({'error': 'Phone number is required'}, status=400)
+
+    try:
+        user = CustomUser.objects.get(phone_number=phone)
+    except CustomUser.DoesNotExist:
+        return Response({'error': 'User not found'}, status=404)
+
+    orders = Order.objects.filter(user=user).order_by('-order_date')
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)

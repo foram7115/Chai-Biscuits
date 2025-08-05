@@ -1,23 +1,13 @@
 import React from "react";
-
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
 
 import { FaPlus } from "react-icons/fa6";
 import Header from "./Header";
-import Footer from './Footer'
-<<<<<<< HEAD
-import { useCart } from "./CartContext"; // Adjust the path if needed
+import Footer from './Footer';
+import { useCart } from "./CartContext";
 
-// Hot coffee images
-=======
-
-import { useCart } from "./CartContext"; // Adjust the path if needed
-
-// Hot coffee images
-
->>>>>>> f1e8c40018332e2057d87ac7c76e18d34d871c83
+// Images
 import Capuccino from "../assets/Capuccino.jpg";
 import Americo from "../assets/Americo.jpg";
 import Latte from "../assets/Latte.jpg";
@@ -59,8 +49,7 @@ import Snack4 from "../assets/Snack4.jpg";
 import Snack5 from "../assets/Snack5.jpg";
 import Snack6 from "../assets/Snack6.jpg";
 
-
-// Hot Coffee
+// Data
 const hotCoffeeItems = [
   { name: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: 300, image: Capuccino },
   { name: "Americano", description: "Espresso, hot water", price: 250, image: Americo },
@@ -73,6 +62,7 @@ const hotCoffeeItems = [
   { name: "Espresso Shot", description: "Strong and bold", price: 200, image: Espresso },
   { name: "Cold Brew", description: "Slow-brewed coffee", price: 310, image: ColdBrew },
 ];
+
 const coldCoffeeItems = [
   { name: "Iced Latte", description: "Espresso, ice, milk", price: 290, image: IcedLatte },
   { name: "Frappe", description: "Blended coffee with cream", price: 330, image: Frappe },
@@ -85,6 +75,7 @@ const coldCoffeeItems = [
   { name: "Affogato", description: "Espresso over ice cream", price: 350, image: Affogato },
   { name: "Choco Cold Brew", description: "Cold brew with chocolate", price: 360, image: ChocoColdBrew },
 ];
+
 const drinkItems = [
   { name: "Lemonade", description: "Fresh lemon juice", price: 180, image: Lemonade },
   { name: "Iced Tea", description: "Chilled tea with lemon", price: 170, image: IcedTea },
@@ -97,6 +88,7 @@ const drinkItems = [
   { name: "Cocacola", description: "Natural hydrating drink", price: 160, image: Drink5 },
   { name: "Pepsi", description: "Pineapple soda fusion", price: 195, image: Drink6 },
 ];
+
 const snackItems = [
   { name: "Grilled Sandwich", description: "Stuffed with veggies", price: 150, image: Sandwich },
   { name: "Butter Croissant", description: "Flaky & buttery", price: 180, image: Croissant },
@@ -129,15 +121,10 @@ const MenuSection = ({ title, items, addToCart }) => (
             <p className="text-gray-600 text-sm">{item.description}</p>
             <div className="flex justify-between items-center mt-2">
               <span className="text-lg font-bold">₹{item.price}.00</span>
-<<<<<<< HEAD
-              <button onClick={() => addToCart(item)} className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700">
-=======
-
               <button
                 onClick={() => addToCart(item)}
                 className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
               >
->>>>>>> f1e8c40018332e2057d87ac7c76e18d34d871c83
                 <FaPlus />
               </button>
             </div>
@@ -148,12 +135,7 @@ const MenuSection = ({ title, items, addToCart }) => (
   </div>
 );
 
-
 const Menu = () => {
-<<<<<<< HEAD
-=======
-
->>>>>>> f1e8c40018332e2057d87ac7c76e18d34d871c83
   const { cartItems, addToCart } = useCart();
 
   const handleAddToCart = (item) => {
@@ -161,6 +143,10 @@ const Menu = () => {
     toast.success(`${item.name} added to cart! 🛒`, {
       position: "top-right",
       autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
       theme: "light",
     });
   };
@@ -173,19 +159,15 @@ const Menu = () => {
           Cart Count: {cartItems.length}
         </div>
 
-        <MenuSection title="Hot Coffee" items={hotCoffeeItems} addToCart={handleAddToCart}/>
+        <MenuSection title="Hot Coffee" items={hotCoffeeItems} addToCart={handleAddToCart} />
         <MenuSection title="Cold Coffee" items={coldCoffeeItems} addToCart={handleAddToCart} />
         <MenuSection title="Drinks" items={drinkItems} addToCart={handleAddToCart} />
         <MenuSection title="Snacks" items={snackItems} addToCart={handleAddToCart} />
       </div>
       <Footer />
+      <ToastContainer />
     </>
   );
 };
 
-
 export default Menu;
-<<<<<<< HEAD
-=======
-
->>>>>>> f1e8c40018332e2057d87ac7c76e18d34d871c83

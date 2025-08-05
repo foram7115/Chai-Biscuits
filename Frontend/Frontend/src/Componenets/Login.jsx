@@ -3,6 +3,7 @@ import back from '../assets/back1.jpg';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [name, setName] = useState('');
@@ -65,9 +66,9 @@ const Login = () => {
 
             <p className="text-sm text-[#4b2e2e] mb-6">
               By clicking next you will agree to our{' '}
-              <a href="#" className="underline font-medium">
+              <Link to="/TermAndConditions" className="underline font-medium">
                 Terms & Conditions
-              </a>
+              </Link>
             </p>
 
             <button

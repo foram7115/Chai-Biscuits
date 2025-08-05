@@ -33,13 +33,6 @@ const Cart = () => {
     return code;
   };
 
-  useEffect(() => {
-    if (!promoCode) {
-      const newCode = generatePromoCode();
-      setPromoCode(newCode);
-    }
-  }, []);
-
   const handlePlaceOrder = () => {
     const phone_number = localStorage.getItem("phone_number");
     const deliveryTime = new Date(Date.now() + 60 * 60 * 1000).toLocaleTimeString([], {
@@ -66,7 +59,10 @@ const Cart = () => {
       placedAt
     };
 
-    localStorage.setItem('latestOrder', JSON.stringify(orderDetails));
+    const existingOrders = JSON.parse(localStorage.getItem("allOrders")) || [];
+      existingOrders.push(orderDetails);
+      localStorage.setItem("allOrders", JSON.stringify(existingOrders));
+
     console.log("✅ Order saved to localStorage:", orderDetails);
 
     axios.post('http://127.0.0.1:8000/api/create-order/', {
@@ -132,8 +128,9 @@ const Cart = () => {
                 <p className="text-brown-800 font-medium mb-2">Promo Code</p>
                 <input
                   type="text"
+                  placeholder="Enter your promo code"
                   value={promoCode}
-                  readOnly
+                  onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
                   className="w-full p-3 rounded-md bg-[#f3e4db] text-brown-800 font-semibold focus:outline-none"
                 />
               </div>
@@ -176,9 +173,5 @@ const Cart = () => {
     </>
   );
 };
-<<<<<<< HEAD
 
 export default Cart;
-=======
-            export default Cart;
->>>>>>> f1e8c40018332e2057d87ac7c76e18d34d871c83

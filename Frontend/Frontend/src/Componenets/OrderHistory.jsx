@@ -12,12 +12,18 @@ const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const storedOrders = localStorage.getItem('allOrders');
-    if (storedOrders) {
-      setOrders(JSON.parse(storedOrders).reverse()); // Show most recent first
-    }
-  }, []);
+  const phone = localStorage.getItem('phone_number');
 
+  fetch(`http://localhost:8000/api/order-history/?phone=${phone}`, {
+    credentials: 'include',
+  })
+    .then((res) => res.json())
+    .then((data) => setOrders(data))
+    .catch((err) => console.error('Failed to fetch orders:', err));
+}, []);
+
+
+  
   return (
     <>
       <Header />
@@ -36,7 +42,7 @@ const OrderHistory = () => {
                 >
                   <div className="flex justify-between items-center flex-wrap gap-y-2">
                     <div>
-                      <h2 className="font-semibold text-[#4b2c20] text-md">Order ID: {order.id}</h2>
+                      <h2 className="font-semibold text-[#4b2c20] text-md">Order ID: {order.order_id}</h2>
                       <p className="text-sm text-gray-600">{order.date}</p>
                     </div>
                     <div className={`text-sm font-medium ${statusColor[order.status] || 'text-gray-600'}`}>
@@ -46,12 +52,16 @@ const OrderHistory = () => {
 
                   <ul className="mt-3 text-sm text-gray-700 list-disc pl-5">
                     {order.items.map((item, i) => (
-                      <li key={i}>{item.quantity}x {item.name}</li>
+                      <li key={i}>{item.quantity}x {item.item_name}</li>
                     ))}
                   </ul>
 
                   <div className="flex justify-between items-center mt-4">
-                    <p className="font-semibold text-[#4b2c20]">Total: ₹{order.total.toFixed(2)}</p>
+                    <p className="font-semibold text-[#4b2c20]">
+                      Total: ₹
+                      {isNaN(parseFloat(order.total_amount)) ? '0.00' : parseFloat(order.total_amount).toFixed(2)}
+                    </p>
+
                     <button className="text-sm text-[#4b2c20] border border-[#4b2c20] px-3 py-1 rounded-full hover:bg-[#f3e7e3] transition">
                       View Details
                     </button>

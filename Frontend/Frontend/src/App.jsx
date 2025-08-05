@@ -35,6 +35,8 @@ function App() {
         <Route exact path="/contact-us" element={<ContactUs />} />
         <Route exact path="/offer2" element={<Offer2 />} />
         <Route exact path="/offer" element={<Offer />} />
+        <Route path="/TermAndConditions" element={<TermsAndConditions />} />
+
       </Routes>
       <ToastContainer/>
     </>

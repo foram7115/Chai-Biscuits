@@ -7,6 +7,7 @@ import hotco from '../assets/hot.png';
 import coldco from '../assets/cold.png';
 import coldd from '../assets/colddrink.png';
 import food from '../assets/food3.png';
+
 import Capuccino from '../assets/Capuccino.jpg';
 import Americo from '../assets/Americo.jpg';
 import ColdMocha from "../assets/ColdMocha.jpg";
@@ -17,6 +18,7 @@ import Muffin from "../assets/Muffin.jpg";
 import Donut from "../assets/Donut.jpg";
 import Espresso from '../assets/Espresso.webp';
 import Brew from '../assets/Brew.jpg';
+
 import Header from './Header';
 import Footer from './Footer';
 import { FaPlus } from "react-icons/fa6";
@@ -38,16 +40,15 @@ const Home = () => {
     theme: "light",
   });
 
-  // Dummy actions for now
   const menu = () => navigate("/menu");
-  const offer = () => alert("Today's special offer!");
-  const offer2 = () => alert("Flat 30% Off!");
+  const offer = () => navigate("/offer");
+  const offer2 = () => navigate("/offer2");
 
   const coffeeItems = [
     { name: "Cappuccino", description: "Espresso, steamed milk, milk foam", price: 300, image: Capuccino },
     { name: "Americano", description: "Espresso, hot water", price: 250, image: Americo },
-    { name: "ColdMocha", description: "Espresso, milk, foam art", price: 280, image: ColdMocha },
-    { name: "IcedAmericano", description: "Espresso, chocolate, steamed milk", price: 320, image: IcedAmericano },
+    { name: "Cold Mocha", description: "Espresso, milk, foam art", price: 280, image: ColdMocha },
+    { name: "Iced Americano", description: "Espresso, chocolate, steamed milk", price: 320, image: IcedAmericano },
     { name: "Smoothie", description: "Fruit smoothie delight", price: 270, image: Smoothie },
     { name: "Mojito", description: "Minty mojito cooler", price: 260, image: Mojito },
     { name: "Muffin", description: "Blueberry muffin", price: 120, image: Muffin },
@@ -75,18 +76,17 @@ const Home = () => {
         <h2 className="flex justify-center text-3xl font-semibold text-[#4b2e2e] mb-4">Our Menu</h2>
 
         <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6">
-          {[
-            { icon: hotco, label: "Hot Coffee", action: menu },
+          {[{ icon: hotco, label: "Hot Coffee", action: menu },
             { icon: coldco, label: "Cold Coffee", action: menu },
             { icon: coldd, label: "Drinks", action: menu },
             { icon: food, label: "Snacks", action: menu },
           ].map((item, index) => (
             <div key={index} className="flex flex-col items-center text-[#4b2e2e]">
               <div
-                className="w-16 h-16 sm:w-20 sm:h-20 bg-[#e5d5ca] rounded-full flex items-center justify-center mb-2"
+                className="w-16 h-16 sm:w-20 sm:h-20 bg-[#e5d5ca] rounded-full flex items-center justify-center mb-2 cursor-pointer"
                 onClick={item.action}
               >
-                <img src={item.icon} alt={item.label} className="w-10 h-10 sm:w-12 sm:h-12 object-contain cursor-pointer" />
+                <img src={item.icon} alt={item.label} className="w-10 h-10 sm:w-12 sm:h-12 object-contain" />
               </div>
               <span className="text-sm text-center">{item.label}</span>
             </div>
@@ -109,12 +109,17 @@ const Home = () => {
               button: "Buy Now →",
               action: offer2,
             }].map((item, i) => (
-              <div key={i} className="snap-start shrink-0 w-[280px] sm:w-[360px] h-48 bg-cover bg-center rounded-2xl overflow-hidden relative"
-                style={{ backgroundImage: `url(${item.bg})` }}>
+              <div key={i}
+                className="snap-start shrink-0 w-[280px] sm:w-[360px] h-48 bg-cover bg-center rounded-2xl overflow-hidden relative"
+                style={{ backgroundImage: `url(${item.bg})` }}
+              >
                 <div className="absolute inset-0 bg-black/40 flex flex-col justify-center px-5 text-white">
                   <h2 className="text-2xl font-bold">{item.title}</h2>
                   {item.subtitle && <h2 className="text-2xl font-bold">{item.subtitle}</h2>}
-                  <button onClick={item.action} className="mt-2 font-medium underline underline-offset-4 text-left cursor-pointer">
+                  <button
+                    onClick={item.action}
+                    className="mt-2 font-medium underline underline-offset-4 text-left cursor-pointer"
+                  >
                     {item.button}
                   </button>
                 </div>

@@ -47,10 +47,6 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-<<<<<<< HEAD
-=======
-  // Remove item
->>>>>>> f1e8c40018332e2057d87ac7c76e18d34d871c83
   const removeFromCart = (item) => {
     setCartItems((prevItems) =>
       prevItems.filter((i) => i.id !== item.id)
