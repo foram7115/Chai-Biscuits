@@ -62,9 +62,7 @@ function Header() {
 
   return (
     <div className="sticky top-0 z-50 bg-[#b08968] h-20">
-      {/* Header Bar */}
       <div className="flex items-center px-4 sm:px-6 py-3 h-20">
-        {/* Left: Profile */}
         <div className="flex items-center z-10">
           <img
             src={userData.profileImage}
@@ -74,7 +72,6 @@ function Header() {
           />
         </div>
 
-        {/* Center: Home, Menu, Cart */}
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center sm:gap-3 z-0">
           <img
             src={HomeIcon}
@@ -96,13 +93,7 @@ function Header() {
           />
         </div>
 
-        {/* Right: Notification + Logo */}
         <div className="flex items-center gap-2 sm:gap-4 md:gap-5 ml-auto z-10">
-          {/* <img
-            src={Notification}
-            alt="notification"
-            className="w-5 sm:w-6 md:w-7 lg:w-8 h-auto object-contain"
-          /> */}
           <img
             src={Logo}
             alt="logo"
@@ -112,11 +103,9 @@ function Header() {
         </div>
       </div>
 
-      {/* Slide-in Profile Panel */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 sm:w-80 bg-[#fceeea] shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
-          showProfile ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 left-0 h-full w-72 sm:w-80 bg-[#fceeea] shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${showProfile ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div className="p-4 flex justify-between items-center">
           <h2 className="text-lg font-semibold text-[#4b2c20]">My Profile</h2>

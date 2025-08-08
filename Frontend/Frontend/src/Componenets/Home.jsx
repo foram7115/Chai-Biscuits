@@ -63,23 +63,15 @@ const Home = () => {
       <ToastContainer />
 
       <div className="min-h-screen bg-[#fdf3ef] p-4">
-        {/* Search Bar */}
-        <div className="flex items-center justify-center bg-[#e5d5ca] px-4 py-3 rounded-full mb-6">
-          <span className="material-symbols-outlined mr-2">search</span>
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-transparent outline-none w-full text-[#4b2e2e]"
-          />
-        </div>
+      
 
         <h2 className="flex justify-center text-3xl font-semibold text-[#4b2e2e] mb-4">Our Menu</h2>
 
         <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6">
           {[{ icon: hotco, label: "Hot Coffee", action: menu },
-            { icon: coldco, label: "Cold Coffee", action: menu },
-            { icon: coldd, label: "Drinks", action: menu },
-            { icon: food, label: "Snacks", action: menu },
+          { icon: coldco, label: "Cold Coffee", action: menu },
+          { icon: coldd, label: "Drinks", action: menu },
+          { icon: food, label: "Snacks", action: menu },
           ].map((item, index) => (
             <div key={index} className="flex flex-col items-center text-[#4b2e2e]">
               <div
@@ -93,7 +85,6 @@ const Home = () => {
           ))}
         </div>
 
-        {/* Offers */}
         <div className="w-full mt-10 px-4">
           <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:justify-center sm:overflow-visible scrollbar-hide">
             {[{
@@ -128,7 +119,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Best Items List */}
         <div className="mt-12 px-4">
           <h2 className="text-2xl font-semibold text-[#4b2e2e] mb-6">Best Items</h2>
 

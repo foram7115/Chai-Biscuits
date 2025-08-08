@@ -5,7 +5,6 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // Load cart from localStorage on mount
   useEffect(() => {
     const storedCart = localStorage.getItem("cartItems");
     if (storedCart) {
@@ -13,7 +12,6 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // Save cart to localStorage on update
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);

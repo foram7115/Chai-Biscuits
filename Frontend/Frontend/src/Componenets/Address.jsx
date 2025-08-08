@@ -11,18 +11,15 @@ function Address() {
   const [editIndex, setEditIndex] = useState(null); // index of address being edited
   const [editedAddress, setEditedAddress] = useState('');
 
-  // Load addresses from localStorage on mount
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem('savedAddresses')) || [];
     setSavedAddresses(stored);
   }, []);
 
-  // Save to localStorage whenever addresses change
   useEffect(() => {
     localStorage.setItem('savedAddresses', JSON.stringify(savedAddresses));
   }, [savedAddresses]);
 
-  // Dummy suggestions – replace with actual API later
   const allLocations = [
     "MG Road, Bangalore",
     "Brigade Road, Bangalore",
@@ -32,23 +29,23 @@ function Address() {
   ];
 
   const handleSearchChange = async (e) => {
-  const value = e.target.value;
-  setSearchQuery(value);
+    const value = e.target.value;
+    setSearchQuery(value);
 
-  if (value.length > 2) {
-    try {
-      const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(value)}&key=f772a5f1bab443d589a9a03bc3dd9004&limit=5`);
-      const data = await response.json();
-      const results = data.results.map(item => item.formatted);
-      setSuggestions(results);
-    } catch (error) {
-      console.error('Error fetching suggestions:', error);
+    if (value.length > 2) {
+      try {
+        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(value)}&key=f772a5f1bab443d589a9a03bc3dd9004&limit=5`);
+        const data = await response.json();
+        const results = data.results.map(item => item.formatted);
+        setSuggestions(results);
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+        setSuggestions([]);
+      }
+    } else {
       setSuggestions([]);
     }
-  } else {
-    setSuggestions([]);
-  }
-};
+  };
 
 
   const handleAddAddress = (address) => {
@@ -94,7 +91,6 @@ function Address() {
             className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white placeholder-gray-500 mb-2"
           />
 
-          {/* Suggestions */}
           {suggestions.length > 0 && (
             <div className="bg-white border border-gray-300 rounded-lg mb-4 max-h-40 overflow-y-auto">
               {suggestions.map((suggestion, index) => (
@@ -109,7 +105,6 @@ function Address() {
             </div>
           )}
 
-          {/* Add manually */}
           <div
             className="flex items-center justify-between bg-white rounded-lg px-4 py-3 shadow-sm mb-6 cursor-pointer"
             onClick={() => handleAddAddress(searchQuery)}
@@ -121,7 +116,6 @@ function Address() {
             <span className="text-[#d12c6a] text-xl">{'>'}</span>
           </div>
 
-          {/* Saved Addresses */}
           <h2 className="mt-4 mb-2 font-semibold text-lg">Saved Addresses</h2>
           <div className="space-y-4">
             {savedAddresses.map((address, index) => (
@@ -140,7 +134,6 @@ function Address() {
                       )}
                     </h3>
 
-                    {/* Editable or Static Address Text */}
                     {editIndex === index ? (
                       <input
                         type="text"
@@ -155,7 +148,6 @@ function Address() {
                     )}
                   </div>
 
-                  {/* Action Icons */}
                   <div className="flex flex-col gap-2">
                     {editIndex === index ? (
                       <button

@@ -60,8 +60,8 @@ const Cart = () => {
     };
 
     const existingOrders = JSON.parse(localStorage.getItem("allOrders")) || [];
-      existingOrders.push(orderDetails);
-      localStorage.setItem("allOrders", JSON.stringify(existingOrders));
+    existingOrders.push(orderDetails);
+    localStorage.setItem("allOrders", JSON.stringify(existingOrders));
 
     console.log("✅ Order saved to localStorage:", orderDetails);
 
