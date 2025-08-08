@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 import uuid
+from datetime import timedelta
+from django.utils import timezone
+
+# ----------------------------
+# Custom User Model
+# ----------------------------
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, phone_number, name, address, password=None):
@@ -10,7 +16,7 @@ class CustomUserManager(BaseUserManager):
         user.set_unusable_password()
         user.save(using=self._db)
         return user
-    
+
     def create_superuser(self, phone_number, name, address, password=None):
         user = self.create_user(phone_number, name, address)
         user.is_superuser = True
@@ -36,29 +42,66 @@ class CustomUser(AbstractBaseUser):
 
     def has_perm(self, perm, obj=None):
         return self.is_superuser
-    
+
     def has_module_perms(self, app_label):
         return self.is_superuser
+
+# ----------------------------
+# OTP for Login
+# ----------------------------
+
+class OTP(models.Model):
+    phone_number = models.CharField(max_length=10)
+    otp = models.CharField(max_length=4)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.phone_number} - OTP: {self.otp}"
+
+# ----------------------------
+# Delivery Partner
+# ----------------------------
+
+class DeliveryPartner(models.Model):
+    phone_number = models.CharField(max_length=10, unique=True)
+    name = models.CharField(max_length=100)
+    address = models.TextField()
+    is_online = models.BooleanField(default=True)  # Online/Offline toggle
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.phone_number})"
+
+
+
+# ----------------------------
+# Order and Items
+# ----------------------------
 
 class Order(models.Model):
     STATUS_CHOICES = [
         ('placed', 'Order Placed'),
-        ('pickup', 'Out for Delivery'),
+        ('assigned', 'Assigned to Delivery Partner'),
+        ('picked_up', 'Picked Up'),
+        ('out_for_delivery', 'Out for Delivery'),
         ('delivered', 'Delivered'),
+        ('cancelled', 'Cancelled'),
     ]
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='orders')
     order_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     order_date = models.DateTimeField(auto_now_add=True)
     placed_at = models.CharField(max_length=20)  # example: '10:00 AM'
-    out_for_delivery_at = models.CharField(max_length=20)
-    delivery_time = models.CharField(max_length=20, default=0)
+    delivery_time = models.CharField(max_length=20, default='0')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    delivery_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='placed')
+    delivery_status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='placed')
+
+    # Link delivery partner if assigned
+    assigned_to = models.ForeignKey(DeliveryPartner, null=True, blank=True, on_delete=models.SET_NULL, related_name='assigned_orders')
 
     def __str__(self):
         return f"Order {self.order_id} for {self.user.name}"
-    
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     item_name = models.CharField(max_length=100)
@@ -69,17 +112,26 @@ class OrderItem(models.Model):
     def total_price(self):
         if self.quantity is not None and self.price_per_item is not None:
             return self.quantity * self.price_per_item
-        return 0  # fallback if values are not set
+        return 0
 
     def __str__(self):
         return f"{self.quantity} x {self.item_name}"
-    
-from django.db import models
 
-class OTP(models.Model):
-    phone_number = models.CharField(max_length=10)
-    otp = models.CharField(max_length=4)
-    created_at = models.DateTimeField(auto_now_add=True)
+# ----------------------------
+# Delivery History (Optional)
+# ----------------------------
+
+class DeliveryHistory(models.Model):
+    delivery_partner = models.ForeignKey(DeliveryPartner, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=20, choices=[('completed', 'Completed'), ('cancelled', 'Cancelled')])
+    earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def time_taken(self):
+        if self.order.order_date and self.completed_at:
+            return self.completed_at - self.order.order_date
+        return timedelta(0)
 
     def __str__(self):
-        return f"{self.phone_number} - OTP: {self.otp}"
+        return f"{self.order.order_id} - {self.delivery_partner.name}"
