@@ -206,3 +206,119 @@ def user_order_history(request):
     orders = Order.objects.filter(user=user).order_by('-order_date')
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
+
+
+from .models import Order, DeliveryPartner
+from .serializers import OrderSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(['GET'])
+def all_orders(request):
+    """All placed orders (admin-level or for delivery panel overview)"""
+    orders = Order.objects.all().order_by('-order_date')
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def unassigned_orders(request):
+    """View orders that are not yet assigned to any delivery partner"""
+    orders = Order.objects.filter(assigned_to__isnull=True).order_by('-order_date')
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
+import json
+from .models import Order, DeliveryPartner, DeliveryHistory
+from .serializers import OrderSerializer
+
+@api_view(['GET'])
+def assigned_orders(request):
+    phone = request.GET.get('phone')
+    if not phone:
+        return Response({'error': 'Phone number is required'}, status=400)
+
+    try:
+        partner = DeliveryPartner.objects.get(phone_number=phone)
+        orders = Order.objects.filter(assigned_to=partner).order_by('-order_date')
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+    except DeliveryPartner.DoesNotExist:
+        return Response({'error': 'Delivery partner not found'}, status=404)
+
+@api_view(['POST'])
+def mark_order_status(request):
+    order_id = request.data.get('order_id')
+    status = request.data.get('status')  # 'picked_up', 'out_for_delivery', 'delivered'
+
+    if not all([order_id, status]):
+        return Response({'error': 'Order ID and new status are required'}, status=400)
+
+    try:
+        order = Order.objects.get(order_id=order_id)
+        order.delivery_status = status
+        order.save()
+
+        if status == 'delivered':
+            DeliveryHistory.objects.create(
+                delivery_partner=order.assigned_to,
+                order=order,
+                status='completed',
+                completed_at=timezone.now(),
+                earnings=50  # Example static earnings
+            )
+
+        return Response({'message': f'Order status updated to {status}'})
+    except Order.DoesNotExist:
+        return Response({'error': 'Order not found'}, status=404)
+
+@api_view(['GET'])
+def delivery_history(request):
+    phone = request.GET.get('phone')
+    if not phone:
+        return Response({'error': 'Phone number is required'}, status=400)
+
+    try:
+        partner = DeliveryPartner.objects.get(phone_number=phone)
+        history = DeliveryHistory.objects.filter(delivery_partner=partner).order_by('-completed_at')
+
+        data = [{
+            'order_id': h.order.order_id,
+            'status': h.status,
+            'completed_at': h.completed_at,
+            'earnings': h.earnings,
+        } for h in history]
+
+        return Response(data)
+    except DeliveryPartner.DoesNotExist:
+        return Response({'error': 'Partner not found'}, status=404)
+
+@csrf_exempt
+def update_delivery_partner_profile(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            phone = data.get('phone_number')
+
+            if not phone:
+                return JsonResponse({'error': 'Phone number is required'}, status=400)
+
+            partner = DeliveryPartner.objects.get(phone_number=phone)
+
+            partner.name = data.get('name', partner.name)
+            partner.is_available = data.get('is_available', partner.is_available)
+            partner.save()
+
+            return JsonResponse({'message': 'Profile updated successfully'})
+        except DeliveryPartner.DoesNotExist:
+            return JsonResponse({'error': 'Delivery partner not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
