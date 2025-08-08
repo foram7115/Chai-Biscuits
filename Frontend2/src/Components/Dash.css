@@ -3,7 +3,7 @@
   margin: auto;
   padding: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f8;
+  /* background-color: #f4f6f8; */
   box-sizing: border-box;
 }
 
@@ -22,6 +22,7 @@
 }
 
 .section-heading {
+    margin-top: 20px;
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 30px;
@@ -32,20 +33,21 @@
   margin-top: 20px;
 }
 
+/* ✅ Updated for 2 cards per row */
 .orders-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* Always 2 per row on large screens */
   gap: 20px;
 }
 
 .order-card {
   display: flex;
   flex-direction: row;
-  background-color: #fff;
+  background-color: #e9e6e6;
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 7px 20px rgba(3, 3, 3, 0.5);
   transition: transform 0.2s ease;
   align-items: center;
 }
@@ -99,27 +101,12 @@
   background-color: #005fa3;
 }
 
-/* Responsive styles from 1080px down to 360px */
-@media (max-width: 1080px) {
-  .title {
-    font-size: 2.2rem;
-  }
-
-  .section-heading {
-    font-size: 1.6rem;
-  }
-
-  .item-image {
-    width: 140px;
-    height: 140px;
-  }
-
-  .order-card {
-    padding: 18px;
-  }
-}
-
+/* Desktop → 2 per row, Tablet & Mobile → 1 per row */
 @media (max-width: 768px) {
+  .orders-grid {
+    grid-template-columns: 1fr;
+  }
+
   .order-card {
     flex-direction: column;
     align-items: center;
@@ -146,32 +133,43 @@
   }
 }
 
+/* Other responsive tweaks */
+@media (max-width: 1080px) {
+  .title {
+    font-size: 2.2rem;
+  }
+  .section-heading {
+    font-size: 1.6rem;
+  }
+  .item-image {
+    width: 140px;
+    height: 140px;
+  }
+  .order-card {
+    padding: 18px;
+  }
+}
+
 @media (max-width: 480px) {
   .dash-container {
     padding: 15px;
   }
-
   .title {
     font-size: 1.6rem;
   }
-
   .welcome {
     font-size: 1rem;
   }
-
   .section-heading {
     font-size: 1.4rem;
   }
-
   .item-image {
     width: 100px;
     height: 100px;
   }
-
   .order-right p {
     font-size: 0.9rem;
   }
-
   .confirm-button {
     font-size: 0.9rem;
     padding: 8px 12px;
@@ -182,37 +180,29 @@
   .dash-container {
     padding: 12px;
   }
-
   .title {
     font-size: 1.5rem;
   }
-
   .welcome {
     font-size: 0.95rem;
   }
-
   .section-heading {
     font-size: 1.3rem;
     margin-bottom: 20px;
   }
-
   .orders-grid {
     gap: 14px;
   }
-
   .order-card {
     padding: 14px;
   }
-
   .item-image {
     width: 95px;
     height: 95px;
   }
-
   .order-right p {
     font-size: 0.85rem;
   }
-
   .confirm-button {
     font-size: 0.85rem;
     padding: 8px 10px;
@@ -224,20 +214,16 @@
   .title {
     font-size: 1.4rem;
   }
-
   .section-heading {
     font-size: 1.2rem;
   }
-
   .item-image {
     width: 90px;
     height: 90px;
   }
-
   .order-right p {
     font-size: 0.8rem;
   }
-
   .confirm-button {
     font-size: 0.8rem;
     padding: 7px 10px;

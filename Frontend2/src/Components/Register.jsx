@@ -36,7 +36,7 @@ const Register = () => {
     return (
         <div
             className="register-container"
-            style={{ backgroundImage: `url(${back})` }}
+            style={{ backgroundImage: `url(${back})`, height: '100vh', width: '100vw', marginLeft: '-128px'}}
         >
             <form className="register-form" onSubmit={handleSubmit}>
                 <h2>Register</h2>

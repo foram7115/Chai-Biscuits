@@ -5,8 +5,9 @@ import './App.css'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import Register from './Components/Register'
 import Login from './Components/Login' // Import the Login component
-import Dash from './Components/Dash' // Import the Login component
-
+import Dash from './Components/Dash'
+import AssignedDeliveries from './Components/AssignedDeliveries'
+import Header from './Components/Header'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -18,6 +19,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} /> {/* Add the new login route */}
         <Route path="/Dash" element={<Dash />} /> {/* Add the new login route */}
+        <Route path="/AssignedDeliveries" element={<AssignedDeliveries />} />
+        <Route path="/Header" element={<Header />} />
       </Routes>
     </>
   )

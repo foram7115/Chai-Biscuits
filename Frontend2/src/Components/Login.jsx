@@ -56,7 +56,7 @@ const Login = ({ navigate }) => {
   return (
     <div
       className="register-container"
-      style={{ backgroundImage: `url(${back1})` }}
+      style={{ backgroundImage: `url(${back1})`, height: '100vh', width: '100vw', marginLeft: '-128px'}}
     >
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Login</h2>

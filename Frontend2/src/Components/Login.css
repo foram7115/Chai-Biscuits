@@ -10,6 +10,13 @@
     box-sizing: border-box;
 }
 
+/* Remove scrollbars globally */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* disables both vertical & horizontal scroll */
+}
+
 /* Global body styles for a clean layout */
 body {
     font-family: Arial, sans-serif;
@@ -17,16 +24,7 @@ body {
 }
 
 /* Main container for the login page */
-.register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 20px;
-}
+
 
 /* Styling for the login form box */
 .register-form {
@@ -36,6 +34,7 @@ body {
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* ensures no form overflow causes scroll */
 }
 
 /* Title of the form */
