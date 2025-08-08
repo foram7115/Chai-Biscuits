@@ -13,25 +13,17 @@ const TrackOrder = () => {
       if (!order.placedAt) return order;
 
       const placedTime = parseTime(order.placedAt);
-      const deliveryTime = new Date(placedTime.getTime() + 40 * 60 * 1000);
-
-      const formattedDelivery = deliveryTime.toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-      });
+      const deliveryTime = new Date(placedTime.getTime() + 40 * 60 * 1000); // 40 mins after placedAt
 
       return {
         ...order,
-        deliveryTime: formattedDelivery,
-        deliveryDateTime: deliveryTime, // for internal checking
+        deliveryTime,
       };
     });
 
-    // Filter out delivered orders
-    const pendingOrders = adjustedOrders.filter(order =>
-      currentTime < new Date(order.deliveryDateTime)
-    );
+    const pendingOrders = adjustedOrders.filter(order => {
+      return order.deliveryTime && new Date() < new Date(order.deliveryTime);
+    });
 
     setOrders(pendingOrders);
   }, [currentTime]);
@@ -47,8 +39,9 @@ const TrackOrder = () => {
     let [hours, minutes] = hourMin.split(':').map(Number);
     if (period === 'PM' && hours < 12) hours += 12;
     if (period === 'AM' && hours === 12) hours = 0;
-    const date = new Date();
-    date.setHours(hours, minutes, 0, 0);
+
+    const now = new Date();
+    const date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
     return date;
   };
 
@@ -58,11 +51,14 @@ const TrackOrder = () => {
       timeStr: order.placedAt || '10:00 AM',
       completed: currentTime >= parseTime(order.placedAt || '10:00 AM'),
     },
-    
     {
       label: 'Delivered',
-      timeStr: order.deliveryTime || '12:00 PM',
-      completed: currentTime >= new Date(order.deliveryDateTime),
+      timeStr: order.deliveryTime.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      }),
+      completed: currentTime >= new Date(order.deliveryTime),
     },
   ];
 
@@ -84,7 +80,9 @@ const TrackOrder = () => {
                   <div className="bg-[#fff3eb] p-4 rounded-lg mb-6 flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-600">Estimated Delivery</p>
-                      <p className="text-lg font-semibold text-[#4b2c20]">Today, {order.deliveryTime}</p>
+                      <p className="text-lg font-semibold text-[#4b2c20]">
+                        Today, {steps[1].timeStr}
+                      </p>
                     </div>
                     <div className="text-sm font-medium text-green-600">
                       {steps[1].completed ? 'Delivered' : 'On Time'}
@@ -97,7 +95,9 @@ const TrackOrder = () => {
                       <div key={i} className="relative">
                         <div
                           className={`absolute -left-[1.55rem] top-1 w-6 h-6 rounded-full border-4 ${
-                            step.completed ? 'bg-green-500 border-green-200' : 'bg-gray-300 border-gray-200'
+                            step.completed
+                              ? 'bg-green-500 border-green-200'
+                              : 'bg-gray-300 border-gray-200'
                           }`}
                         ></div>
                         <div>

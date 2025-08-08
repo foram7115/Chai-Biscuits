@@ -3,11 +3,6 @@ import back from '../assets/back1.jpg';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-<<<<<<< HEAD
-=======
-import { Link } from 'react-router-dom';
-
->>>>>>> e327ba32ee4cb78f69ef46bd07487d1e787f9c84
 const Login = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
