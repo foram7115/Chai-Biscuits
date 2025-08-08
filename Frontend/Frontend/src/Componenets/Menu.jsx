@@ -4,10 +4,17 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { FaPlus } from "react-icons/fa6";
 import Header from "./Header";
+<<<<<<< HEAD
+import Footer from './Footer'
+import { useCart } from "./CartContext"; // Adjust the path if needed
+
+// Hot coffee images
+=======
 import Footer from './Footer';
 import { useCart } from "./CartContext";
 
 // Images
+>>>>>>> e327ba32ee4cb78f69ef46bd07487d1e787f9c84
 import Capuccino from "../assets/Capuccino.jpg";
 import Americo from "../assets/Americo.jpg";
 import Latte from "../assets/Latte.jpg";
@@ -121,10 +128,14 @@ const MenuSection = ({ title, items, addToCart }) => (
             <p className="text-gray-600 text-sm">{item.description}</p>
             <div className="flex justify-between items-center mt-2">
               <span className="text-lg font-bold">₹{item.price}.00</span>
+<<<<<<< HEAD
+              <button onClick={() => addToCart(item)} className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700">
+=======
               <button
                 onClick={() => addToCart(item)}
                 className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
               >
+>>>>>>> e327ba32ee4cb78f69ef46bd07487d1e787f9c84
                 <FaPlus />
               </button>
             </div>
@@ -156,7 +167,6 @@ const Menu = () => {
       <Header />
       <div className="p-6 bg-[#fef5f1]">
         <div className="font-semibold mb-4 text-[#4b2c20]">
-          Cart Count: {cartItems.length}
         </div>
 
         <MenuSection title="Hot Coffee" items={hotCoffeeItems} addToCart={handleAddToCart} />
@@ -170,4 +180,9 @@ const Menu = () => {
   );
 };
 
+<<<<<<< HEAD
+
 export default Menu;
+=======
+export default Menu;
+>>>>>>> e327ba32ee4cb78f69ef46bd07487d1e787f9c84

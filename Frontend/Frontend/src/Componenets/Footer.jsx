@@ -6,20 +6,16 @@ import logo from "../assets/logo.png";
 
 const Footer = () => {
     return (
-
         <footer className="bg-[#fef5f1] text-black py-10 px-4 sm:px-6">
             <hr className="opacity-0.05" />
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 mt-5 gap-10 ">
-
                 <div className="flex flex-col">
                     <img src={logo} alt="Chai-Biscuits Logo" className="w-24 h-auto mb-4" />
                     <p className="text-sm text-gray-700 leading-relaxed">
                         Your one-stop shop for freshly brewed coffee, calming teas, and crunchy snacks. Sip & Snack with love!
                     </p>
                 </div>
-
                 <div className="flex direction-row gap-10">
-
                     <div>
                         <h4 className="text-lg font-semibold mb-3">Explore</h4>
                         <ul className="space-y-2 text-sm">
@@ -30,7 +26,6 @@ const Footer = () => {
                             <li><a href="#" className="hover:underline">Contact</a></li>
                         </ul>
                     </div>
-
                     <div>
                         <h4 className="text-lg font-semibold mb-4">Customer Service</h4>
                         <ul className="space-y-2 text-sm">
@@ -40,8 +35,6 @@ const Footer = () => {
                             <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
                         </ul>
                     </div>
-
-
                     <div>
                         <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
                         <div className="flex items-center space-x-4">
@@ -64,5 +57,4 @@ const Footer = () => {
         </footer>
     );
 };
-
 export default Footer;

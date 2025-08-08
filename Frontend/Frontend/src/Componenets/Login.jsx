@@ -3,29 +3,28 @@ import back from '../assets/back1.jpg';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+<<<<<<< HEAD
+=======
 import { Link } from 'react-router-dom';
 
+>>>>>>> e327ba32ee4cb78f69ef46bd07487d1e787f9c84
 const Login = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const navigate = useNavigate();
-
   const handleNext = async () => {
     if (!name || !phone) {
       alert('Please enter your full name and phone number');
       return;
     }
-
     if (!/^\d{10}$/.test(phone)) {
       alert('Phone number must be 10 digits');
       return;
     }
-
     try {
       const response = await axios.post('http://localhost:8000/api/send-otp/', {
         phone_number: phone,
       });
-
       if (response.status === 200) {
         localStorage.setItem('userPhone', phone);
         navigate('/Verify', { state: { phone } });
@@ -35,7 +34,6 @@ const Login = () => {
       alert('Failed to send OTP. Please try again.');
     }
   };
-
   return (
     <div className="align-center">
       <div className="image" style={{ backgroundImage: `url(${back})` }}>
@@ -47,7 +45,6 @@ const Login = () => {
             <h2 className="text-xl font-semibold text-[#4b2e2e] mb-8 mt-20">
               What's Your Mobile Number?
             </h2>
-
             <input
               type="text"
               placeholder="Full Name"
@@ -55,7 +52,6 @@ const Login = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-
             <input
               type="text"
               placeholder="Phone No."
@@ -63,14 +59,12 @@ const Login = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
-
             <p className="text-sm text-[#4b2e2e] mb-6">
               By clicking next you will agree to our{' '}
               <Link to="/TermAndConditions" className="underline font-medium">
                 Terms & Conditions
               </Link>
             </p>
-
             <button
               className="w-full py-3 bg-[#4b2e2e] text-white font-semibold rounded-full"
               onClick={handleNext}
@@ -83,5 +77,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
