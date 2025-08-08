@@ -1,3 +1,10 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: auto; /* Ensure it grows with content */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
 .dash-container {
   max-width: 1200px;
   margin: auto;
