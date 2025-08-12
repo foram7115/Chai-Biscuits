@@ -19,8 +19,7 @@ function Header() {
 
   const handleClick = (label) => {
     const routes = {
-      "My Addresses": "/address",
-      "Track Order": "/track-order",
+      "Assigned Deliveries" : "/AssignedDeliveries",
       "Order History": "/OrderHistory",
       "Assigned Deliveries": "/AssignedDeliveries",
       "Terms & Conditions": "/TermAndConditions",
@@ -37,7 +36,7 @@ function Header() {
     if (!phone) return;
 
     axios
-      .get(`http://localhost:8000/api/get-user-profile/?phone=${phone}`, {
+      .get(`http://localhost:8000/api/get-partner-profile/?phone=${phone}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -108,6 +107,7 @@ function Header() {
           <p className="text-gray-600">{userData.phone}</p>
 
           <div className="w-full flex flex-col gap-2 mt-4">
+<<<<<<< HEAD
             {[
               "Order History",
               "Assigned Deliveries",
@@ -122,6 +122,19 @@ function Header() {
                 {label} <span>&gt;</span>
               </button>
             ))}
+=======
+            {["Assigned Deliveries","Order History", "Terms & Conditions", "Contact Us"].map(
+              (label, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleClick(label)}
+                  className="flex justify-between items-center px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 transition"
+                >
+                  {label} <span>&gt;</span>
+                </button>
+              )
+            )}
+>>>>>>> eceb8da74c21153cb40901d3670d159e0fcdcf67
           </div>
 
           <button

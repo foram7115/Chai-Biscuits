@@ -7,8 +7,12 @@ import logo from "../assets/logo.png";
 const Footer = () => {
     return (
         <footer className="bg-[#FCE9D8] text-gray-800 pt-10">
+<<<<<<< HEAD
 
             <hr className="border-gray-400 mb-8" />
+=======
+            
+>>>>>>> eceb8da74c21153cb40901d3670d159e0fcdcf67
 
             <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-10 items-center md:items-start text-center md:text-left">
 

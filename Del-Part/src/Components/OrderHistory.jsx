@@ -29,8 +29,8 @@ const OrderHistory = () => {
   return (
     <>
       <Header />
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mt-14">Orders History</h1>
+      <div className="max-w-6xl mx-auto px-4 py-8 mb-10">
+        <h1 className="text-3xl font-bold text-center mt-20 mb-10">Orders History</h1>
         <section className="grid gap-6 md:grid-cols-2">
           {completedOrders.map((order) => (
             <div
