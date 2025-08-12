@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import back from '../assets/back1.jpg';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-<<<<<<< HEAD
-=======
 import { Link } from 'react-router-dom';
->>>>>>> 12dd664899a8ffd0a7212692e5254e8e278d0706
+import axios from 'axios';
 const Login = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');

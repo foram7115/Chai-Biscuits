@@ -4,14 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaPlus } from "react-icons/fa6";
 import Header from "./Header";
 import Footer from './Footer'
-<<<<<<< HEAD
 import { useCart } from "./CartContext"; // Adjust the path if needed
 
 // Hot coffee images
-=======
-import { useCart } from "./CartContext";
-
->>>>>>> 12dd664899a8ffd0a7212692e5254e8e278d0706
 import Capuccino from "../assets/Capuccino.jpg";
 import Americo from "../assets/Americo.jpg";
 import Latte from "../assets/Latte.jpg";
@@ -126,19 +121,8 @@ const MenuSection = ({ title, items, addToCart }) => (
             <div className="flex justify-between items-center mt-2">
               <span className="text-lg font-bold">₹{item.price}.00</span>
               <button onClick={() => addToCart(item)} className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700">
-<<<<<<< HEAD
                 <FaPlus />
               </button>
-=======
-                </button>
-                <button
-                  onClick={() => addToCart(item)}
-                  className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
-                >
-
-                  <FaPlus />
-                </button>
->>>>>>> 12dd664899a8ffd0a7212692e5254e8e278d0706
             </div>
           </div>
         ))}
@@ -180,10 +164,6 @@ const Menu = () => {
     </>
   );
 };
-<<<<<<< HEAD
 
 
 export default Menu;
-=======
-export default Menu;
->>>>>>> 12dd664899a8ffd0a7212692e5254e8e278d0706

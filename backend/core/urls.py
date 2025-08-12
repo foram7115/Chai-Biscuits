@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import send_otp, verify_otp, user_order_history, register_user, get_user_profile, create_order
+from .views import send_otp, verify_otp, user_order_history, register_user, get_user_profile, create_order, DeliveryPartner
 
 urlpatterns = [
     path('register/', register_user),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('orders/all/', views.all_orders),
     path('orders/unassigned/', views.unassigned_orders),
     # Delivery Partner Views
+    path('delivery-partner/', views.DeliveryPartner),
     path('orders/assigned/', views.assigned_orders),
     path('orders/history/', views.delivery_history),
     path('orders/update-status/', views.mark_order_status),

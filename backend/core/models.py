@@ -92,6 +92,7 @@ class Order(models.Model):
     order_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     order_date = models.DateTimeField(auto_now_add=True)
     placed_at = models.CharField(max_length=20)  # example: '10:00 AM'
+    out_for_delivery_at = models.DateTimeField(null=True, blank=True)
     delivery_time = models.CharField(max_length=20, default='0')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
     delivery_status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='placed')

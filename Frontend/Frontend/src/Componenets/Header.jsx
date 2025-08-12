@@ -147,7 +147,7 @@ function Header() {
 
           <button
             onClick={() => {
-              localStorage.removeItem('phone_number');
+               localStorage.clear();
               setShowProfile(false);
               navigate('/');
             }}
