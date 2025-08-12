@@ -94,17 +94,16 @@ const Register = () => {
         </div>
 
         {/* Submit Button */}
-       <button
-  type="submit"
-  disabled={loading}
-  className={`w-full py-3 rounded-lg font-semibold text-white transition ${
-    loading
-      ? "bg-gray-400 cursor-not-allowed"
-      : "bg-yellow-900 hover:bg-yellow-800"
-  }`}
->
-  {loading ? "Registering..." : "Register"}
-</button>
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full py-3 rounded-lg font-semibold text-white transition ${loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-yellow-900 hover:bg-yellow-800"
+            }`}
+        >
+          {loading ? "Registering..." : "Register"}
+        </button>
       </form>
     </div>
   );

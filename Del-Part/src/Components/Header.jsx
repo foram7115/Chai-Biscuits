@@ -21,11 +21,14 @@ function Header() {
     const routes = {
       "My Addresses": "/address",
       "Track Order": "/track-order",
-      "Order History": "/order-history",
-      "Terms & Conditions": "/term-conditions",
-      "Contact Us": "/contact-us",
+      "Order History": "/OrderHistory",
+      "Terms & Conditions": "/TermAndConditions",
+      "Contact Us": "/Contact",
     };
-    if (routes[label]) navigate(routes[label]);
+    if (routes[label]) {
+      navigate(routes[label]);
+      setShowProfile(false);
+    }
   };
 
   useEffect(() => {
@@ -55,13 +58,13 @@ function Header() {
     <header className="bg-[#a67b5b] fixed top-0 w-full z-50 shadow-md">
       {/* Main Header */}
       <div className="flex items-center justify-between px-4 sm:px-6 py-1 max-w-screen-xl mx-auto">
-        
-        {/* Left - Profile */}
+
+        {/* Left - Logo */}
         <img
-          src={userData.profileImage}
-          alt="profile"
-          onClick={() => setShowProfile(true)}
-          className="w-7 h-7 sm:w-9 sm:h-9 rounded-full cursor-pointer border border-gray-300 object-cover hover:scale-105 transition-transform"
+          src={Logo}
+          alt="logo"
+          onClick={() => navigate("/Dash")}
+          className="w-20 h-20 cursor-pointer hover:scale-105 transition-transform"
         />
 
         {/* Center - Icons */}
@@ -74,12 +77,12 @@ function Header() {
           />
         </div>
 
-        {/* Right - Logo */}
+        {/* Right - Profile */}
         <img
-          src={Logo}
-          alt="logo"
-          onClick={() => navigate("/Dash")}
-          className="w-20 h-20 cursor-pointer hover:scale-105 transition-transform"
+          src={userData.profileImage}
+          alt="profile"
+          onClick={() => setShowProfile(true)}
+          className="w-7 h-7 sm:w-9 sm:h-9 rounded-full cursor-pointer border border-gray-300 object-cover hover:scale-105 transition-transform"
         />
       </div>
 
@@ -112,20 +115,17 @@ function Header() {
 
           {/* Buttons */}
           <div className="w-full flex flex-col gap-2 mt-4">
-            {[
-             
-              "Order History",
-              "Terms & Conditions",
-              "Contact Us",
-            ].map((label, i) => (
-              <button
-                key={i}
-                onClick={() => handleClick(label)}
-                className="flex justify-between items-center px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 transition"
-              >
-                {label} <span>&gt;</span>
-              </button>
-            ))}
+            {["Order History", "Terms & Conditions", "Contact Us"].map(
+              (label, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleClick(label)}
+                  className="flex justify-between items-center px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 transition"
+                >
+                  {label} <span>&gt;</span>
+                </button>
+              )
+            )}
           </div>
 
           {/* Logout */}

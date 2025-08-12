@@ -5,9 +5,9 @@ import Footer from './Components/Footer';
 import Contact from './Components/Contact';
 import Dash from './Components/Dash';
 import Login from './Components/Login';
-import OrderHistory from './Components/OrderHistory';
-import Otp from './Components/Otp';
 import Register from './Components/Register';
+import Otp from './Components/Otp';
+import OrderHistory from './Components/OrderHistory';
 import TermAndConditions from './Components/TermAndConditions';
 import Welcome from './Components/Welcome';
 
@@ -24,6 +24,7 @@ function App() {
       {shouldShowHeaderFooter && <Header />}
 
       <Routes>
+        <Route path="/" element={<Welcome />} />
         <Route path="/AssignedDeliveries" element={<AssignedDeliveries />} />
         <Route path="/Footer" element={<Footer />} />
         <Route path="/Contact" element={<Contact />} />
@@ -33,7 +34,6 @@ function App() {
         <Route path="/Otp" element={<Otp />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/TermAndConditions" element={<TermAndConditions />} />
-        <Route path="/" element={<Welcome />} />
       </Routes>
 
       {shouldShowHeaderFooter && <Footer />}
