@@ -67,7 +67,7 @@ const Otp = () => {
         alert('OTP Verified!');
         localStorage.setItem('name', res.data.name);
         localStorage.setItem('phone_number', res.data.phone_number);
-        navigate('/home');
+        navigate('/dash');
       }
     } catch (err) {
       console.error('Error verifying OTP:', err);

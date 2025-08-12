@@ -1,49 +1,40 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import back1 from "../assets/back1.jpg";
 
-const mockApi = {
-  login: (formData) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (formData.name && formData.phone_number) {
-          resolve({ status: 200, message: "Login successful!" });
-        } else {
-          reject({ status: 400, message: "Missing form data." });
-        }
-      }, 1500);
-    });
-  },
-};
-
 const Login = () => {
-  const navigate = useNavigate(); // ✅ react-router navigation
-  const [formData, setFormData] = useState({
-    name: "",
-    phone_number: "",
-  });
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleNext = async (e) => {
     e.preventDefault();
+
+    if (!name || !phone) {
+      alert("Please enter your full name and phone number");
+      return;
+    }
+    if (!/^\d{10}$/.test(phone)) {
+      alert("Phone number must be 10 digits");
+      return;
+    }
+
     setLoading(true);
-    setMessage(null);
     try {
-      await mockApi.login(formData);
-      setMessage({ type: "success", text: "Login successful!" });
+      const response = await axios.post("http://localhost:8000/api/send-otp/", {
+        phone_number: phone,
+      });
 
-      // ✅ Navigate to OTP page after success
-      navigate("/otp", { state: { phone: formData.phone_number } });
-
+      if (response.status === 200) {
+        localStorage.setItem("userPhone", phone);
+        localStorage.setItem("userName", name);
+        navigate("/otp", { state: { phone } });
+      }
     } catch (error) {
-      console.error("Login error:", error);
-      setMessage({ type: "error", text: "Login failed. Please try again." });
+      console.error("Error sending OTP:", error);
+      alert("Failed to send OTP. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -56,29 +47,16 @@ const Login = () => {
     >
       <form
         className="bg-white bg-opacity-90 rounded-xl shadow-lg p-6 w-full max-w-md"
-        onSubmit={handleSubmit}
+        onSubmit={handleNext}
       >
         <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
-
-        {message && (
-          <div
-            className={`mb-4 p-2 rounded text-center ${
-              message.type === "success"
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-700"
-            }`}
-          >
-            {message.text}
-          </div>
-        )}
 
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">Name</label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
             placeholder="Enter your name"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-yellow-300"
@@ -89,9 +67,8 @@ const Login = () => {
           <label className="block text-sm font-medium mb-1">Phone Number</label>
           <input
             type="tel"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleChange}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             required
             placeholder="Enter your phone number"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-yellow-300"
@@ -103,7 +80,7 @@ const Login = () => {
           disabled={loading}
           className="w-full bg-yellow-900 hover:bg-yellow-800 text-white py-2 rounded-lg transition"
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Sending OTP..." : "Login"}
         </button>
 
         <p className="text-center text-sm mt-4">
