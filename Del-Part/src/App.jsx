@@ -1,23 +1,28 @@
-import { Routes, Route } from 'react-router-dom'
-import Header from './Components/Header'
-import AssignedDeliveries from './Components/AssignedDeliveries'
-import Footer from './Components/Footer'
-import Contact from './Components/Contact'
-import Dash from './Components/Dash'
-import Login from './Components/Login'
-import OrderHistory from './Components/OrderHistory'
-import Otp from './Components/Otp'
-import Register from './Components/Register'
-import TermAndConditions from './Components/TermAndConditions'
-import Welcome from './Components/Welcome'
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Header from './Components/Header';
+import AssignedDeliveries from './Components/AssignedDeliveries';
+import Footer from './Components/Footer';
+import Contact from './Components/Contact';
+import Dash from './Components/Dash';
+import Login from './Components/Login';
+import OrderHistory from './Components/OrderHistory';
+import Otp from './Components/Otp';
+import Register from './Components/Register';
+import TermAndConditions from './Components/TermAndConditions';
+import Welcome from './Components/Welcome';
 
 function App() {
+  const location = useLocation();
+
+  // Pages where Header and Footer should be hidden
+  const hideHeaderFooter = ["/", "/Login", "/Register", "/Otp"];
+
+  const shouldShowHeaderFooter = !hideHeaderFooter.includes(location.pathname);
+
   return (
     <>
-      {/* Header stays on top for all pages */}
-      <Header />
+      {shouldShowHeaderFooter && <Header />}
 
-      {/* Routes for different pages */}
       <Routes>
         <Route path="/AssignedDeliveries" element={<AssignedDeliveries />} />
         <Route path="/Footer" element={<Footer />} />
@@ -30,8 +35,10 @@ function App() {
         <Route path="/TermAndConditions" element={<TermAndConditions />} />
         <Route path="/" element={<Welcome />} />
       </Routes>
+
+      {shouldShowHeaderFooter && <Footer />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
