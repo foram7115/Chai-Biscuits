@@ -1,5 +1,4 @@
 import React from "react";
-
 import applesImg from "../assets/apples.jpg";
 import bananasImg from "../assets/bananas.jpg";
 import orangesImg from "../assets/oranges.jpg";
@@ -66,7 +65,6 @@ const Dash = () => {
         key={order.id}
         className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 transition hover:shadow-lg"
       >
-        {/* Left: Image */}
         <div className="flex-shrink-0">
           <img
             src={order.image}
@@ -74,8 +72,6 @@ const Dash = () => {
             className="w-24 h-24 object-cover rounded-lg"
           />
         </div>
-
-        {/* Right: Details */}
         <div className="flex-1 text-center sm:text-left">
           <p className="text-sm sm:text-base"><strong>Order ID:</strong> {order.id}</p>
           <p className="text-sm sm:text-base"><strong>Item:</strong> {order.item}</p>
@@ -104,7 +100,6 @@ const Dash = () => {
       </div>
     ));
   };
-
   return (
     <>
       <Header />
@@ -112,26 +107,23 @@ const Dash = () => {
         <h1 className="text-3xl font-bold text-center mb-2">Order Details</h1>
         <p className="text-lg text-center mb-8">Welcome, Foram!</p>
 
-        {/* New Orders */}
-<h2 className="text-2xl font-semibold mb-4">New Orders</h2>
-<section className="grid gap-6 sm:grid-cols-2">
-  {renderOrders(newOrders, "confirm")}
-</section>
+        <h2 className="text-2xl font-semibold mb-4">New Orders</h2>
+        <section className="grid gap-6 sm:grid-cols-2">
+          {renderOrders(newOrders, "confirm")}
+        </section>
 
-{/* Pending Orders */}
-<h2 className="text-2xl font-semibold mt-10 mb-4">Pending Orders</h2>
-<section className="grid gap-6 sm:grid-cols-2">
-  {renderOrders(pendingOrders, "complete")}
-</section>
+        <h2 className="text-2xl font-semibold mt-10 mb-4">Pending Orders</h2>
+        <section className="grid gap-6 sm:grid-cols-2">
+          {renderOrders(pendingOrders, "complete")}
+        </section>
 
-{/* Completed Orders */}
-<h2 className="text-2xl font-semibold mt-10 mb-4">Completed Orders</h2>
-<section className="grid gap-6 sm:grid-cols-2">
-  {renderOrders(completedOrders, "none")}
-</section>
+        <h2 className="text-2xl font-semibold mt-10 mb-4">Completed Orders</h2>
+        <section className="grid gap-6 sm:grid-cols-2">
+          {renderOrders(completedOrders, "none")}
+        </section>
 
       </div>
-    
+
     </>
   );
 };

@@ -9,7 +9,7 @@ const Register = () => {
     name: "",
     phone_number: "",
     address: "",
-    is_available: true, // ✅ Default for delivery partners
+    is_available: true,
   });
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +22,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:8000/api/register-partner/", formData); // ✅ API endpoint for DeliveryPartner
+      await axios.post("http://localhost:8000/api/register-partner/", formData);
       alert("Delivery Partner registered successfully!");
       navigate("/Login");
     } catch (error) {
@@ -46,7 +46,6 @@ const Register = () => {
           Delivery Partner Registration
         </h2>
 
-        {/* Name */}
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">
             Name
@@ -62,7 +61,6 @@ const Register = () => {
           />
         </div>
 
-        {/* Phone Number */}
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">
             Phone Number
@@ -78,7 +76,6 @@ const Register = () => {
           />
         </div>
 
-        {/* Address */}
         <div className="mb-6">
           <label className="block text-gray-700 font-medium mb-1">
             Address
@@ -94,22 +91,15 @@ const Register = () => {
           ></textarea>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
-<<<<<<< HEAD
-          className={`w-full py-3 rounded-lg font-semibold text-white transition ${
-            loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-yellow-900 hover:bg-yellow-800"
-          }`}
-=======
+
           className={`w-full py-3 rounded-lg font-semibold text-white transition ${loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-yellow-900 hover:bg-yellow-800"
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-yellow-900 hover:bg-yellow-800"
             }`}
->>>>>>> 37aebf12760cfdf24099c48af4b5cd3cdbf09380
+
         >
           {loading ? "Registering..." : "Register"}
         </button>

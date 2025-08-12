@@ -14,7 +14,6 @@ import Welcome from './Components/Welcome';
 function App() {
   const location = useLocation();
 
-  // Pages where Header and Footer should be hidden
   const hideHeaderFooter = ["/", "/Login", "/Register", "/Otp"];
 
   const shouldShowHeaderFooter = !hideHeaderFooter.includes(location.pathname);

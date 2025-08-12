@@ -17,31 +17,28 @@ const AssignedDeliveries = () => {
         <>
             <Header />
             <div className="max-w-6xl mx-auto px-4 py-6 mt-20 text-center">
-                {/* Title */}
+
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">
                     Assigned Deliveries
                 </h2>
 
-                {/* Grey Centered Box */}
                 <div className="bg-gray-100 rounded-lg shadow-inner p-6 flex flex-col items-center justify-center min-h-[200px]">
-                    {/* Tabs */}
+
                     <div className="flex gap-4 mb-6">
                         {['today', 'completed'].map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`px-5 py-2 rounded-full font-medium transition ${
-                                    activeTab === tab
+                                className={`px-5 py-2 rounded-full font-medium transition ${activeTab === tab
                                         ? 'bg-blue-600 text-white shadow-md'
                                         : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                }`}
+                                    }`}
                             >
                                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
                             </button>
                         ))}
                     </div>
 
-                    {/* Deliveries List or Empty Message */}
                     {deliveries.length === 0 ? (
                         <p className="text-gray-500 italic">No deliveries found.</p>
                     ) : (

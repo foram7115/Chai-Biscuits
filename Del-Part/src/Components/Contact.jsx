@@ -12,7 +12,7 @@ const Contact = () => {
             Contact Us
           </h2>
           <form className="space-y-5">
-            {/* Name */}
+
             <div>
               <label className="block text-gray-700 font-medium mb-1">Full Name</label>
               <input
@@ -22,7 +22,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* Email */}
             <div>
               <label className="block text-gray-700 font-medium mb-1">Email Address</label>
               <input
@@ -32,7 +31,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* Message */}
             <div>
               <label className="block text-gray-700 font-medium mb-1">Message</label>
               <textarea
@@ -42,7 +40,6 @@ const Contact = () => {
               ></textarea>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               className="w-full bg-brown-500 hover:bg-brown-600 text-white py-2 px-4 rounded-lg transition duration-300"
@@ -52,7 +49,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-      
+
     </>
   );
 };

@@ -7,12 +7,11 @@ import logo from "../assets/logo.png";
 const Footer = () => {
     return (
         <footer className="bg-[#FCE9D8] text-gray-800 pt-10">
-            {/* Divider */}
+
             <hr className="border-gray-400 mb-8" />
 
-            {/* Main Footer Content */}
             <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-10 items-center md:items-start text-center md:text-left">
-                {/* Logo & Description */}
+
                 <div className="md:w-1/3">
                     <img src={logo} alt="Chai-Biscuits Logo" className="w-24 mb-4 mx-auto md:mx-0" />
                     <p className="text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
@@ -21,9 +20,8 @@ const Footer = () => {
                     </p>
                 </div>
 
-                {/* Links */}
                 <div className="flex flex-col sm:flex-row md:w-2/3 gap-10 items-center md:items-start">
-                    {/* Explore */}
+
                     <div>
                         <h4 className="text-lg font-semibold text-black mb-3">Explore</h4>
                         <ul className="space-y-2">
@@ -35,7 +33,6 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Customer Service */}
                     <div>
                         <h4 className="text-lg font-semibold text-black mb-3">Customer Service</h4>
                         <ul className="space-y-2">
@@ -46,7 +43,6 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Socials */}
                     <div>
                         <h4 className="text-lg font-semibold text-black mb-3">Follow Us</h4>
                         <div className="flex gap-4 justify-center md:justify-start">
@@ -64,7 +60,6 @@ const Footer = () => {
                 </div>
             </div>
 
-            {/* Bottom Bar */}
             <div className="mt-8 bg-[#E5C4A1] text-center py-4 text-sm text-gray-700">
                 © {new Date().getFullYear()} Chai-Biscuits. All rights reserved.
             </div>

@@ -22,6 +22,7 @@ function Header() {
       "My Addresses": "/address",
       "Track Order": "/track-order",
       "Order History": "/OrderHistory",
+      "Assigned Deliveries": "/AssignedDeliveries",
       "Terms & Conditions": "/TermAndConditions",
       "Contact Us": "/Contact",
     };
@@ -56,10 +57,9 @@ function Header() {
 
   return (
     <header className="bg-[#a67b5b] fixed top-0 w-full z-50 shadow-md">
-      {/* Main Header */}
+
       <div className="flex items-center justify-between px-4 sm:px-6 py-1 max-w-screen-xl mx-auto">
 
-        {/* Left - Logo */}
         <img
           src={Logo}
           alt="logo"
@@ -67,7 +67,6 @@ function Header() {
           className="w-20 h-20 cursor-pointer hover:scale-105 transition-transform"
         />
 
-        {/* Center - Icons */}
         <div className="flex items-center gap-5 sm:gap-7">
           <img
             src={HomeIcon}
@@ -77,7 +76,6 @@ function Header() {
           />
         </div>
 
-        {/* Right - Profile */}
         <img
           src={userData.profileImage}
           alt="profile"
@@ -86,13 +84,10 @@ function Header() {
         />
       </div>
 
-      {/* Profile Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
-          showProfile ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${showProfile ? "translate-x-0" : "translate-x-full"
+          }`}
       >
-        {/* Sidebar Header */}
         <div className="flex justify-between items-center border-b p-4">
           <h2 className="text-lg font-semibold">My Profile</h2>
           <button
@@ -103,7 +98,6 @@ function Header() {
           </button>
         </div>
 
-        {/* Sidebar Content */}
         <div className="flex flex-col items-center p-4 gap-3">
           <img
             src={userData.profileImage}
@@ -113,22 +107,23 @@ function Header() {
           <h3 className="text-lg font-medium">{userData.name}</h3>
           <p className="text-gray-600">{userData.phone}</p>
 
-          {/* Buttons */}
           <div className="w-full flex flex-col gap-2 mt-4">
-            {["Order History", "Terms & Conditions", "Contact Us"].map(
-              (label, i) => (
-                <button
-                  key={i}
-                  onClick={() => handleClick(label)}
-                  className="flex justify-between items-center px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 transition"
-                >
-                  {label} <span>&gt;</span>
-                </button>
-              )
-            )}
+            {[
+              "Order History",
+              "Assigned Deliveries",
+              "Terms & Conditions",
+              "Contact Us",
+            ].map((label, i) => (
+              <button
+                key={i}
+                onClick={() => handleClick(label)}
+                className="flex justify-between items-center px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 transition"
+              >
+                {label} <span>&gt;</span>
+              </button>
+            ))}
           </div>
 
-          {/* Logout */}
           <button
             className="mt-6 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded transition"
             onClick={() => {

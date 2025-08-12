@@ -15,7 +15,7 @@ function Welcome() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-yellow-50 via-white to-orange-100 relative">
-      {/* Login Button (top right) */}
+
       <div className="absolute top-4 right-4">
         <button
           onClick={login}
@@ -25,7 +25,6 @@ function Welcome() {
         </button>
       </div>
 
-      {/* Main Content */}
       <div className="flex flex-col flex-grow items-center justify-center text-center px-4">
         <img
           src={Logo}
