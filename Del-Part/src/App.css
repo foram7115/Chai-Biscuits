@@ -1,14 +1,8 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  height: auto; /* Ensure it grows with content */
-  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .logo {
@@ -45,4 +39,4 @@ html, body {
 
 .read-the-docs {
   color: #888;
-}
+} */

@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useCart } from "./CartContext";
-
 import offer1 from "../assets/offer1.jpg";
 import offer2 from "../assets/offer2.avif";
 import offer3 from "../assets/offer3.jpg";
@@ -17,7 +16,6 @@ import offer9 from "../assets/offer9.jpg";
 import offer10 from "../assets/offer10.jpg";
 import offer11 from "../assets/offer11.jpg";
 import offer12 from "../assets/offer12.jpg";
-
 const offerImages = [
   { image: offer1, name: "50% Off Latte", price: 220 },
   { image: offer2, name: "Buy 1 Get 1 Free", price: 280 },
@@ -32,10 +30,8 @@ const offerImages = [
   { image: offer11, name: "Daily Brew Discount", price: 210 },
   { image: offer12, name: "Weekend Only Offer", price: 250 },
 ];
-
 const Offer = () => {
   const { cartItems, addToCart } = useCart();
-
   const handleAddToCart = (item) => {
     addToCart(item);
     toast.success(`${item.name} added to cart! 🛒`, {
@@ -44,7 +40,6 @@ const Offer = () => {
       theme: "light",
     });
   };
-
   return (
     <>
       <Header />
@@ -52,13 +47,11 @@ const Offer = () => {
         <h2 className="text-3xl font-bold text-brown-800 mb-8 text-center">
           Special Offers
         </h2>
-
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {offerImages.map((item, index) => (
             <div
               key={index}
-              className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 bg-white flex flex-col"
-            >
+              className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 bg-white flex flex-col">
               <div className="w-full h-48 flex items-center justify-center bg-white">
                 <img
                   src={item.image}
@@ -89,5 +82,4 @@ const Offer = () => {
     </>
   );
 };
-
 export default Offer;

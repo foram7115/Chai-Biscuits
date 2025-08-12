@@ -64,42 +64,17 @@ function Header() {
     <div className="sticky top-0 z-50 bg-[#b08968] h-20">
       <div className="flex items-center px-4 sm:px-6 py-3 h-20">
         <div className="flex items-center z-10">
-          <img
-            src={userData.profileImage}
-            alt="profile"
-            onClick={() => setShowProfile(true)}
-            className="sm:w-9 md:w-10 lg:w-11 h-8 sm:h-9 md:h-10 lg:h-11 object-cover rounded-full cursor-pointer"
-          />
+          <img src={userData.profileImage} alt="profile" onClick={() => setShowProfile(true)} className="sm:w-9 md:w-10 lg:w-11 h-8 sm:h-9 md:h-10 lg:h-11 object-cover rounded-full cursor-pointer" />
         </div>
 
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center sm:gap-3 z-0">
-          <img
-            src={HomeIcon}
-            alt="home"
-            onClick={home}
-            className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 object-cover rounded-full cursor-pointer"
-          />
-          <img
-            src={MenuIcon}
-            alt="menu"
-            onClick={menu}
-            className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 object-cover rounded-full cursor-pointer"
-          />
-          <img
-            src={Cart}
-            alt="cart"
-            onClick={() => navigate('/Cart')}
-            className="w-5 sm:w-7 md:w-9 lg:w-10 h-auto object-cover rounded-full cursor-pointer"
-          />
+          <img src={HomeIcon} alt="home" onClick={home} className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 object-cover rounded-full cursor-pointer" />
+          <img src={MenuIcon} alt="menu" onClick={menu} className="w-6 sm:w-7 md:w-9 lg:w-10 h-10 object-cover rounded-full cursor-pointer" />
+          <img src={Cart} alt="cart" onClick={() => navigate('/Cart')} className="w-5 sm:w-7 md:w-9 lg:w-10 h-auto object-cover rounded-full cursor-pointer" />
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4 md:gap-5 ml-auto z-10">
-          <img
-            src={Logo}
-            alt="logo"
-            onClick={() => navigate('/home')}
-            className="w-20 sm:w-24 md:w-28 lg:w-32 h-auto object-contain cursor-pointer"
-          />
+          <img src={Logo} alt="logo" onClick={() => navigate('/home')} className="w-20 sm:w-24 md:w-28 lg:w-32 h-auto object-contain cursor-pointer" />
         </div>
       </div>
 

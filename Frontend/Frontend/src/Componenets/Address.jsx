@@ -8,7 +8,7 @@ function Address() {
   const [suggestions, setSuggestions] = useState([]);
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
-  const [editIndex, setEditIndex] = useState(null); // index of address being edited
+  const [editIndex, setEditIndex] = useState(null);
   const [editedAddress, setEditedAddress] = useState('');
 
   useEffect(() => {

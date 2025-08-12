@@ -1,50 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-
 const TrackOrder = () => {
   const [orders, setOrders] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date());
-
   useEffect(() => {
     const storedOrders = JSON.parse(localStorage.getItem('allOrders')) || [];
-
     const adjustedOrders = storedOrders.map(order => {
       if (!order.placedAt) return order;
-
       const placedTime = parseTime(order.placedAt);
       const deliveryTime = new Date(placedTime.getTime() + 40 * 60 * 1000); // 40 mins after placedAt
-
       return {
         ...order,
         deliveryTime,
       };
     });
-
     const pendingOrders = adjustedOrders.filter(order => {
       return order.deliveryTime && new Date() < new Date(order.deliveryTime);
     });
-
     setOrders(pendingOrders);
   }, [currentTime]);
-
   useEffect(() => {
     const interval = setInterval(() => setCurrentTime(new Date()), 60000);
     return () => clearInterval(interval);
   }, []);
-
   const parseTime = (timeStr) => {
     if (!timeStr) return new Date(0);
     const [hourMin, period] = timeStr.split(' ');
     let [hours, minutes] = hourMin.split(':').map(Number);
     if (period === 'PM' && hours < 12) hours += 12;
     if (period === 'AM' && hours === 12) hours = 0;
-
     const now = new Date();
     const date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
     return date;
   };
-
   const getSteps = (order) => [
     {
       label: 'Order Placed',
@@ -61,14 +50,12 @@ const TrackOrder = () => {
       completed: currentTime >= new Date(order.deliveryTime),
     },
   ];
-
   return (
     <>
       <Header />
       <div className="min-h-screen bg-[#fef6f3] p-4 sm:p-6 md:p-10">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-xl sm:text-2xl font-bold text-[#4b2c20] mb-6">Track Your Orders</h1>
-
           {orders.length === 0 ? (
             <p className="text-center text-gray-600">No active orders. All orders have been delivered.</p>
           ) : (
@@ -76,7 +63,6 @@ const TrackOrder = () => {
               const steps = getSteps(order);
               return (
                 <div key={index} className="bg-white rounded-2xl shadow-md p-6 sm:p-8 mb-10">
-                  {/* Estimated Delivery */}
                   <div className="bg-[#fff3eb] p-4 rounded-lg mb-6 flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-600">Estimated Delivery</p>
@@ -88,17 +74,14 @@ const TrackOrder = () => {
                       {steps[1].completed ? 'Delivered' : 'On Time'}
                     </div>
                   </div>
-
-                  {/* Steps */}
                   <div className="relative border-l-4 border-[#d3b9af] ml-3 pl-6 space-y-6">
                     {steps.map((step, i) => (
                       <div key={i} className="relative">
                         <div
-                          className={`absolute -left-[1.55rem] top-1 w-6 h-6 rounded-full border-4 ${
-                            step.completed
+                          className={`absolute -left-[1.55rem] top-1 w-6 h-6 rounded-full border-4 ${step.completed
                               ? 'bg-green-500 border-green-200'
                               : 'bg-gray-300 border-gray-200'
-                          }`}
+                            }`}
                         ></div>
                         <div>
                           <p className="text-md font-semibold text-[#4b2c20]">{step.label}</p>
@@ -107,8 +90,6 @@ const TrackOrder = () => {
                       </div>
                     ))}
                   </div>
-
-                  {/* Delivery Partner */}
                   <div className="mt-8 border-t pt-6">
                     <h2 className="text-lg font-semibold text-[#4b2c20] mb-2">Delivery Partner</h2>
                     <div className="flex items-center justify-between">
@@ -121,8 +102,6 @@ const TrackOrder = () => {
                       </button>
                     </div>
                   </div>
-
-                  {/* Order Summary */}
                   <div className="mt-8 border-t pt-6">
                     <h2 className="text-lg font-semibold text-[#4b2c20] mb-2">Order Summary</h2>
                     <ul className="text-sm text-gray-700 space-y-2">
@@ -148,5 +127,4 @@ const TrackOrder = () => {
     </>
   );
 };
-
 export default TrackOrder;
