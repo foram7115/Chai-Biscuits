@@ -41,7 +41,7 @@ const Register = () => {
         onSubmit={handleSubmit}
         className="bg-white/90 backdrop-blur-md rounded-xl shadow-lg w-full max-w-md p-6"
       >
-        <h2 className="text-2xl font-bold text-center text-indigo-600 mb-6">
+        <h2 className="text-2xl font-bold text-center text-black-600 mb-6">
           Register
         </h2>
 
@@ -94,17 +94,17 @@ const Register = () => {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full py-3 rounded-lg font-semibold text-white transition ${
-            loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-indigo-600 hover:bg-indigo-700"
-          }`}
-        >
-          {loading ? "Registering..." : "Register"}
-        </button>
+       <button
+  type="submit"
+  disabled={loading}
+  className={`w-full py-3 rounded-lg font-semibold text-white transition ${
+    loading
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-yellow-900 hover:bg-yellow-800"
+  }`}
+>
+  {loading ? "Registering..." : "Register"}
+</button>
       </form>
     </div>
   );

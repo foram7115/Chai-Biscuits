@@ -139,11 +139,11 @@ const Otp = () => {
         </p>
 
         <button
-          className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition"
-          onClick={handleVerify}
-        >
-          Verify
-        </button>
+  className="w-full bg-yellow-900 text-white py-3 rounded-lg font-semibold hover:bg-yellow-800 transition"
+  onClick={handleVerify}
+>
+  Verify
+</button>
       </div>
     </div>
   );

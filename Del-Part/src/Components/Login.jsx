@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import { createRoot } from "react-dom/client";
+import { useNavigate } from "react-router-dom"; // ✅ import
 import back1 from "../assets/back1.jpg";
-
-const Page = {
-  LOGIN: "login",
-  REGISTER: "register",
-};
 
 const mockApi = {
   login: (formData) => {
@@ -21,7 +16,8 @@ const mockApi = {
   },
 };
 
-const Login = ({ navigate }) => {
+const Login = () => {
+  const navigate = useNavigate(); // ✅ react-router navigation
   const [formData, setFormData] = useState({
     name: "",
     phone_number: "",
@@ -41,6 +37,10 @@ const Login = ({ navigate }) => {
     try {
       await mockApi.login(formData);
       setMessage({ type: "success", text: "Login successful!" });
+
+      // ✅ Navigate to OTP page after success
+      navigate("/otp", { state: { phone: formData.phone_number } });
+
     } catch (error) {
       console.error("Login error:", error);
       setMessage({ type: "error", text: "Login failed. Please try again." });
@@ -81,7 +81,7 @@ const Login = ({ navigate }) => {
             onChange={handleChange}
             required
             placeholder="Enter your name"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-300"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-yellow-300"
           />
         </div>
 
@@ -94,14 +94,14 @@ const Login = ({ navigate }) => {
             onChange={handleChange}
             required
             placeholder="Enter your phone number"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-300"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-yellow-300"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition"
+          className="w-full bg-yellow-900 hover:bg-yellow-800 text-white py-2 rounded-lg transition"
         >
           {loading ? "Logging in..." : "Login"}
         </button>
@@ -110,8 +110,8 @@ const Login = ({ navigate }) => {
           Don’t have an account?{" "}
           <button
             type="button"
-            onClick={() => navigate(Page.REGISTER)}
-            className="text-green-600 hover:underline"
+            onClick={() => navigate("/register")}
+            className="text-yellow-800 hover:underline"
           >
             Register
           </button>
@@ -120,44 +120,5 @@ const Login = ({ navigate }) => {
     </div>
   );
 };
-
-const Register = ({ navigate }) => {
-  return (
-    <div
-      className="min-h-screen w-full flex items-center justify-center bg-cover bg-center px-4"
-      style={{ backgroundImage: `url(${back1})` }}
-    >
-      <div className="bg-white bg-opacity-90 rounded-xl shadow-lg p-6 w-full max-w-md text-center">
-        <h2 className="text-2xl font-bold mb-4">Register Page</h2>
-        <p className="mb-4">This is a mock register page.</p>
-        <button
-          onClick={() => navigate(Page.LOGIN)}
-          className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg"
-        >
-          Go to Login
-        </button>
-      </div>
-    </div>
-  );
-};
-
-const App = () => {
-  const [currentPage, setCurrentPage] = useState(Page.LOGIN);
-
-  const navigate = (page) => {
-    setCurrentPage(page);
-  };
-
-  switch (currentPage) {
-    case Page.REGISTER:
-      return <Register navigate={navigate} />;
-    case Page.LOGIN:
-    default:
-      return <Login navigate={navigate} />;
-  }
-};
-
-const root = createRoot(document.getElementById("root"));
-root.render(<App />);
 
 export default Login;
