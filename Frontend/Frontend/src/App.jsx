@@ -14,12 +14,10 @@ import Cart from './Componenets/Cart'
 import Offer from './Componenets/Offer'
 import Offer2 from './Componenets/Offer2'
 import { ToastContainer } from 'react-toastify'
-
-
 function App() {
   return (
     <>
-    <Routes>
+      <Routes>
         <Route exact path="/" element={<Welcome />} />
         <Route exact path="/Register" element={<Register />} />
         <Route exact path="/Menu" element={<Menu />} />
@@ -35,11 +33,9 @@ function App() {
         <Route exact path="/offer2" element={<Offer2 />} />
         <Route exact path="/offer" element={<Offer />} />
         <Route path="/TermAndConditions" element={<TermsAndConditions />} />
-
       </Routes>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   )
 }
-
 export default App

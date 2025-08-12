@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import back from '../assets/back1.jpg';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+=======
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+>>>>>>> af2d05b99f6f39776619bc68b40156ab60b4ccc7
 const Login = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -41,32 +46,16 @@ const Login = () => {
             <h2 className="text-xl font-semibold text-[#4b2e2e] mb-8 mt-20">
               What's Your Mobile Number?
             </h2>
+            <input type="text" placeholder="Full Name" className="w-full mb-4 px-4 py-3 rounded-full bg-[#e5d5ca] text-[#4b2e2e] placeholder-[#4b2e2e] focus:outline-none" value={name} onChange={(e) => setName(e.target.value)} />
             <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full mb-4 px-4 py-3 rounded-full bg-[#e5d5ca] text-[#4b2e2e] placeholder-[#4b2e2e] focus:outline-none"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Phone No."
-              className="w-full mb-4 px-4 py-3 rounded-full bg-[#e5d5ca] text-[#4b2e2e] placeholder-[#4b2e2e] focus:outline-none"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
+              type="text" placeholder="Phone No." className="w-full mb-4 px-4 py-3 rounded-full bg-[#e5d5ca] text-[#4b2e2e] placeholder-[#4b2e2e] focus:outline-none" value={phone} onChange={(e) => setPhone(e.target.value)} />
             <p className="text-sm text-[#4b2e2e] mb-6">
               By clicking next you will agree to our{' '}
               <Link to="/TermAndConditions" className="underline font-medium">
                 Terms & Conditions
               </Link>
             </p>
-            <button
-              className="w-full py-3 bg-[#4b2e2e] text-white font-semibold rounded-full"
-              onClick={handleNext}
-            >
-              Next
-            </button>
+            <button className="w-full py-3 bg-[#4b2e2e] text-white font-semibold rounded-full" onClick={handleNext}>Next</button>
           </div>
         </div>
       </div>
