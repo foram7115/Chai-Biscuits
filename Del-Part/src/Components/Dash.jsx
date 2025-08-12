@@ -131,7 +131,7 @@ const Dash = () => {
 </section>
 
       </div>
-      <Footer />
+    
     </>
   );
 };

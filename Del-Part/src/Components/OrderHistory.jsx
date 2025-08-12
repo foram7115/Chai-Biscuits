@@ -72,7 +72,7 @@ const OrderHistory = () => {
           ))}
         </section>
       </div>
-      <Footer />
+      
     </>
   );
 };
