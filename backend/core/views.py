@@ -322,3 +322,36 @@ def update_delivery_partner_profile(request):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+@csrf_exempt
+def register_delivery_partner(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+
+            name = data.get('name', '').strip()
+            phone_number = data.get('phone_number', '').strip()
+            address = data.get('address', '').strip()
+
+            if not all([name, phone_number, address]):
+                return JsonResponse({'error': 'All fields are required'}, status=400)
+
+            if not phone_number.isdigit() or len(phone_number) != 10:
+                return JsonResponse({'error': 'Invalid phone number'}, status=400)
+
+            if DeliveryPartner.objects.filter(phone_number=phone_number).exists():
+                return JsonResponse({'error': 'Phone number already registered'}, status=400)
+
+            DeliveryPartner.objects.create(
+                name=name,
+                phone_number=phone_number,
+                address=address
+            )
+
+            return JsonResponse({'message': 'Delivery partner registered successfully'})
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)

@@ -9,6 +9,7 @@ const Register = () => {
     name: "",
     phone_number: "",
     address: "",
+    is_available: true, // ✅ Default for delivery partners
   });
   const [loading, setLoading] = useState(false);
 
@@ -21,12 +22,12 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:8000/api/register/", formData);
-      alert("Registration successful!");
-      navigate("/login");
+      await axios.post("http://localhost:8000/api/register-partner/", formData); // ✅ API endpoint for DeliveryPartner
+      alert("Delivery Partner registered successfully!");
+      navigate("/Login");
     } catch (error) {
       console.error("Registration error:", error);
-      alert("Registration failed. Please try again.");
+      alert(error.response?.data?.error || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -42,7 +43,7 @@ const Register = () => {
         className="bg-white/90 backdrop-blur-md rounded-xl shadow-lg w-full max-w-md p-6"
       >
         <h2 className="text-2xl font-bold text-center text-black-600 mb-6">
-          Register
+          Delivery Partner Registration
         </h2>
 
         {/* Name */}
@@ -94,17 +95,17 @@ const Register = () => {
         </div>
 
         {/* Submit Button */}
-       <button
-  type="submit"
-  disabled={loading}
-  className={`w-full py-3 rounded-lg font-semibold text-white transition ${
-    loading
-      ? "bg-gray-400 cursor-not-allowed"
-      : "bg-yellow-900 hover:bg-yellow-800"
-  }`}
->
-  {loading ? "Registering..." : "Register"}
-</button>
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full py-3 rounded-lg font-semibold text-white transition ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-yellow-900 hover:bg-yellow-800"
+          }`}
+        >
+          {loading ? "Registering..." : "Register"}
+        </button>
       </form>
     </div>
   );

@@ -10,7 +10,7 @@ function Welcome() {
   };
 
   const login = () => {
-    navigate("/login");
+    navigate("/Login");
   };
 
   return (
