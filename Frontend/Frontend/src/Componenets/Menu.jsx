@@ -4,13 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaPlus } from "react-icons/fa6";
 import Header from "./Header";
 import Footer from './Footer'
-<<<<<<< HEAD
 import { useCart } from "./CartContext"; // Adjust the path if needed
 
 // Hot coffee images
-=======
-import { useCart } from "./CartContext";
->>>>>>> af2d05b99f6f39776619bc68b40156ab60b4ccc7
 import Capuccino from "../assets/Capuccino.jpg";
 import Americo from "../assets/Americo.jpg";
 import Latte from "../assets/Latte.jpg";
@@ -117,15 +113,6 @@ const MenuSection = ({ title, items, addToCart }) => (
               <button onClick={() => addToCart(item)} className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700">
                 <FaPlus />
               </button>
-<<<<<<< HEAD
-=======
-              <button
-                onClick={() => addToCart(item)}
-                className="bg-brown-800 text-black p-2 rounded-full hover:bg-brown-700"
-              >
-                <FaPlus />
-              </button>
->>>>>>> af2d05b99f6f39776619bc68b40156ab60b4ccc7
             </div>
           </div>
         ))}
@@ -163,10 +150,6 @@ const Menu = () => {
     </>
   );
 };
-<<<<<<< HEAD
 
 
 export default Menu;
-=======
-export default Menu;
->>>>>>> af2d05b99f6f39776619bc68b40156ab60b4ccc7

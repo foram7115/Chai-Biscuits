@@ -28,7 +28,7 @@ function App() {
         <Route path="/Otp" element={<Otp />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/TermAndConditions" element={<TermAndConditions />} />
-        <Route path="/Welcome" element={<Welcome />} />
+        <Route path="/" element={<Welcome />} />
       </Routes>
     </>
   )
