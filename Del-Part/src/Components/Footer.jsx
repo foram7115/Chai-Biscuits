@@ -7,8 +7,7 @@ import logo from "../assets/logo.png";
 const Footer = () => {
     return (
         <footer className="bg-[#FCE9D8] text-gray-800 pt-10">
-            {/* Divider */}
-            <hr className="border-gray-400 mb-8" />
+            
 
             {/* Main Footer Content */}
             <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-10 items-center md:items-start text-center md:text-left">

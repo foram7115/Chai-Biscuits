@@ -7,6 +7,7 @@ urlpatterns = [
     path('send-otp/', send_otp),
     path('verify-otp/', verify_otp),
     path('get-user-profile/', views.get_user_profile),
+    path('get-partner-profile/', views.get_partner_profile),
     path('create-order/', views.create_order),
     path('order-history/', user_order_history),
     path('orders/all/', views.all_orders),
@@ -18,5 +19,6 @@ urlpatterns = [
     path('orders/update-status/', views.mark_order_status),
     path('delivery-partner/update-profile/', views.update_delivery_partner_profile),
     path('register-partner/', views.register_delivery_partner),
+    path("api/orders/<str:order_id>/status/", views.get_order_status),
 ]
 

@@ -86,6 +86,7 @@ const Cart = () => {
         clearCart();
         navigate("/track-order");
       });
+      
   };
 
   return (

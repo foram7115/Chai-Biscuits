@@ -37,6 +37,31 @@ def get_user_profile(request):
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+@csrf_exempt
+def get_partner_profile(request):
+    if request.method == 'GET':
+        try:
+            print("Query params:", request.GET)
+            phone = request.GET.get('phone') 
+
+            if not phone:
+                return JsonResponse({'error': 'Phone number is required'}, status=400)
+
+            user = DeliveryPartner.objects.get(phone_number=phone)
+
+            return JsonResponse({
+                'name': user.name,
+                'phone_number': user.phone_number,
+                'address': user.address
+            })
+
+        except DeliveryPartner.DoesNotExist:
+            return JsonResponse({'error': 'User not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
 
 @csrf_exempt
 def register_user(request):
@@ -354,4 +379,20 @@ def register_delivery_partner(request):
             import traceback
             traceback.print_exc()
             return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+@csrf_exempt
+def get_order_status(request, order_id):
+    """Return current status of a specific order for polling"""
+    if request.method == 'GET':
+        try:
+            order = Order.objects.get(order_id=order_id)
+            return JsonResponse({
+                "order_id": str(order.order_id),
+                "status": order.delivery_status,
+                "last_updated": order.order_date.strftime("%Y-%m-%d %H:%M:%S")
+            })
+        except Order.DoesNotExist:
+            return JsonResponse({"error": "Order not found"}, status=404)
     return JsonResponse({'error': 'Invalid request method'}, status=405)

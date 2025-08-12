@@ -19,8 +19,7 @@ function Header() {
 
   const handleClick = (label) => {
     const routes = {
-      "My Addresses": "/address",
-      "Track Order": "/track-order",
+      "Assigned Deliveries" : "/AssignedDeliveries",
       "Order History": "/OrderHistory",
       "Terms & Conditions": "/TermAndConditions",
       "Contact Us": "/Contact",
@@ -36,7 +35,7 @@ function Header() {
     if (!phone) return;
 
     axios
-      .get(`http://localhost:8000/api/get-user-profile/?phone=${phone}`, {
+      .get(`http://localhost:8000/api/get-partner-profile/?phone=${phone}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -115,7 +114,7 @@ function Header() {
 
           {/* Buttons */}
           <div className="w-full flex flex-col gap-2 mt-4">
-            {["Order History", "Terms & Conditions", "Contact Us"].map(
+            {["Assigned Deliveries","Order History", "Terms & Conditions", "Contact Us"].map(
               (label, i) => (
                 <button
                   key={i}
